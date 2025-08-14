@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #4589FF;
+    overflow: hidden; /* Verhindert Scrollleisten während der Animation */
+}
+
+#loginStartAnimationLogo {
+    width: 222px; /* Breite des Logos */
+    height: 100px; /* Höhe des Logos */
+    position: absolute; /* Absolute Positionierung */
+    top: 50%; /* Startet von der Mitte vertikal */
+    left: 50%; /* Startet von der Mitte horizontal */
+    transform: translate(-50%, -50%); /* Zentriert das Logo */
+    animation: animateLogo 500ms ease-in-out forwards;
+    padding-top: 67px;
+}
+
+@keyframes animateLogo {
+    0% { 
+        transform: translate(-50%, -50%); /* Startpunkt in der Mitte */
+    }
+    100% { 
+        transform: translate(-50vw, -50vh); /* Bewegt sich in die obere linke Ecke */
+    }
+}

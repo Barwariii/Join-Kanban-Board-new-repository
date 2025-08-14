@@ -1,0 +1,92 @@
+.sidebarBecomesFooter {
+  display: none;
+}
+
+@media (max-width: 1150px) {
+
+  @media (max-width: 740px) {
+    .headerTitleContainer {
+      display: none;
+    }
+  }
+  .sidebarBecomesFooter {
+    display: flex;
+    max-width: 1150px;
+    width: 100%;
+    max-height: 80px;
+    height: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    z-index: 1000;
+  }
+
+  .footerMenuAtResponsiv {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+
+  .iconForResponsivFooter {
+    width: 24px;
+    height: 24px;
+  }
+
+  .addTaskContents {
+    margin-left: unset;
+    padding-bottom: 150px;
+    justify-content: center;
+    max-width: 1150px;
+    width: 100%;
+  }
+
+  .mainLeftContent {
+    max-width: 400px;
+    width: 100%;
+    margin: 0px 8px;
+  }
+
+  .priorityOptions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rightContainer {
+    position: relative;
+  }
+
+  .rightContainerBtn {
+    bottom: -150px;
+  }
+
+  .subtaskContent {
+    margin: 16px 0 16px 0;
+    height: 100%;
+  }
+
+  .rightContainer {
+    display: none;
+  }
+
+  .leftContent {
+    display: flex;
+    flex-direction: column;
+    margin: unset;
+  }
+
+  .leftBtnsContainer {
+    display: flex;
+    margin-bottom: 80px;
+    justify-content: center;
+  }
+
+  .leftContainerBtn {
+    display: flex;
+  }
+}

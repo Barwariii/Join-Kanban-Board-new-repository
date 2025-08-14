@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join - Kanban Board</title>
+    <link rel="shortcut icon" href="../assets/icons/favicon_blue.png" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/sign_up.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+
+<body>
+    <header class="signUpHeader">
+        <div class="JoinLogoHeaderFrame">
+            <div class="JoinLogoHeader">
+                <img class="headerJoinLogo" src="../assets/icons/logInBigJoin.svg" alt="join logo">
+            </div>
+        </div>
+    </header>
+
+    <div class="signUpContainer">
+        <div class="signUpBox">
+            <!-- Back arrow -->
+            <a href="../pages/log_in.html" class="back-arrow">
+                <img src="../assets/icons/backArrowIcon.png" alt="Back arrow">
+            </a>
+
+            <h2>Sign Up</h2>
+            <form id="signupForm" action="#" method="post" class="login-form">
+                <div class="inputSignUp">
+                    <input type="text" id="name" name="name" placeholder="Name" required>
+                    <img src="../assets/icons/signUpNameIcon.png" alt="Name Icon" class="input-icon">
+                </div>
+                <div class="inputSignUp">
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                    <img src="../assets/icons/logInMailIcon.png" alt="Email Icon" class="input-icon">
+                </div>
+                <div class="inputSignUp">
+                    <input type="text" id="passwordField" name="password" placeholder="Password" required oninput="maskPassword('passwordField')">
+                    <img src="../assets/icons/logInLock.png" alt="Password Icon" class="input-icon">
+                </div>
+                <div class="inputSignUp">
+                    <input type="text" id="confirmPasswordField" name="confirmpassword" placeholder="Confirm Password" required oninput="maskPassword('confirmPasswordField')">
+                    <img src="../assets/icons/logInLock.png" alt="Confirm Password Icon" class="input-icon">
+                </div>
+                <div class="checkboxAccept">
+                    <input type="checkbox" id="accept" name="accept">
+                    <label for="accept">I accept the</label>
+                    <a class="linkPrivacy" href="../pages/privacy_policy.html">Privacy Policy</a>
+                </div>
+                <button type="submit" class="login-btn" id="signUpButton" disabled>Sign up</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Overlay und Popup-Element -->
+    <div id="overlay" class="overlay hidden"></div>
+    <div id="signup-popup" class="popup hidden">
+        <p>You Signed Up Successfully</p>
+    </div>
+
+    <!-- js for masking passwords -->
+    <script>
+        function maskPassword(fieldId) {
+            const inputField = document.getElementById(fieldId);
+            const realPassword = inputField.getAttribute('data-real-password') || ''; // speichert das echte PW
+
+            // Capture newly entered character
+            const newChar = inputField.value.length > realPassword.length
+                ? inputField.value.slice(-1)
+                : '';
+
+            // Update the real password
+            const updatedPassword = newChar ? realPassword + newChar : realPassword.slice(0, -1);
+            inputField.setAttribute('data-real-password', updatedPassword);
+
+            // Replace input with asterisks
+            inputField.value = '*'.repeat(updatedPassword.length);
+        }
+    </script>
+
+    <!-- Include signup.js -->
+    <script src="../scripts/signup.js"></script>
+
+</body>
+
+</html>

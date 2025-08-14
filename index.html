@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join - Kanban Board</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./assets/icons/favicon_blue.png" type="image/x-icon">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style_responsive.css">
+    <link rel="stylesheet" href="./styles/help_icon.css">
+
+
+    <!-- Scripts -->
+    <script src="./script.js"></script>
+    <script src="./scripts/database.js"></script>
+    <script src="./scripts/contacts.js"></script>
+    <!-- <script src="./scripts/overlay_functionality.js"></script> -->
+    <!-- أضف هذا في الـ head -->
+<script>
+  async function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.onload = resolve;
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  }
+</script>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <div class="headerLeft">
+                <img class="headerLogo" src="./assets/icons/logo_full_white.png" alt="join logo">
+            </div>
+
+            <div class="headerRight">
+                <div class="headerTitleContainer" onclick="toggledropDownBar()">
+                    <span class="headerTitle">Kanban Project Management Tool</span>
+                </div>
+                <div class="headerHelpIconContainer">
+                    <a href="./pages/help_button.html" class="headerHelpIconLink">
+                        <img class="headerHelpIcon" src="./assets/icons/help_icon.png" alt="help icon">
+                    </a>
+                </div>
+
+                <div class="headerProfileContainer" onclick="toggledropDownBar()">
+                    <div class="headerProfile">
+                        <span class="headerProfileLetter">SM</span>
+                    </div>
+                </div>
+
+                <div class="dropDownBar" id="dropDownBar">
+                    <a href="./legal_notice.html" class="dropDownItem">Legal Notice</a>
+                    <a href="./privacy_policy.html" class="dropDownItem">Privacy Policy</a>
+                    <a href="./pages/log_in.html" class="dropDownItem">Log Out</a>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <div class="bottomContent">
+        <footer class="sidebarContainer">
+            <div class="topBottomWrapper">
+                <div class="topContainer">
+
+                    <div class="menuItem currentPage">
+                        <a class="menuLink" href="./index.html">
+                            <img class="icon" src="./assets/icons/summary_icon.svg" alt="Summary icon">
+                            <span class="text">Summary</span>
+                        </a>
+                    </div>
+                    <div class="menuItem">
+                        <a class="menuLink" href="./pages/add_task.html">
+                            <img class="icon" src="./assets/icons/add_task_icon.svg" alt="Add Task icon">
+                            <span class="text">Add Task</span>
+                        </a>
+                    </div>
+                    <div class="menuItem">
+                        <a class="menuLink" href="./pages/board.html">
+                            <img class="icon" src="./assets/icons/board_icon.svg" alt="Board icon">
+                            <span class="text">Board</span>
+                        </a>
+
+                    </div>
+                    <div class="menuItem">
+                        <a class="menuLink" href="./pages/contact.html">
+                            <img class="icon" src="./assets/icons/contact_icon.svg" alt="Contacts icon">
+                            <span class="text">Contacts</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bottomContainer">
+                    <a href="./pages/privacy_policy.html" class="bottomText">Privacy Policy</a>
+                    <a href="./pages/legal_notice.html" class="bottomText">Legal Notice</a>
+                </div>
+            </div>
+        </footer>
+
+        <div class="rightContent">
+
+            <!-- Dashboard Section -->
+            <div class="dashboardWrapper">
+                <div class="dashboardHeader">
+                    <h1>Good morning,<span class="dashboardUsername"> Sofia Müller</span></h1>
+                </div>
+                <div class="dashboardStatsGrid">
+
+                    <a href="./pages/board.html" class="dashboardUrgentTasks">
+                        <div class="dashboard-icon">
+                            <img src="./assets/icons/icon_urgent.png" alt="Urgent tasks icon">
+                        </div>
+                        <div class="dashboardStatInfo">
+                            <p id="urgenttasksInBoard" class="dashboardNumberUrgent"></p>
+                            <p class="dashboardLabelUrgent">Tasks Urgent</p>
+                        </div>
+                        <div class="dashboardDeadline">
+                            <p class="dashboardDate" id="currentDate"></p>
+                            <p class="dashboardDeadlineLabel">Upcoming Deadline</p>
+                        </div>
+                    </a>
+
+                    <a href="./pages/board.html" class="dashboardStatItem">
+                        <div class="dashboardIcon">
+                            <img src="./assets/icons/icon_board.png" alt="Tasks in board icon">
+                        </div>
+                        <p id="totalTasksinBoard" class="dashboardNumber"></p>
+                        <p class="dashboardLabel">Task in Board</p>
+                    </a>
+
+                    <a href="./pages/board.html" class="dashboardStatItem">
+                        <div class="dashboardIcon">
+                            <img src="./assets/icons/icon_todo.png" alt="Tasks to do icon">
+                        </div>
+                        <p id="toDoTaskDashboard" class="dashboardNumber"></p>
+                        <p class="dashboardLabel">Tasks To-do</p>
+                    </a>
+
+                    <a href="./pages/board.html" class="dashboardStatItem">
+                        <div class="dashboardIcon">
+                            <img src="./assets/icons/icon_progress.png" alt="Tasks in progress icon">
+                        </div>
+                        <p id="inProgressTaskDashboard" class="dashboardNumber"></p>
+                        <p class="dashboardLabel">Task in Progress</p>
+                    </a>
+
+                    <a href="./pages/board.html" class="dashboardStatItem">
+                        <div class="dashboardIcon">
+                            <img src="./assets/icons/icon_feedback.png" alt="Awaiting feedback icon">
+                        </div>
+                        <p id="awaitingTaskDashboard" class="dashboardNumber"></p>
+                        <p class="dashboardLabel">Awaiting Feedback</p>
+                    </a>
+
+
+                    <a href="./pages/board.html" class="dashboardStatItem">
+                        <div class="dashboardIcon">
+                            <img src="./assets/icons/icon_done.png" alt="Tasks done icon">
+                        </div>
+                        <p id="doneTaskDashboard" class="dashboardNumber"></p>
+                        <p class="dashboardLabel">Tasks Done</p>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="sidebarBecomesFooter">
+            <div class="linkContainerForResonsivFooter">
+                <a class="footerMenuAtResponsiv" href="../index.html">
+                    <img class="iconForResponsivFooter" src="../assets/icons/summary_icon.svg">
+                    <span class="textForResponsivFooter">Summary</span>
+                </a>
+            </div>
+
+
+            <div class="linkContainerForResonsivFooter">
+                <a class="footerMenuAtResponsiv" href="../pages/board.html">
+                    <img class="iconForResponsivFooter" src="../assets/icons/board_icon.svg">
+                    <span class="textForResponsivFooter boardTextResponsiv">Board</span>
+                </a>
+            </div>
+
+            <div class="linkContainerForResonsivFooter">
+                <a class="footerMenuAtResponsiv" href="../pages/add_task.html">
+                    <img class="iconForResponsivFooter"src="../assets/icons/add_task_icon.svg">
+                    <span class="textForResponsivFooter">Add Task</span>
+                </a>
+            </div>
+
+            <div class="contactInBlueForOverlay">
+                <div class="linkContainerForResonsivFooter">
+                    <a class="footerMenuAtResponsiv" href="../pages/contact.html">
+                        <img class="iconForResponsivFooter" src="../assets/icons/contact_icon_blue.svg">
+                        <span class="textForResponsivFooter">Contacts</span>
+                    </a>
+                </div>
+            </div>
+    </footer>
+</body>
+
+</html>

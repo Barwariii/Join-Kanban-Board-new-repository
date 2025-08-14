@@ -1,0 +1,149 @@
+.userStoryBG {
+  width: 128px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #ff7a00;
+  color: white;
+}
+
+.technicalTaskBG {
+  width: 152px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #0038ff;
+  color: white;
+}
+
+.taskSingleCard {
+  width: 350px;
+  height: auto;
+  border-radius: 24px;
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.08);
+  font-size: 18px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.taskSingleCardContentWrapper {
+  width: 318px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 16px;
+  gap: 16px;
+  cursor: pointer;
+}
+
+.taskTypeContainer {
+  width: 100%;
+  height: 32px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-btns {
+  display: flex;
+}
+
+.edit-task-btn,
+.delete-task-btn {
+  padding: 5px 10px;
+  cursor: help;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.edit-task-btn {
+  background-color: #4589ff;
+  color: white;
+}
+
+.delete-task-btn {
+  background-color: #ff3d00;
+  color: white;
+}
+
+.taskTitleAndDescriptionContainer {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 8px;
+}
+
+.taskTitleContainer {
+  width: 100%;
+  height: auto;
+  font-weight: bold;
+  color: #4589ff;
+}
+
+.taskDescriptionContainer {
+  width: 100%;
+  height: auto;
+  color: #a8a8a8;
+}
+
+.taskProgressbarContainer {
+  width: 100%;
+  height: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.taskProgressbarSVGContainer {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.taskAssignedToAndPriorityContainer {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.taskAssignedToContainer {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  overflow-x: auto;
+  padding-left: 8px;
+}
+
+.taskSingleContact {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-radius: 21px;
+  border: 2px solid white;
+  background-color: #ff7a00;
+  color: white;
+  margin-left: -10px;
+}
+
+.taskPriorityContainer {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.taskPrioritySVGContainer {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+}

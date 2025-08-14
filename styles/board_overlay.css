@@ -1,0 +1,441 @@
+.overlayForUserStory{
+    display: flex;
+    flex-direction: column;
+    width: 528px;
+    height: 872px;
+    background-color: white;
+    border-radius: 8px;
+  }
+  
+  .upperOverlayContainer{
+    display: flex;
+    flex-direction: column;
+    margin-left: 32px;
+    gap: 24px;
+  }
+  
+  .userstoryPlusCross {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 32px;
+    margin-top: 32px;
+  }
+  
+  .userstory{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FF7A00;
+    border-radius: 8px;
+    width: 160px;
+    height: 36px;
+  }
+  
+  .titleField{
+    font-size: 61px;
+    font-weight: 700;
+  }
+  
+  .buildDatePriority {
+    color: #42526E;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .date {
+    font-size: 21px;
+    font-weight: 700;
+  }
+  
+  .priority {
+    font-size: 21px;
+    font-weight: 700;
+  }
+  
+  .lowerOverlayContainer{
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 32px;
+    margin-right: 32px;
+    gap: 24px;
+  }
+  
+  .assignedAndName {
+    color: #42526E;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .assign {
+    font-size: 21px;
+    font-weight: 700;
+  }
+  
+  .namesForOverlay {
+    padding-top: 7px;
+    padding-right: 16px;
+    padding-bottom: 7px;
+    padding-left: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .circleAndName{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  
+  }
+  
+  .circleForOverlayUserStory {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background-color: aqua;
+    border: 2px;
+    border-radius: 22px;
+  }
+  
+  .subtasks {
+    color: #42526E;
+    font-size: 21px;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cubeWithHook{
+    gap: 16px;
+    padding-top: 6px;
+    padding-right: 16px;
+    padding-bottom: 6px;
+    padding-left: 16px;
+  }
+  
+  .cubeWithoutHook{
+    gap: 16px;
+    padding-top: 6px;
+    padding-right: 16px;
+    padding-bottom: 6px;
+    padding-left: 16px;
+  }
+  
+  .deleteAndEditOverlay {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  
+  .deleteImgIcon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .separationDiv{
+    display: flex;
+    flex-direction: column;
+    background-color: #888888;
+    width: 0.5px;
+  }
+  
+  .editImgIcon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .overlayForTechnicalTask {
+    display: flex;
+    flex-direction: column;
+    width: 528px;
+    height: 872px;
+    background-color: white;
+    border-radius: 8px;
+  }
+  
+  .technicalTaskPlusCross {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 32px;
+    margin-top: 32px;
+  }
+  
+  .technicalTask {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0038FF;
+    border-radius: 8px;
+    width: 160px;
+    height: 36px;
+  }
+  
+  .addTaskOverlay {
+    width: 530px;
+    height: 100vh;
+    border-radius: 30px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .addTaskWrapper {
+    width: 530px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+  }
+  
+  .addTaskImg {
+    gap: 205px;
+    display: flex;
+    margin-bottom: 24px;
+    margin-top: 36px;
+  }
+  
+  .titleAddTask {
+    font-size: 48px;
+    font-weight: 700;
+  }
+  
+  .blueXForAddTaskOverlay {
+    padding-bottom: 47px;
+    cursor: pointer;
+  }
+  
+  .contentPartContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .topPartContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .bottomPartContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .titlePart {
+    height: 64px;
+    width: 440px;
+  }
+  
+  .textInputForAddTask {
+    height: 64px;
+    width: 440px;
+    border: none #D1D1D1;
+    border-bottom: 2px solid #D1D1D1;
+  }
+  
+  .dateAndImg {
+    display: flex;
+    width: 85%;
+    flex-direction: column;
+  }
+  
+  .discriptionPart {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+  }
+  
+  .discriptionInput {
+    width: 440px;
+    height: 103px;
+    border: 1px solid #D1D1D1;
+    border-radius: 0px 10px 10px 10px;
+  }
+  
+  .dateInputField {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #D1D1D1;
+    margin-bottom: 24px;
+  }
+  
+  .textInputForDueDate {
+    height: 48px;
+    width: 440px;
+    border: none #D1D1D1;
+  }
+
+  .calendarForAddTask {
+    cursor: pointer;
+  }
+  
+  ::placeholder {
+    color: #D1D1D1;
+    font-size: 23px;
+  }
+  
+  .fontsForAddTask {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+  
+  .prioBtnDiv {
+    margin-top: 24px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .btnUrgent {
+    display: flex;
+    gap: 10px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    height: 56px;
+    width: 140px;
+    font-size: 24px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .btnUrgent:hover {
+    box-shadow: 0px 2px 0px 0px #FF3D00;
+  }
+  
+  .btnMedium {
+    display: flex;
+    gap: 10px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    height: 56px;
+    width: 140px;
+    font-size: 24px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .btnMedium:hover {
+    box-shadow: 0px 2px 0px 0px #FFA800;
+  }
+  
+  .btnLow {
+    display: flex;
+    gap: 10px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    height: 56px;
+    width: 140px;
+    font-size: 24px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .btnLow:hover {
+    box-shadow: 0px 2px 0px 0px #7AE229;
+  }
+  
+  .PriorityWithImgDiv {
+    margin-bottom: 24px;
+  }
+  
+  .assignedToForAddTaskOverlay {
+    width: 86%;
+    margin-bottom: 24px;
+    border-bottom: 2px solid #D1D1D1;
+  }
+  
+  .selectContractAndArrowDropDown {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .categorySelectTaskAndImg {
+    border-bottom: 2px solid #D1D1D1;
+    margin-bottom: 24px;
+    width: 87%;
+  }
+  
+  .spanAndArrowDropDownIcon {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .SubtasksTextInputAndImg {
+    margin-bottom: 24px;
+    width: 87%;
+  }
+  
+  .inputandImgForSubtasks {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .dropDownArrowForAddTaskOverlay {
+    cursor: pointer;
+  }
+    
+  .inputFieldForSubtasks {
+    height: 64px;
+    width: 440px;
+    border: none #D1D1D1;
+    border-bottom: 2px solid #D1D1D1;
+  }
+  
+  .bluePlusForAddTaskOverlay {
+    cursor: pointer;
+  }
+
+  .createTaskBtn {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+  
+  .creatBtnForOverlay {
+    width: 175px;
+    display: flex;
+    height: 58px;
+    background-color: #4589FF;
+    border-radius: 10px;
+    color: white;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 23px;
+    font-weight: 400;
+    border: 1px solid #4589FF;
+    cursor: pointer;
+    margin-right: 28px;
+  }
+  
+  /* color: #FF3D00; redForUrgent 
+  /* color: #FFA800; orangeForMedium
+  /* color: #7AE229; greenForLow

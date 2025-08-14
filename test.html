@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styles/help_icon.css">
+    <link rel="stylesheet" href="./styles/contact.css">
+    <link rel="stylesheet" href="./styles/contact_responsive.css">
+    <link rel="stylesheet" href="./styles/style_responsive.css">
+    
+</head>
+<body>
+    <div class="contactDetailsOverlayForMaxWitdh950PX">
+        <div class="contactInfoAndBlueArrowLeft">
+            <span class="contactListInformation">Contact Information</span>
+            <img class="blueLeftArrow" src="./assets/icons/arrow_left_line.svg">
+        </div>
+        <div class="circleFirstLetterAndName">
+            <div class="circleWithFirstLettersOfFirstAndLastName">
+                <span class="firstLetterFromFirsAndLastName">LB</span>
+            </div>
+            <span class="nameOfSpecificContact">name of contact</span>
+        </div>
+        <div class="emailAndLinkForSpecificContact">
+            <span class="emailTextInOverlay">Email</span>
+            <a class="linkForTheEmailForOverlayContact" href="">questionmark@gmail.com</a>
+        </div>
+        <div class="phoneAndSpecificNumber">
+            <span class="PhoneNumberForOverlayContact">Phone</span>
+            <span class="numberForPhone">number of specific contact</span>
+        </div>
+        <div class="blueThreePointBtn">
+            <button class="threePointsBlueBtn" onclick="dropDownEditAndDelete()">
+                <img src="./assets/icons/three_points.svg">
+            </button>
+        </div>
+        <div class="dropDownContainerForSpecialContactInfo" id="dropDownMenuForSpecialContact" style="display: none;">
+            <div class="editAndSpanTextForSpecialContactInfo">
+                <img src="./assets/icons/edit.svg">
+                <span class="spanInspecialContactDiv">Edit</span>
+            </div>
+            <div class="deleteandSpanTextForSpecialConactInfo">
+                <img src="./assets/icons/delete.svg">
+                <span class="spanInspecialContactDiv">Delete</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        function dropDownEditAndDelete(){
+            let editAndDeleteDropdown = document.getElementById('dropDownMenuForSpecialContact');
+            editAndDeleteDropdown.style.display = editAndDeleteDropdown.style.display === "none" ? "block" : "none";
+        }
+    </script>
+</body>
+</html>

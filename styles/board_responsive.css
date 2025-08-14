@@ -1,0 +1,140 @@
+.sidebarBecomesFooter {
+  display: none;
+}
+
+@media (max-width: 1150px) {
+  .sidebarBecomesFooter {
+    display: flex;
+    max-width: 1150px;
+    width: 100%;
+    max-height: 80px;
+    height: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    z-index: 1000;
+  }
+
+  .footerMenuAtResponsiv {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+
+  .iconForResponsivFooter {
+    width: 24px;
+    height: 24px;
+  }
+
+  .rightContent {
+    margin-left: unset;
+  }
+
+  .boardContent {
+    margin: 0px 16px;
+  }
+
+  .searchAndAddContainer {
+    flex-direction: column;
+  }
+
+  /* .searchBarContainer {
+    width: 100% !important;
+  } */
+
+  .searchInput {
+    padding: unset !important;
+    max-width: 320px !important;
+    width: 100% !important;
+  }
+
+  .boardSearchIconContainer {
+    width: 40px;
+    margin-left: 200px;
+  }
+
+  .boardContainer {
+    flex-direction: column;
+  }
+
+  .toDoContainer,
+  .inProgressContainer,
+  .awaitFeedbackContainer,
+  .doneContainer {
+    width: 100%;
+    margin-bottom: 80px;
+  }
+
+  .tabItem {
+    width: 100% !important;
+  }
+
+  .tasksContainer {
+    overflow-x: scroll !important;
+    max-width: 280px !important;
+    width: 100% !important;
+  }
+
+  .tasks {
+    height: 100% !important;
+    flex-direction: row !important;
+    margin-left: 0px !important;
+  }
+
+  .taskSingleCardContentWrapper {
+    max-width: 250px !important;
+    width: unset !important;
+  }
+
+  .taskTypeContainer {
+    gap: 12px;
+  }
+
+  .task-btns span {
+    margin-left: 4px !important;
+    padding: 5px !important;
+  }
+
+  /* Board Overlay Add Task */
+  .mainLeftContent {
+    max-width: 400px !important;
+    width: 100% !important;
+  }
+
+  .leftContent {
+    margin-bottom: 200px;
+  }
+
+  .priorityOptions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rightContainerBtn {
+    margin-bottom: 50px;
+  }
+
+
+  /* Board Edit Overlay Tasks */
+  .form-group {
+    padding-right: 48px;
+  }
+
+  .priority-options {
+    flex-direction: column;
+  }
+
+  .priority-btn {
+    justify-content: space-between;
+  }
+
+  .edit-task-actions {
+    justify-content: center;
+  }
+}

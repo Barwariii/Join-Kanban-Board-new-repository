@@ -1,0 +1,739 @@
+.boardOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.747); /* overlay background */
+  z-index: 1000; /* over all elements */
+}
+
+.headerTitle {
+  cursor: pointer;
+}
+
+.headerProfileLetter {
+  cursor: pointer;
+}
+
+.dropDownBar {
+  top: 100px;
+  display: none;
+  position: absolute;
+  flex-direction: column;
+}
+
+.dropDownItem {
+  color: #42526e;
+  text-decoration: none;
+  display: block;
+  text-align: end;
+}
+
+.activ {
+  padding: 10px;
+  width: 125px;
+  height: 90px;
+  display: block;
+  gap: 8px;
+  font-size: 19px;
+  font-weight: 400;
+  border-radius: 20px 0px 20px 20px;
+  box-shadow: 0 4px 10px rgb(0, 0, 0, 0.3);
+}
+
+.boardContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 80px;
+  margin-right: 80px;
+}
+
+.searchAndAddContainer {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.searchBarContainer {
+  width: auto;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchInput {
+  width: 320px;
+  height: 48px;
+  border-radius: 16px;
+  border: 1px solid #a8a8a8;
+  font-size: 20px;
+  cursor: pointer;
+  padding-right: 64px;
+  padding-left: 24px;
+}
+
+.searchInput:hover {
+  border: 1px solid #4589ff;
+}
+
+.searchInput:focus {
+  border: 1px solid #005dff;
+  outline: none;
+}
+/* Lupe Icon */
+.boardSearchIconContainer {
+  width: 64px;
+  height: 40px;
+  border-left: 1px solid #d1d1d1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  margin-left: 320px;
+}
+
+.boardSearchIconSVGWrapper {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+}
+
+.boardSearchIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.boardSearchIconSVGWrapper:hover {
+  background-color: #e3eeff;
+  cursor: pointer;
+}
+
+.boardSearchIconSVGWrapper:hover .boardSearchIconRect {
+  fill: #4589ff;
+}
+
+.boardSearchIconSVGWrapper:active .boardSearchIconRect {
+  fill: #005dff;
+}
+
+/* Add Task Button Styling */
+.boardAddTaskButtonContainer {
+  width: 152px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4589ff;
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-size: 20px;
+  cursor: pointer;
+  height: 50px;
+  gap: 8px;
+}
+
+.boardAddTaskButtonContainer:hover {
+  background-color: #005dff;
+}
+
+.boardAddTaskButtonContainer:active {
+  background-color: #091931;
+}
+
+/* Board Container */
+.boardContainer {
+  width: 100%;
+  /* height: 100%; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+/* Tab Item */
+.tabItem {
+  width: 360px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tabItemText {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 24px;
+  color: #42526e;
+}
+
+.tabItemSVGContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 24px;
+}
+
+.tabItemSVGContainer:hover .tabItemSVG {
+  stroke: #005dff;
+}
+
+.tabItemSVGContainer:active .tabItemSVG {
+  stroke: #a8a8a8;
+}
+
+/* Tasks Container */
+.tasksContainer {
+  width: 360px;
+  /* height: calc(100% - 48px); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 12px;
+  padding-top: 8px;
+}
+
+.tasks {
+  width: 360px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* To Do Tasks */
+.toDoContainer {
+  width: 360px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.noToDoContainer {
+  width: 350px;
+  min-height: 64px;
+  background-color: #e7e7e7;
+  border-radius: 12px;
+  border: 1px dashed #a8a8a8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.noToDoText {
+  font-size: 22px;
+  color: #a8a8a8;
+}
+
+/* In Progress Tasks */
+.inProgressContainer {
+  width: 360px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.noInProgressContainer {
+  width: 350px;
+  min-height: 64px;
+  background-color: #e7e7e7;
+  border-radius: 12px;
+  border: 1px dashed #a8a8a8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.noInProgressText {
+  font-size: 22px;
+  color: #a8a8a8;
+}
+
+/* Await feedback Tasks */
+.awaitFeedbackContainer {
+  width: 360px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.noAwaitFeedbackContainer {
+  width: 350px;
+  min-height: 64px;
+  background-color: #e7e7e7;
+  border-radius: 12px;
+  border: 1px dashed #a8a8a8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.noAwaitFeedbackText {
+  font-size: 22px;
+  color: #a8a8a8;
+}
+
+/* Done Tasks */
+.doneContainer {
+  width: 360px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.noDoneContainer {
+  width: 350px;
+  min-height: 64px;
+  background-color: #e7e7e7;
+  border-radius: 12px;
+  border: 1px dashed #a8a8a8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.noDoneText {
+  font-size: 22px;
+  color: #a8a8a8;
+}
+
+/* Drag and Drop */
+.rotateCard {
+  transform: rotate(5deg);
+  transition: transform 0.3s ease;
+}
+
+.containerGetHovered {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+/* نموذج التعديل */
+.edit-task-overlay {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+  height: 800px;
+  margin: 20px auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.edit-task-overlay h2 {
+  margin-bottom: 20px;
+  color: #4589ff;
+}
+
+#editTaskTitle,
+.edit-task-overlay textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 8px;
+}
+
+.edit-task-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.edit-task-actions button {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+/* .edit-task-overlay {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+} */
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+/* .form-group input[type="text"], */
+.form-group input[type="date"],
+/* .form-group select, */
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.contacts-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.contact-checkbox label {
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.contact-checkbox input {
+  margin-right: 5px;
+}
+
+.edit-task-priority {
+  width: 100%;
+  padding: 10px;
+  border-style: none;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.edit-task-priority :focus:not(:focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+.edit-new-subtask {
+  margin: 8px 0px 24px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+}
+
+.edit-new-subtask input {
+  flex-grow: 1;
+}
+
+#subtasksList {
+  display: flex;
+  flex-flow: wrap;
+  margin: 8px 0px 8px 0px;
+  gap: 8px;
+  /* overflow-x: auto;
+  scrollbar-width: none; */
+}
+
+.subtask-item {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-clr-light-blue);
+  padding: 4px;
+  border: solid 1.5px #7b818b;
+  border-radius: 8px;
+}
+
+#newSubtaskInput {
+  margin: 0;
+  border: none;
+  width: 100% 358px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.remove-subtask {
+  background: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.edit-new-subtask button {
+  background: none;
+  color: var(--bg-clr-light-blue);
+  border: none;
+  padding: 0 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.edit-task-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.save-btn {
+  background: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: #f44336;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* تنسيق القائمة المنسدلة لجهات الاتصال */
+.assigned-to-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.dropdown-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.dropdown-input img {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-option {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.contact-option:hover {
+  background-color: #f5f5f5;
+}
+
+.contact-badge {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-right: 10px;
+}
+
+.selected-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.selected-contact {
+  display: flex;
+  align-items: center;
+  background: #f0f0f0;
+  border-radius: 20px;
+  padding: 4px 8px 4px 4px;
+  height: 24px;
+}
+
+.selected-contact span:first-child {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f0f0f0;
+  margin-right: 6px;
+}
+
+.contact-name {
+  margin-right: 6px;
+}
+
+.remove-contact {
+  cursor: pointer;
+  color: #ff4444;
+  font-weight: bold;
+}
+
+/* priorety */
+.priority-options {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.priority-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 36px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid rgb(113, 113, 113, 0.2);
+}
+
+/* .priority-btn:hover {
+  background-color: #f5f5f5;
+} */
+
+.urgent-btn-hover:hover {
+  box-shadow: 0px 3px 0px 0px #ff3d00;
+}
+
+.medium-btn-hover:hover {
+  box-shadow: 0px 3px 0px 0px #ffa800;
+}
+
+.low-btn-hover:hover {
+  box-shadow: 0px 3px 0px 0px #7ae229;
+}
+
+/* Specific colors when active */
+.active.urgent-btn {
+  background-color: #ff3d00 !important;
+  color: #ffffff;
+}
+
+.active.urgent-btn path {
+  fill: white;
+}
+
+.active.medium-btn {
+  background-color: #ffa800 !important;
+  color: #ffffff;
+}
+
+.active.medium-btn path {
+  fill: white;
+}
+
+.active.low-btn {
+  background-color: #7ae229 !important;
+  color: #ffffff;
+}
+
+.active.low-btn path {
+  fill: white;
+}
+
+/* .priority-btn.active {
+  background-color: #e3f2fd;
+  border-color: #2196f3;
+} */
+
+/* .priority-btn svg {
+  width: 20px;
+  height: 20px;
+} */
+
+
+/* delete confirm msg */
+.delete-confirm-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  max-width: 1440px;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.delete-confirm-box {
+  background: #fff;
+  padding: 32px 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.15);
+  min-width: 300px;
+  text-align: center;
+  font-size: 18px;
+}
+.delete-confirm-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+.confirm-btn {
+  background: #eee;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.confirm-btn:hover {
+  background: #e74c3c;
+  color: #ffffff;
+}
+
+.cancel-btn {
+  background: #eee;
+  color: #222;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background: #439324;
+  color: #ffffff;
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join - Kanban Board</title>
+    <!-- fav -->
+    <link rel="shortcut icon" href="../assets/icons/favicon_blue.png" type="image/x-icon">
+    <!-- styles -->
+    <link rel="stylesheet" href="../styles/log_in.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <header class="LogInHeader">
+        <div class="JoinLogoHeaderFrame">
+            <div class="JoinLogoHeader">
+                <img class="headerJoinLogo" src="../assets/icons/logInBigJoin.svg" alt="join logo">
+            </div>
+
+            <!-- Sign Up Link Button -->
+            <div class="headerLogIn">
+                <div class="headerLogInFull">
+                    <a href="../pages/sign_up.html" class="signUpLink">
+                        <img class="headerJoinLogoSignUp" src="../assets/icons/logInNotUserSignUp.svg" alt="Sign up">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="loginContainer">
+        <div class="loginBox">
+            <h2>Log in</h2>
+            <form action="#" method="post" class="login-form" onsubmit="return validateLogin()">
+                <div class="inputGroup">
+                    <input type="email" id="email" name="email" placeholder="Email" required
+                        onfocus="fillDemoCredentials()">
+                    <img src="../assets/icons/logInMailIcon.png" alt="Email Icon" class="input-icon">
+                </div>
+
+                <div class="inputGroup">
+                    <input type="text" id="passwordField" name="password" placeholder="Password" required
+                        onfocus="fillDemoCredentials()" oninput="maskPassword()">
+                    <img src="../assets/icons/logInLock.png" alt="Password Icon" class="input-icon">
+                </div>
+
+                <div class="checkboxGroup">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+
+                <div class="buttonGroup">
+                    <button type="submit" class="login-btn">Log in</button>
+                    <button type="button" class="guest-btn" onclick="guestLogin()">Guest log in</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footerLinks">
+        <a class="linkPrivacy" href="../pages/privacy_policy.html">Privacy Policy</a>
+        <a class="linkNotice" href="../pages/legal_notice.html">Legal Notice</a>
+    </footer>
+
+    <!-- js for filling test infos and login validation -->
+    <script>
+        function fillDemoCredentials() {
+            const emailField = document.getElementById('email');
+            const passwordField = document.getElementById('passwordField');
+
+            // sets values if empty
+            if (!emailField.value) {
+                emailField.value = 'test@dv.com';
+            }
+            if (!passwordField.getAttribute('data-real-password')) {
+                passwordField.setAttribute('data-real-password', '12345678');
+                passwordField.value = '*'.repeat(8); // display the masked password
+            }
+        }
+
+        function maskPassword() {
+            const inputField = document.getElementById('passwordField');
+            const realPassword = inputField.getAttribute('data-real-password') || ''; // Store the real password
+
+            // Capture new input character
+            const newChar = inputField.value.length > realPassword.length
+                ? inputField.value.slice(-1)
+                : '';
+
+            // Update the real password
+            const updatedPassword = newChar ? realPassword + newChar : realPassword.slice(0, -1);
+            inputField.setAttribute('data-real-password', updatedPassword);
+
+            // Replace input with masked characters
+            inputField.value = '*'.repeat(updatedPassword.length);
+        }
+
+        function validateLogin() {
+            const email = document.getElementById('email').value;
+            const realPassword = document.getElementById('passwordField').getAttribute('data-real-password');
+
+            // check if input matches test info
+            if (email === 'test@dv.com' && realPassword === '12345678') {
+                // redirect to index.html if test infos are correct
+                window.location.href = '../index.html';
+                return false;
+            } else {
+                alert("Invalid password. Please use the right password or sign up.");
+                return false; // revent form login if demo infos are incorrect
+            }
+        }
+
+        function guestLogin() {
+            // redirects the user to index.html for guest login
+            window.location.href = '../index.html';
+        }
+    </script>
+
+</body>
+
+</html>

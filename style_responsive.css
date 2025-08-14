@@ -1,0 +1,85 @@
+.sidebarBecomesFooter {
+  display: none;
+}
+
+@media (max-width: 1150px) {
+  .sidebarBecomesFooter {
+    display: flex;
+    max-width: 1150px;
+    width: 100%;
+    max-height: 80px;
+    height: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    z-index: 1000;
+  }
+
+  .footerMenuAtResponsiv {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+
+  .iconForResponsivFooter {
+    width: 24px;
+    height: 24px;
+  }
+
+  .rightContent {
+    margin-top: unset;
+    margin-left: unset;
+  }
+
+  .dashboardWrapper {
+    box-shadow: unset;
+  }
+
+  .dashboardHeader h1 {
+    font-size: clamp(24px, 3.8vw + 12px, 64px);
+  }
+
+  .dashboardUsername {
+    display: none;
+  }
+
+  .dashboardStatsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 0px 100px 0;
+  }
+
+  .dashboardUrgentTasks {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 8px;
+  }
+
+  .dashboardDeadline {
+    text-align: center;
+  }
+
+  .dashboardDeadlineLabel {
+    padding: 8px;
+  }
+
+  .dashboardStatItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.linkContainerForResponsivFooter {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: none;
+}

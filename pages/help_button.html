@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join - Contacts</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../assets/icons/favicon_blue.png" type="image/x-icon">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../styles/contact.css">
+    <link rel="stylesheet" href="../styles/help_icon.css">
+
+    <!-- Scripts -->
+    <script src="../script.js"></script>
+    <script src="../scripts/overlay_functionality.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <div class="headerLeft">
+                <img class="headerLogo" src="../assets/icons/logo_full_white.png" alt="join logo">
+            </div>
+
+            <div class="headerRight">
+                <div class="headerTitleContainer" onclick="toggledropDownBar()">
+                    <span class="headerTitle">Kanban Project Management Tool</span>
+                </div>
+                <div class="headerHelpIconContainer">
+                    <a href="./help_button.html">
+                        <img class="headerHelpIcon" src="../assets/icons/help_icon.png" alt="help icon">
+                    </a>
+                </div>
+
+                <div class="headerProfileContainer" onclick="toggledropDownBar()">
+                    <div class="headerProfile">
+                        <span class="headerProfileLetter">SM</span>
+                    </div>
+                </div>
+
+                <div class="dropDownBar" id="dropDownBar">
+                    <a href="./legal_notice.html" class="dropDownItem">Legal Notice</a>
+                    <a href="./privacy_policy.html" class="dropDownItem">Privacy Policy</a>
+                    <a href="./log_in.html" class="dropDownItem">Log Out</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="bottomContent">
+        <footer class="sidebarContainer">
+            <div class="topBottomWrapper">
+                <div class="topContainer">
+                    <div class="menuItem">
+                        <a class="menuLink" href="../index.html">
+                            <img class="icon" src="../assets/icons/summary_icon.svg" alt="Summary icon">
+                            <span class="text">Summary</span>
+                        </a>
+                    </div>
+                    <div class="menuItem">
+                        <a class="menuLink" href="../pages/add_task.html">
+                            <img class="icon" src="../assets/icons/add_task_icon.svg" alt="Add Task icon">
+                            <span class="text">Add Task</span>
+                        </a>
+                    </div>
+                    <div class="menuItem">
+                        <a class="menuLink" href="../pages/board.html">
+                            <img class="icon" src="../assets/icons/board_icon.svg" alt="Board icon">
+                            <span class="text">Board</span>
+                        </a>
+
+                    </div>
+                    <div class="menuItem">
+                        <a class="menuLink" href="../pages/contact.html">
+                            <img class="icon" src="../assets/icons/contact_icon.svg" alt="Contacts icon">
+                            <span class="text">Contacts</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bottomContainer">
+                    <a href="./privacy_policy.html" class="bottomText">Privacy Policy</a>
+                    <a href="./legal_notice.html" class="bottomText">Legal Notice</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Insert help text -->
+        <div class="rightContent">
+            <span class="headlines">
+                <div class="mainBodyForHelp">
+                    <div class="textAndArrow">
+                        <h1 class="helpHeins">Help</h1>
+                        <svg onclick="goBack()" class="arrowImg" width="33" height="33" viewBox="0 0 33 33" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M10.9373 15.1667H25.8333C26.5696 15.1667 27.1666 15.7636 27.1666 16.5C27.1666 17.2364 26.5696 17.8333 25.8333 17.8333H10.9373L17.1466 24.0427C17.6672 24.5633 17.6672 25.4074 17.1466 25.928C16.626 26.4486 15.7819 26.4486 15.2613 25.928L7.24746 17.9142C6.46642 17.1332 6.46642 15.8668 7.24747 15.0858L15.2613 7.072C15.7819 6.55138 16.626 6.55138 17.1466 7.072C17.6672 7.59262 17.6672 8.43671 17.1466 8.95733L10.9373 15.1667Z"
+                                fill="#005DFF" />
+                        </svg>
+                    </div>
+
+                    <p>Welcome to the help page for <span class="join">Join</span> your guide to using our kanban
+                        project management tool. Here, we'll provide an overview of what <span class="join">Join</span>
+                        is, how it can benefit you, and how to use it.
+
+                    <h2>What is <span class="join">Join</span>?</h2>
+                    Join is a kanban-based project management tool designed and built by a group of dedicated students
+                    as part of their web development bootcamp at the Developer Akademie.
+
+                    Kanban, a Japanese term meaning "billboard", is a highly effective method to visualize work, limit
+                    work-in-progress, and maximize efficiency (or flow). <span class="join">Join</span> leverages the
+                    principles of kanban to help users manage their tasks and projects in an intuitive, visual
+                    interface.
+
+                    It is important to note that <span class="join">Join</span> is designed as an educational exercise
+                    and is not intended for extensive business usage. While we strive to ensure the best possible user
+                    experience, we cannot guarantee consistent availability, reliability, accuracy, or other aspects of
+                    quality regarding <span class="join">Join</span>.
+                    </p>
+                    <h2>How to use it</h2>
+                    <p>Here is a step-by-step guide on how to use <span class="join">Join</span>:</p>
+
+                    <div class="numberAndText">
+                        <div class="number">
+                            <h3>1.</h3>
+                        </div>
+                        <div class="headlinePlusText">
+                            <div>
+                                <h4>Exploring the Board</h4>
+                                <div>
+                                    <p class="mainText">When you log in to <span class="join">Join</span>, you'll find a
+                                        default board. This board represents your project and contains four default
+                                        lists: "To Do", "In Progress", "Await feedback" and "Done".
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="numberAndText">
+                        <div class="number">
+                            <h3>2.</h3>
+                        </div>
+                        <div class="headlinePlusText">
+                            <div>
+                                <h4>Creating Contacts</h4>
+                                <div>
+                                    <p class="mainText">In <span class="join">Join</span>, you can add contacts to
+                                        collaborate on your projects. Go to the "Contacts" section, click on "New
+                                        contact", and fill in the required information. Once added, these contacts can
+                                        be assigned tasks and they can interact with the tasks on the board.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="numberAndText">
+                        <div class="number">
+                            <h3>3.</h3>
+                        </div>
+                        <div class="headlinePlusText">
+                            <div>
+                                <div>
+                                    <h4>Adding Cards</h4>
+                                    <div>
+                                        <p class="mainText">Now that you've added your contacts, you can start adding
+                                            cards. Cards represent individual tasks. Click the "+" button under the
+                                            appropriate list to create a new card. Fill in the task details in the card,
+                                            like task name, description, due date, assignees, etc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="numberAndText">
+                        <div class="number">
+                            <h3>4.</h3>
+                        </div>
+                        <div class="headlinePlusText">
+                            <div>
+                                <h4>Moving Cards</h4>
+                                <div>
+                                    <p class="mainText">As the task moves from one stage to another, you can reflect
+                                        that on the board by dragging and dropping the card from one list to another.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="numberAndText">
+                        <div class="number">
+                            <h3>5.</h3>
+                        </div>
+                        <div class="headlinePlusText">
+                            <div>
+                                <h4>Deleting Cards</h4>
+                                <div>
+                                    <p class="mainText">Once a task is completed, you can either move it to the "Done"
+                                        list or delete it. Deleting a card will permanently remove it from the board.
+                                        Please exercise caution when deleting cards, as this action is irreversible.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>Remember that using <span class="join">Join</span> effectively requires consistent updates from
+                        you and your team to ensure the board reflects the current state of your project.
+
+                    <p>Have more questions about <span class="join">Join</span>? Feel free to contact us at
+                        trashfilter@mailbox.org. We're here to help you!</p>
+
+                    <p>Enjoy using <span class="join">Join</span>!</p>
+                </div>
+            </span>
+        </div>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+</body>
+
+</html>

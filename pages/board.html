@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join - Board</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../assets/icons/favicon_blue.png" type="image/x-icon">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../styles/board.css">
+    <link rel="stylesheet" href="../styles/board_responsive.css">
+    <link rel="stylesheet" href="../styles/contact.css">
+    <link rel="stylesheet" href="../styles/help_icon.css">
+    <link rel="stylesheet" href="../styles/board_card.css">
+    <link rel="stylesheet" href="../styles/board_overlay_add_task.css">
+
+    <!-- Scripts -->
+    <script src="../scripts/database.js"></script>
+    <script src="../scripts/board_database.js"></script>
+    <script src="../scripts/board_templates.js"></script>
+    <script src="../script.js"></script>
+    <script src="../scripts/board.js"></script>
+</head>
+
+<body onload="loadAndRenderBoardTasks()">
+    <header>
+        <div class="header">
+            <div class="headerLeft">
+                <img class="headerLogo" src="../assets/icons/logo_full_white.png" alt="join logo">
+            </div>
+
+            <div class="headerRight">
+
+                <div class="headerTitleContainer" onclick="toggledropDownBar()">
+                    <span class="headerTitle">Kanban Project Management Tool</span>
+                </div>
+
+                <div class="headerHelpIconContainer">
+                    <a href="./help_button.html" class="headerHelpIconLink">
+                        <img class="headerHelpIcon" src="../assets/icons/help_icon.png" alt="help icon">
+                    </a>
+                </div>
+
+                <div class="headerProfileContainer" onclick="toggledropDownBar()">
+                    <div class="headerProfile">
+                        <span class="headerProfileLetter">SM</span>
+                    </div>
+                </div>
+
+                <div class="dropDownBar" id="dropDownBar">
+                    <a href="./legal_notice.html" class="dropDownItem">Legal Notice</a>
+                    <a href="./privacy_policy.html" class="dropDownItem">Privacy Policy</a>
+                    <a href="../pages/log_in.html" class="dropDownItem">Log Out</a>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- sidebar -->
+    <div class="bottomContent">
+        <footer class="sidebarContainer">
+            <div class="topBottomWrapper">
+                <div class="topContainer">
+                    <div class="menuItem">
+                        <a class="menuLink" href="../index.html">
+                            <img class="icon" src="../assets/icons/summary_icon.svg" alt="Summary icon">
+                            <span class="text">Summary</span>
+                        </a>
+                    </div>
+                    <div class="menuItem">
+                        <a class="menuLink" href="../pages/add_task.html">
+                            <img class="icon" src="../assets/icons/add_task_icon.svg" alt="Add Task icon">
+                            <span class="text">Add Task</span>
+                        </a>
+                    </div>
+                    <div class="menuItem currentPage">
+                        <a class="menuLink" href="../pages/board.html">
+                            <img class="icon" src="../assets/icons/board_icon.svg" alt="Board icon">
+                            <span class="text">Board</span>
+                        </a>
+                    </div>
+                    <div class="menuItem">
+                        <a class="menuLink" href="../pages/contact.html">
+                            <img class="icon" src="../assets/icons/contact_icon.svg" alt="Contacts icon">
+                            <span class="text">Contacts</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- sidebar -->
+                <div class="bottomContainer">
+                    <div>
+                        <a href="./privacy_policy.html" class="bottomText">Privacy Policy</a>
+                    </div>
+                    <a href="./legal_notice.html" class="bottomText">Legal Notice</a>
+                </div>
+            </div>
+        </footer>
+
+        <div class="rightContent">
+            <div class="boardContent">
+                <div class="searchAndAddContainer">
+                    <!-- suchfeld -->
+                    <div class="searchBarContainer">
+                        <input type="text" id="taskSearchInput" class="searchInput" placeholder="Find Task" oninput="filterTasksBySearch()">
+                        <div class="boardSearchIconContainer">
+                            <div class="boardSearchIconSVGWrapper">
+                                <svg class="boardSearchIcon" width="32" height="33" viewBox="0 0 32 33"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <mask id="mask0_51146_4665" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0"
+                                        y="0" width="32" height="33">
+                                        <rect y="0.5" width="32" height="32" fill="#D9D9D9" />
+                                    </mask>
+                                    <g mask="url(#mask0_51146_4665)">
+                                        <path class="boardSearchIconRect"
+                                            d="M13.7118 20.7137C11.8946 20.7137 10.3567 20.0843 9.098 18.8256C7.83931 17.5669 7.20996 16.029 7.20996 14.2118C7.20996 12.3946 7.83931 10.8567 9.098 9.598C10.3567 8.33931 11.8946 7.70996 13.7118 7.70996C15.529 7.70996 17.0669 8.33931 18.3256 9.598C19.5843 10.8567 20.2137 12.3946 20.2137 14.2118C20.2137 14.9454 20.097 15.6372 19.8636 16.2874C19.6302 16.9376 19.3134 17.5127 18.9133 18.0129L24.5149 23.6145C24.6983 23.7979 24.79 24.0313 24.79 24.3147C24.79 24.5981 24.6983 24.8315 24.5149 25.0149C24.3315 25.1983 24.0981 25.29 23.8147 25.29C23.5313 25.29 23.2979 25.1983 23.1145 25.0149L17.5129 19.4133C17.0127 19.8134 16.4376 20.1302 15.7874 20.3636C15.1372 20.597 14.4454 20.7137 13.7118 20.7137ZM13.7118 18.7131C14.9622 18.7131 16.025 18.2755 16.9002 17.4002C17.7755 16.525 18.2131 15.4622 18.2131 14.2118C18.2131 12.9615 17.7755 11.8987 16.9002 11.0234C16.025 10.1482 14.9622 9.71053 13.7118 9.71053C12.4615 9.71053 11.3987 10.1482 10.5234 11.0234C9.64815 11.8987 9.21053 12.9615 9.21053 14.2118C9.21053 15.4622 9.64815 16.525 10.5234 17.4002C11.3987 18.2755 12.4615 18.7131 13.7118 18.7131Z"
+                                            fill="#42526E" />
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Task BTN -->
+                    <div class="boardAddTaskButtonContainer" onclick="openTaskBoard()">
+                        <span class="boardAddTaskButtonText">Add task</span>
+                        <div class="boardAddTaskButtonSVGWrapper">
+                            <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path class="" d="M8.5 1V16" stroke="white" stroke-width="2" stroke-linecap="round" />
+                                <path d="M16 8.6416L1 8.6416" stroke="white" stroke-width="2" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Board -->
+                <div class="boardContainer">
+
+                    <!-- To do Container -->
+                    <div class="toDoContainer" id="toDoContainer"
+                        ondrop="moveCardToNewCategoryHandler('toDo', 0); removeHighlightClass('toDoContainer')"
+                        ondragover="addHighlightClass('toDoContainer'); handleDragOver(event)"
+                        ondragleave="removeHighlightClass('toDoContainer')">
+                        <div class="tabItem">
+                            <span class="tabItemText">To Do</span>
+                            <div class="tabItemSVGContainer">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="tabItemSVG" x="1" y="1" width="22" height="22" rx="7" stroke="#4589FF"
+                                        stroke-width="2" />
+                                    <path class="tabItemSVG" d="M12 8V16" stroke="#4589FF" stroke-width="2"
+                                        stroke-linecap="round" />
+                                    <path class="tabItemSVG" d="M16 12.0752L8 12.0752" stroke="#4589FF" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="tasksContainer">
+                            <div class="tasks" id="toDoTasks">
+                                <!-- Task Card get rendered in here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- In progress Container -->
+                    <div class="inProgressContainer" id="inProgressContainer"
+                        ondrop="moveCardToNewCategoryHandler('inProgress', 1); removeHighlightClass('inProgressContainer')"
+                        ondragover="addHighlightClass('inProgressContainer'); handleDragOver(event)"
+                        ondragleave="removeHighlightClass('inProgressContainer')">
+                        <div class="tabItem">
+                            <span class="tabItemText">In progress</span>
+                            <div class="tabItemSVGContainer">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="tabItemSVG" x="1" y="1" width="22" height="22" rx="7" stroke="#4589FF"
+                                        stroke-width="2" />
+                                    <path class="tabItemSVG" d="M12 8V16" stroke="#4589FF" stroke-width="2"
+                                        stroke-linecap="round" />
+                                    <path class="tabItemSVG" d="M16 12.0752L8 12.0752" stroke="#4589FF" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="tasksContainer">
+                            <div class="tasks" id="inProgressTasks">
+                                <!-- Task Card get rendered in here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Await feedback Container -->
+                    <div class="awaitFeedbackContainer" id="awaitFeedbackContainer"
+                        ondrop="moveCardToNewCategoryHandler('awaitFeedback', 2); removeHighlightClass('awaitFeedbackContainer')"
+                        ondragover="addHighlightClass('awaitFeedbackContainer'); handleDragOver(event)"
+                        ondragleave="removeHighlightClass('awaitFeedbackContainer')">
+                        <div class="tabItem">
+                            <span class="tabItemText">Await feedback</span>
+                            <div class="tabItemSVGContainer">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="tabItemSVG" x="1" y="1" width="22" height="22" rx="7" stroke="#4589FF"
+                                        stroke-width="2" />
+                                    <path class="tabItemSVG" d="M12 8V16" stroke="#4589FF" stroke-width="2"
+                                        stroke-linecap="round" />
+                                    <path class="tabItemSVG" d="M16 12.0752L8 12.0752" stroke="#4589FF" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="tasksContainer">
+                            <div class="tasks" id="awaitFeedbackTasks">
+                                <!-- Task Card get rendered in here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Done Container -->
+                    <div class="doneContainer" id="doneContainer"
+                        ondrop="moveCardToNewCategoryHandler('done', 3); removeHighlightClass('doneContainer')"
+                        ondragover="addHighlightClass('doneContainer'); handleDragOver(event)"
+                        ondragleave="removeHighlightClass('doneContainer')">
+                        <div class="tabItem">
+                            <span class="tabItemText">Done</span>
+                        </div>
+                        <div class="tasksContainer">
+                            <div class="tasks" id="doneTasks">
+                                <!-- Task Card get rendered in here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Board Overlay -->
+            <div id="boardOverlay" class="boardOverlay" style="display:none"></div>
+
+        </div>
+    </div>
+
+    <div class="sidebarBecomesFooter">
+        <div class="linkContainerForResonsivFooter">
+            <a class="footerMenuAtResponsiv" href="../index.html">
+                <img class="iconForResponsivFooter" src="../assets/icons/summary_icon.svg">
+                <span class="textForResponsivFooter">Summary</span>
+            </a>
+        </div>
+
+
+        <div class="linkContainerForResonsivFooter">
+            <a class="footerMenuAtResponsiv" href="../pages/board.html">
+                <img class="iconForResponsivFooter" src="../assets/icons/board_icon.svg">
+                <span class="textForResponsivFooter boardTextResponsiv">Board</span>
+            </a>
+        </div>
+
+        <div class="linkContainerForResonsivFooter">
+            <a class="footerMenuAtResponsiv" href="../pages/add_task.html">
+                <img class="iconForResponsivFooter" src="../assets/icons/add_task_icon.svg">
+                <span class="textForResponsivFooter">Add Task</span>
+            </a>
+        </div>
+
+        <div class="contactInBlueForOverlay">
+            <div class="linkContainerForResonsivFooter">
+                <a class="footerMenuAtResponsiv" href="../pages/contact.html">
+                    <img class="iconForResponsivFooter" src="../assets/icons/contact_icon_blue.svg">
+                    <span class="textForResponsivFooter">Contacts</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

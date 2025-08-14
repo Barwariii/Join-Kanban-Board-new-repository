@@ -1,0 +1,231 @@
+.JoinLogoHeaderFrame {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 67px;
+  padding-right: 28px;
+}
+
+.headerLogInFull {
+  display: flex;
+  justify-content: end;
+  width: 315px;
+  height: 48px;
+}
+
+.headerJoinLogo {
+  width: 100.03px;
+  height: 121.97px;
+  padding-left: 77px;
+}
+
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.loginBox {
+  background-color: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 400px;
+}
+
+h2 {
+  font-family: "Open-Sans";
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 57.6px;
+  text-align: center;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid lightgray;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+
+.inputGroup img.input-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  height: 24px;
+  width: 24px;
+}
+
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.checkboxGroup input {
+  margin-right: 10px;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+  gap: 37px;
+  text-decoration: none;
+}
+
+button.login-btn,
+button.guest-btn {
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+button.login-btn {
+  background-color: #4589ff;
+  color: white;
+  width: 135px;
+  height: 48px;
+  border-radius: 8px;
+}
+
+button.login-btn:hover {
+  background-color: #005DFF;
+  color: white;
+}
+
+
+
+button.guest-btn {
+  background-color: rgb(255, 255, 255);
+  color: #647188;
+  border: 1px solid #647188;
+  width: 197px;
+  height: 48px;
+  border-radius: 8px;
+
+}
+
+.footerLinks {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.footerLinks a {
+  text-decoration: none;
+  color: #43526e;
+  font-weight: 400;
+}
+
+.footerLinks a:hover {
+  color: #005dff;
+}
+
+
+@media (max-width: 600px) {
+  .JoinLogoHeader {
+    padding-left: 20px;
+    width: 80px;
+    height: auto;
+  }
+
+  .headerLogInFull {
+    width: auto;
+    padding-right: 20px;
+  }
+
+  .loginContainer {
+    padding: 20px;
+  }
+
+  .loginBox {
+    width: 90%; 
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  .inputGroup input {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .inputGroup img.input-icon {
+    height: 20px;
+    width: 20px;
+  }
+
+  button.login-btn,
+  button.guest-btn {
+    width: 100%; 
+    font-size: 14px;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .footerLinks {
+    position: absolute; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    gap: 10px;
+    width: 100%; 
+    display: flex;
+    justify-content: center;
+  }
+
+  .headerJoinLogo {
+    padding-left: 38px;
+  }
+
+  .headerLogIn {
+    position: absolute;
+    bottom: 40px; 
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 90%; 
+    max-width: 400px; 
+    overflow: hidden; 
+    box-sizing: border-box; 
+  }
+
+  .headerLogInFull {
+    display: inline-flex;
+    justify-content: center;
+  }
+
+  
+  .headerJoinLogoSignUp {
+    max-width: 100%; 
+    height: auto; 
+    overflow: hidden; 
+    box-sizing: border-box; 
+  }
+}

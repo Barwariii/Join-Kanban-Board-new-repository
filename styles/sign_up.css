@@ -1,0 +1,265 @@
+body {
+  background-color: #4589ff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+/* Header */
+.signUpHeader {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  padding: 20px;
+  padding-top: 67px;
+  padding-left: 58px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.JoinLogoHeaderFrame {
+  display: flex;
+  padding-left: 20px;
+}
+
+.headerJoinLogo {
+  width: 100.03px;
+  height: 121.97px;
+}
+
+/* signup */
+.signUpContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signUpBox {
+  background-color: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  width: 400px;
+  position: relative;
+}
+
+.back-arrow {
+  position: absolute;
+  top: 84px;
+  left: 20px;
+  text-decoration: none;
+}
+
+.back-arrow img {
+  width: 24px;
+  height: 24px;
+}
+
+h2 {
+  font-family: "Open-Sans", sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.inputSignUp {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.inputSignUp input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid lightgray;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+
+.inputSignUp img.input-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  height: 24px;
+  width: 24px;
+}
+
+.checkboxAccept {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  gap: 12px;
+}
+
+.checkboxAccept input {
+  margin-right: 10px;
+}
+
+.linkPrivacy {
+  color: #4589ff;
+  text-decoration: none;
+}
+
+.linkPrivacy:hover {
+  text-decoration: underline;
+}
+
+/* Submit button */
+.login-btn {
+  background-color: #4589ff;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.login-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.login-btn:hover:enabled {
+  background-color: #005dff;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.63); /* transparenter Hintergrund */
+  z-index: 999;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color:#4589FF;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  opacity: 0;
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+.popup img {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+.popup p {
+  font-size: 23px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.hidden {
+  display: none;
+}
+
+/* animation vom popup */
+@keyframes slideUp {
+  0% {
+      top: 80%;
+      opacity: 0;
+  }
+  100% {
+      top: 50%;
+      opacity: 1;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .signUpHeader {
+    display: none;
+    padding-top: 30px;
+    padding-left: 30px;
+  }
+
+  .JoinLogoHeaderFrame {
+    padding-left: 10px; 
+  }
+
+  .headerJoinLogo {
+    width: 90px;
+    height: auto; 
+  }
+
+  .signUpBox {
+    width: 95%; 
+    padding: 25px; 
+    border-radius: 15px; 
+  }
+
+  .back-arrow {
+    position: absolute;
+    top: 20px; 
+    left: 20px;
+    width: 30px; 
+    height: 30px; 
+  }
+
+  h2 {
+    font-size: 40px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .inputSignUp {
+    margin-bottom: 15px; 
+  }
+
+  .inputSignUp input {
+    padding: 12px;
+    font-size: 16px; 
+  }
+
+  .inputSignUp img.input-icon {
+    height: 22px; 
+    width: 22px;
+  }
+
+  .checkboxAccept {
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    gap: 8px; 
+  }
+
+  .login-btn {
+    width: 100%; 
+    font-size: 16px; 
+    padding: 12px;
+    border-radius: 6px; 
+  }
+
+  .footerLinks {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px; 
+  }
+}
