@@ -1,4 +1,7 @@
-// Generate Random Color for new Contact
+/**
+ * Generate a random color for a new contact.
+ * @returns {string} The randomly selected color value.
+ */
 function generateRandomColor() {
     let colorArray = Object.keys(accountColors);
     let randomNumber = Math.random();
@@ -9,7 +12,12 @@ function generateRandomColor() {
     return randomValue;
 }
 
-// Generate Initials from firstName and lastName
+
+/**
+ * Generate initials from the given name.
+ * @param {string} nameValue - The full name.
+ * @returns {string} The generated initials.
+ */
 function generateInitials(nameValue) {
     if (nameValue.includes(" ")) {
         let singleNames = nameValue.split(" ");
@@ -19,7 +27,11 @@ function generateInitials(nameValue) {
     }
 }
 
-// Sort contact List
+
+/**
+ * Sorts the contact list alphabetically by name.
+ * @param {Object[]} userData - Array of user objects.
+ */
 function sortContactList(userData) {
     userData.sort((a, b) => {
         return a.name < b.name ? -1 : 1;
@@ -27,7 +39,10 @@ function sortContactList(userData) {
 }
 
 
-// Render Contact List
+/**
+ * Renders the contact list into the DOM.
+ * @param {Object[]} userData - Array of user objects.
+ */
 function renderContactList(userData) {
     sortContactList(userData);
     let contactListContainer = document.querySelector("#contactList");
@@ -49,14 +64,15 @@ function renderContactList(userData) {
             `;
         }
 
-
         contactListContainer.innerHTML += contactListRenderTemplate(singleContact, index);
     });
 }
 
 
 /**
- * Contact Details
+ * Renders the details of a specific contact.
+ * @param {string} userId - The ID of the user.
+ * @param {number} index - Index of the user in the list.
  */
 function renderContactDetails(userId, index) {
     let contactDetails = document.querySelector("#contactDetails");
@@ -78,13 +94,18 @@ function renderContactDetails(userId, index) {
 }
 
 
+/**
+ * Clears the contact details section.
+ */
 function renderContactDetailsClear() {
     let contactDetails = document.querySelector("#contactDetails");
     contactDetails.innerHTML = "";
 }
 
 
-// add new contact form validation
+/**
+ * Validates the new contact form before submission.
+ */
 function checkContactFormValidation() {
     // Albert fragen in wie weit die Form Validation nochmal gehen soll
     let nameRef = document.querySelector("#name");
@@ -95,21 +116,23 @@ function checkContactFormValidation() {
         addNewContact();
     } else {
         if (nameRef.value == "") {
-            nameRef.style = "border-bottom: 1px solid var(--form-val-wrong)"
+            nameRef.style = "border-bottom: 1px solid var(--form-val-wrong)";
         }
 
         if (emailRef.value == "") {
-            emailRef.style = "border-bottom: 1px solid var(--form-val-wrong)"
+            emailRef.style = "border-bottom: 1px solid var(--form-val-wrong)";
         }
 
         if (phoneRef.value == "") {
-            phoneRef.style = "border-bottom: 1px solid var(--form-val-wrong)"
+            phoneRef.style = "border-bottom: 1px solid var(--form-val-wrong)";
         }
     }
 }
 
 
-// Add new Contact form validation
+/**
+ * Checks and updates the border color for form fields based on validity.
+ */
 function checkFormValidation() {
     let nameRef = document.querySelector("#name");
     let emailRef = document.querySelector("#email");
@@ -132,7 +155,9 @@ function checkFormValidation() {
 }
 
 
-// add new contact function
+/**
+ * Adds a new contact to the database.
+ */
 function addNewContact() {
     // checkContactFormValidation();
     let nameRef = document.querySelector("#name");
@@ -152,7 +177,7 @@ function addNewContact() {
         email: emailValue,
         phone: phoneValue,
         color: randomColor
-    }
+    };
 
     sendNewContactToDB(newProfile);
 
@@ -165,7 +190,11 @@ function addNewContact() {
 }
 
 
-// Update single contact
+/**
+ * Updates the data of an existing contact.
+ * @param {string} id - The contact's ID.
+ * @param {number} index - The contact's index in the list.
+ */
 function updateCurrentContact(id, index) {
     if (!validateEditForm()) return; // Abbrechen, wenn eines leer ist
 
@@ -186,8 +215,10 @@ function updateCurrentContact(id, index) {
 }
 
 
-
-// Deletes single contact
+/**
+ * Deletes a contact by ID.
+ * @param {string} id - The contact's ID.
+ */
 function deleteContact(id) {
     deleteContactFromDB(id);
     renderContactDetailsClear();
@@ -195,7 +226,10 @@ function deleteContact(id) {
 }
 
 
-// Check background color
+/**
+ * Highlights the background color for the selected contact.
+ * @param {number} index - The contact's index.
+ */
 function checkBackgroundColor(index) {
     let allDivs = document.querySelectorAll(".contactListSingleContactItemContainer");
     let allSpans = document.querySelectorAll(".contactListSingleContactItemEmail");
@@ -215,6 +249,9 @@ function checkBackgroundColor(index) {
 }
 
 
+/**
+ * Loads the contacts page and renders the contact list.
+ */
 function loadContactsPage() {
   loadUserData('/users').then(() => {
     renderContactList(userData);

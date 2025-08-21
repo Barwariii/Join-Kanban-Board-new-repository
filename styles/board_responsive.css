@@ -2,10 +2,95 @@
   display: none;
 }
 
-@media (max-width: 1150px) {
+  @media (max-width: 1455px) {
+    .sidebarContainer {
+      display: none !important;
+    }
+  }
+
+.headerLogo {
+  @media (max-width: 540px) {
+    padding-left: 30px;
+  }
+}
+
+.headerRight {
+  @media (max-width: 480px) {
+    gap: 0px;
+  }
+  @media (max-width: 367px) {
+    margin-right: 16px;
+  }
+}
+
+.headerTitle {
+  @media (max-width: 510px) {
+    font-size: 16px;
+  }
+  @media (max-width: 430px) {
+    display: none;
+    font-size: 0px;
+  }
+}
+
+.headerTitleContainer {
+  @media (max-width: 510px) {
+    width: 280px;
+  }
+  @media (max-width: 468px) {
+    /* width: 213px; */
+    display: none;
+  }
+  /* @media (max-width: 400px) {
+    display: none;
+  } */
+}
+
+.headerHelpIconContainer {
+  @media (max-width: 420px) {
+    width: 32px;
+  }
+}
+
+.header {
+  @media (max-width: 400px) {
+    justify-content: center;
+    gap: 158px;
+  }
+  @media (max-width: 329px) {
+    width: 333px;
+    gap: 133px;
+  }
+}
+
+.headerHelpIcon {
+  @media (max-width: 430px) {
+    display: none;
+  }
+}
+
+@media (max-width: 1455px) {
   .sidebarBecomesFooter {
     display: flex;
-    max-width: 1150px;
+    max-width: 1455px;
+    width: 100%;
+    max-height: 80px;
+    height: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    z-index: 1000;
+  }
+}
+
+@media (max-width: 1455px) {
+  .sidebarBecomesFooter {
+    display: flex;
+    max-width: 1455px;
     width: 100%;
     max-height: 80px;
     height: 100%;
@@ -68,6 +153,12 @@
   .awaitFeedbackContainer,
   .doneContainer {
     width: 100%;
+    margin-bottom: 30px;
+    align-items: unset;
+    height: unset;
+  }
+
+  .doneContainer {
     margin-bottom: 80px;
   }
 
@@ -76,9 +167,12 @@
   }
 
   .tasksContainer {
-    overflow-x: scroll !important;
-    max-width: 280px !important;
-    width: 100% !important;
+    overflow-x: auto !important;
+    width: 90svw !important;
+    /* max-width: 400px !important; */
+    /* width: 100% !important; */
+    /* margin-left: 40px; */
+    align-items: unset;
   }
 
   .tasks {
@@ -120,7 +214,6 @@
     margin-bottom: 50px;
   }
 
-
   /* Board Edit Overlay Tasks */
   .form-group {
     padding-right: 48px;
@@ -136,5 +229,6 @@
 
   .edit-task-actions {
     justify-content: center;
+    margin-bottom: 100px;
   }
 }

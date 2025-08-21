@@ -47,8 +47,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  margin-left: 80px;
-  margin-right: 80px;
+  margin-left: 20px;
+  /* margin-right: 80px; */
 }
 
 .searchAndAddContainer {
@@ -155,15 +155,16 @@
   width: 100%;
   /* height: 100%; */
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   margin-top: 24px;
   margin-bottom: 8px;
+  gap: 16px;
 }
 
 /* Tab Item */
 .tabItem {
-  width: 360px;
+  width: 100%;
   min-height: 48px;
   display: flex;
   align-items: center;
@@ -195,8 +196,8 @@
 
 /* Tasks Container */
 .tasksContainer {
-  width: 360px;
-  /* height: calc(100% - 48px); */
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -215,8 +216,8 @@
 
 /* To Do Tasks */
 .toDoContainer {
-  width: 360px;
-  height: 100%;
+  width: 272px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -224,7 +225,8 @@
 }
 
 .noToDoContainer {
-  width: 350px;
+  max-width: 300px;
+  width: 100%;
   min-height: 64px;
   background-color: #e7e7e7;
   border-radius: 12px;
@@ -242,7 +244,7 @@
 
 /* In Progress Tasks */
 .inProgressContainer {
-  width: 360px;
+  width: 300px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -269,7 +271,7 @@
 
 /* Await feedback Tasks */
 .awaitFeedbackContainer {
-  width: 360px;
+  width: 300px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -296,7 +298,7 @@
 
 /* Done Tasks */
 .doneContainer {
-  width: 360px;
+  width: 300px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -382,10 +384,8 @@
   margin-bottom: 20px;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
+.form-group label span {
+  color: #717d92;
 }
 
 /* .form-group input[type="text"], */
@@ -462,6 +462,37 @@
   border-radius: 8px;
 }
 
+/* Checkbox */
+.cb {
+  appearance: none;
+  -webkit-appearance: none; /* eigenes Styling */
+  width: 24px;
+  height: 24px;
+  margin: 0 8px 0 0;
+  border: 2px solid #cbd5e1;
+  border-radius: 4px;
+  display: inline-grid;
+  place-content: center;
+  background: #fff;
+  transition: 0.2s;
+}
+.cb:checked {
+  background: #4caf50;
+  border-color: #ffffff5e;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><path fill='none' stroke='white' stroke-width='2' d='M3 7l2.5 2.5L11 4'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 24px 24px;
+}
+.cb:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
+}
+.cb:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 #newSubtaskInput {
   margin: 0;
   border: none;
@@ -470,7 +501,7 @@
   font-size: 14px;
 }
 
-.remove-subtask {
+/* .remove-subtask {
   background: #ff4444;
   color: white;
   border: none;
@@ -479,7 +510,7 @@
   height: 25px;
   margin-left: 10px;
   cursor: pointer;
-}
+} */
 
 .edit-new-subtask button {
   background: none;
@@ -498,14 +529,18 @@
 }
 
 .save-btn {
-  background: #4caf50;
-  color: white;
-  padding: 10px 20px;
+  background: #eee;
+  color: #222;
   border: none;
-  border-radius: 4px;
+  padding: 8px 24px;
+  border-radius: 6px;
   cursor: pointer;
 }
 
+.save-btn:hover {
+  background-color: #4caf50;
+  color: #ffffff;
+}
 .cancel-btn {
   background: #f44336;
   color: white;
@@ -538,26 +573,62 @@
 
 .dropdown-content {
   display: none;
-  position: absolute;
-  width: 100%;
-  max-height: 200px;
+  /* position: absolute;
+  width: 100%; */
+  max-height: 150px;
   overflow-y: auto;
-  border: 1px solid #ddd;
+  scrollbar-width: none;
+  /* border: 1px solid #ddd;
   border-radius: 4px;
   background: white;
   z-index: 1000;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .contact-option {
-  display: flex;
+  /* display: flex;
   align-items: center;
   padding: 8px 12px;
+  cursor: pointer; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
   cursor: pointer;
+  margin: 4px 0 0 8px;
+  height: 40px;
+  padding: 0 8px;
 }
 
 .contact-option:hover {
-  background-color: #f5f5f5;
+  background-color: #d2e3ff;
+  border-radius: 5px;
+  display: flex;
+  margin-top: 4px;
+  height: 40px;
+  width: 100%;
+}
+
+.contact-option.active {
+  background-color: #4589ff;
+  border-radius: 5px;
+  color: white;
+}
+
+.contact-option.active:hover {
+  background-color: #005dff;
+}
+
+.contact-option:focus:not(:hover) {
+  background-color: #00ffa2;
+  border-radius: 5px;
+}
+
+.edit-contact-iformation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .contact-badge {
@@ -569,6 +640,10 @@
   justify-content: center;
   color: white;
   margin-right: 10px;
+}
+
+.hideCheckBox {
+  display: none;
 }
 
 .selected-contacts {
@@ -681,7 +756,6 @@
   height: 20px;
 } */
 
-
 /* delete confirm msg */
 .delete-confirm-overlay {
   position: fixed;
@@ -734,6 +808,6 @@
 }
 
 .cancel-btn:hover {
-  background: #439324;
+  background: #e74c3c;
   color: #ffffff;
 }

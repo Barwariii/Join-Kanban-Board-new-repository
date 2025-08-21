@@ -1,0 +1,239 @@
+/* === Open Task Overlay === */
+.open-task-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5000;
+  padding: 16px;
+}
+.open-task-card {
+  background: #fff;
+  max-width: 400px;
+  max-height: 800px;
+  width: 100%;
+  /* height: 100%; */
+  border-radius: 16px;
+  padding: 24px 20px 16px;
+  margin-bottom: 60px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+.ot-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.ot-chip {
+  background: #ff7a00;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: 400;
+  font-family: "open-sans", sans-serif;
+}
+.ot-close {
+  background: transparent;
+  border: 0;
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  line-height: 1;
+  color: #4589ff;
+}
+
+.ot-title {
+  font-size: 61px;
+  line-height: 1.2;
+  margin: 8px 0 6px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+}
+.ot-desc {
+  color: #000000;
+  margin: 0 0 16px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: var(--fontsize-19px);
+}
+.ot-row {
+  display: flex;
+  gap: 12px;
+  margin: 25px 0;
+}
+.ot-label {
+  font-weight: 700;
+  color: #42526e;
+  min-width: 90px;
+  font-size: var(--fontsize-21px);
+  font-family: "Open Sans", sans-serif;
+}
+
+.ot-section {
+  margin-top: 25px;
+}
+.ot-subtitle {
+  font-weight: 700;
+  color: #42526e;
+  margin-bottom: 8px;
+  font-size: var(--fontsize-21px);
+  font-family: "Open Sans", sans-serif;
+}
+
+/* Assigned contacts (vertical list like design) */
+.openTaskAssignedToContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 150px;
+  height: 100%;
+  overflow-y: auto;
+}
+.ot-chip-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ot-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 700;
+}
+.ot-name {
+  color: #000000;
+  font-size: var(--fontsize-19px);
+  font-weight: 400;
+  font-family: "Open Sans", sans-serif;
+}
+
+/* Progress */
+.ot-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ot-progress-track {
+  background: #f4f4f4;
+  border-radius: 8px;
+  height: 16px;
+  overflow: hidden;
+}
+#progressFill {
+  height: 16px;
+  border-radius: 8px;
+  background: #4589ff;
+  width: 0;
+}
+.ot-progress-text {
+  color: #6b778c;
+  font-size: 14px;
+}
+
+/* Subtasks */
+.ot-subtasks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ot-subtask {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.ot-subtask input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  margin: 0 8px 0 0;
+  border: 2px solid #cbd5e1;
+  border-radius: 4px;
+  display: inline-grid;
+  place-content: center;
+  background: #fff;
+  transition: 0.2s;
+}
+
+.ot-subtask input:checked {
+  background: #4caf50;
+  border-color: #ffffff5e;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><path fill='none' stroke='white' stroke-width='2' d='M3 7l2.5 2.5L11 4'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 24px 24px;
+}
+
+.ot-subtask-text {
+  color: #000000;
+  font-size: var(--fontsize-16px);
+  font-weight: 400;
+  font-family: "Open Sans", sans-serif;
+}
+
+.ot-subtask-text.is-done {
+  text-decoration: line-through;
+  color: #6b778c;
+}
+
+/* Actions */
+.ot-actions {
+  display: flex;
+  /* gap: 16px; */
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+.ot-delete-btn,
+.ot-edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+.ot-delete-btn {
+  background: none;
+  color: #2a3647;
+}
+.ot-edit-btn {
+  background: none;
+  color: #2a3647;
+}
+.ot-ico {
+  font-size: 16px;
+}
+
+/* Misc */
+.ot-muted {
+  color: #6b778c;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 16px;
+  padding: 3px 10px;
+  font-weight: 600;
+}
+.pill-urgent {
+  background: #ffe4e0;
+  color: #ff3d00;
+}
+.pill-medium {
+  background: #fff2da;
+  color: #ffa800;
+}
+.pill-low {
+  background: #e9f8e1;
+  color: #4c9a2a;
+}

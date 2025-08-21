@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="../styles/help_icon.css">
     <link rel="stylesheet" href="../styles/board_card.css">
     <link rel="stylesheet" href="../styles/board_overlay_add_task.css">
+    <link rel="stylesheet" href="../styles/board_open_task_overlay.css">
+
+    <!-- <link rel="stylesheet" href="../styles/add_task.css"> -->
 
     <!-- Scripts -->
     <script src="../scripts/database.js"></script>
@@ -24,39 +27,44 @@
     <script src="../scripts/board_templates.js"></script>
     <script src="../script.js"></script>
     <script src="../scripts/board.js"></script>
+    <script src="../scripts/board_drag_drop.js"></script>
+    <!-- <script src="../scripts/board_overlay_add_task.js"></script> -->
+    <script src="../scripts/board_open_task_overlay.js"></script>
 </head>
 
 <body onload="loadAndRenderBoardTasks()">
     <header>
-        <div class="header">
-            <div class="headerLeft">
-                <img class="headerLogo" src="../assets/icons/logo_full_white.png" alt="join logo">
-            </div>
-
-            <div class="headerRight">
-
-                <div class="headerTitleContainer" onclick="toggledropDownBar()">
-                    <span class="headerTitle">Kanban Project Management Tool</span>
+        <div class="background-header">
+            <div class="header">
+                <div class="headerLeft">
+                    <img class="headerLogo" src="../assets/icons/logo_full_white.png" alt="join logo">
                 </div>
 
-                <div class="headerHelpIconContainer">
-                    <a href="./help_button.html" class="headerHelpIconLink">
-                        <img class="headerHelpIcon" src="../assets/icons/help_icon.png" alt="help icon">
-                    </a>
-                </div>
+                <div class="headerRight">
 
-                <div class="headerProfileContainer" onclick="toggledropDownBar()">
-                    <div class="headerProfile">
-                        <span class="headerProfileLetter">SM</span>
+                    <div class="headerTitleContainer" onclick="toggledropDownBar()">
+                        <span class="headerTitle">Kanban Project Management Tool</span>
                     </div>
-                </div>
 
-                <div class="dropDownBar" id="dropDownBar">
-                    <a href="./legal_notice.html" class="dropDownItem">Legal Notice</a>
-                    <a href="./privacy_policy.html" class="dropDownItem">Privacy Policy</a>
-                    <a href="../pages/log_in.html" class="dropDownItem">Log Out</a>
-                </div>
+                    <div class="headerHelpIconContainer">
+                        <a href="./help_button.html" class="headerHelpIconLink">
+                            <img class="headerHelpIcon" src="../assets/icons/help_icon.png" alt="help icon">
+                        </a>
+                    </div>
 
+                    <div class="headerProfileContainer" onclick="toggledropDownBar()">
+                        <div class="headerProfile">
+                            <span class="headerProfileLetter">SM</span>
+                        </div>
+                    </div>
+
+                    <div class="dropDownBar" id="dropDownBar">
+                        <a href="./legal_notice.html" class="dropDownItem">Legal Notice</a>
+                        <a href="./privacy_policy.html" class="dropDownItem">Privacy Policy</a>
+                        <a href="../pages/log_in.html" class="dropDownItem">Log Out</a>
+                    </div>
+
+                </div>
             </div>
         </div>
     </header>
@@ -107,7 +115,8 @@
                 <div class="searchAndAddContainer">
                     <!-- suchfeld -->
                     <div class="searchBarContainer">
-                        <input type="text" id="taskSearchInput" class="searchInput" placeholder="Find Task" oninput="filterTasksBySearch()">
+                        <input type="text" id="taskSearchInput" class="searchInput" placeholder="Find Task"
+                            oninput="filterTasksBySearch()">
                         <div class="boardSearchIconContainer">
                             <div class="boardSearchIconSVGWrapper">
                                 <svg class="boardSearchIcon" width="32" height="33" viewBox="0 0 32 33"

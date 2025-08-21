@@ -1,7 +1,13 @@
+// =====================================
+// Globals
+// =====================================
 addTaskUserData = [];
-
 let subtasks = [];
 
+
+// =====================================
+// Fetch Users (Assigned-To source)
+// =====================================
 async function getUserDataForAddTask(path = "/users") {
   try {
     let userResponse = await fetch(DATABASE_URL + path + ".json");
@@ -28,6 +34,9 @@ async function getUserDataForAddTask(path = "/users") {
 }
 
 
+// =====================================
+// Priority Default (Medium)
+// =====================================
 function setDefaultPriorityMedium() {
   // Medium aktiv
   medium.classList.add('active');
@@ -41,7 +50,9 @@ function setDefaultPriorityMedium() {
 }
 
 
-
+// =====================================
+// Assigned-To: Template & Render
+// =====================================
 //! Template function for assigned to
 function assignedToSingleUserTemplate(singleUser, i) {
   return /*html*/`
@@ -66,7 +77,6 @@ function assignedToSingleUserTemplate(singleUser, i) {
   `;
 }
 
-
 function renderAssignedToList() {
   let ulItem = document.getElementById("assignedContactsUlItem");
   ulItem.innerHTML = "";
@@ -75,14 +85,16 @@ function renderAssignedToList() {
     const singleUser = addTaskUserData[i];
     ulItem.innerHTML += assignedToSingleUserTemplate(singleUser, i);
 
+    // Render Checkbox state
     const contactElement = document.getElementById(singleUser.id);
     renderToggleCheckbox(contactElement, i);
   }
 }
 
 
-
-
+// =====================================
+// Assigned-To: SVG Templates & Bootstrapping
+// =====================================
 // * Select assigned Contacts
 // Add the SVG only once as a template
 const uncheckedSVG = `
@@ -95,7 +107,6 @@ const checkedSVG = `
       <path d="M20 11.9658V17.9658C20 19.6227 18.6569 20.9658 17 20.9658H7C5.34315 20.9658 4 19.6227 4 17.9658V7.96582C4 6.30897 5.34315 4.96582 7 4.96582H15" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
       <path d="M8 12.9658L12 16.9658L20 5.46582" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>`;
-
 
 //* Get all contacts
 const contacts = document.querySelectorAll('.contact');
@@ -110,9 +121,11 @@ for (let i = 0; i < contacts.length; i++) {
 }
 
 
+// =====================================
+// Assigned-To: Toggle + Render Toggle
+// =====================================
 //! Funktion für Checkbox umschalten
 function toggleCheckbox(contactElement, i) {
-
 
   const unchecked = document.getElementById(`unCheckedBox${i}`);
   const checked = document.getElementById(`checkedBox${i}`);
@@ -134,7 +147,6 @@ function toggleCheckbox(contactElement, i) {
   contactElement.classList.toggle('active');
 
 }
-
 
 //! Funktion für Checkbox umschalten
 function renderToggleCheckbox(contactElement, i) {
@@ -162,7 +174,9 @@ function renderToggleCheckbox(contactElement, i) {
 }
 
 
-//! Toggle Dropdown of assigned Contacts
+// =====================================
+// Assigned-To Dropdown (open/close + outside/esc)
+// =====================================
 // verhindert Bubbling im Dropdown (Alternative zu onclick im HTML)
 (function initAssignedDropdownShield() {
   const dd = document.getElementById('assignedContacts');
@@ -193,11 +207,9 @@ function handleOutsideAssignedClick(e) {
   }
 }
 
-
 function handleEscapeAssigned(e) {
   if (e.key === 'Escape') closeAssignedDropdown();
 }
-
 
 function closeAssignedDropdown() {
   const dd = document.getElementById('assignedContacts');
@@ -214,8 +226,6 @@ function closeAssignedDropdown() {
 
   updateSelectedContacts();
 }
-
-
 
 // change assiend icon
 function changeDropdownAssignedIcon() {
@@ -250,11 +260,13 @@ function updateSelectedContacts() {
   });
 }
 
-//! Priority btns effects
+
+// =====================================
+// Priority Buttons (Urgent/Medium/Low)
+// =====================================
 const urgent = document.getElementById('urgent');
 const medium = document.getElementById('medium');
 const low = document.getElementById('low');
-
 
 function toggleUrgent() {
   if (urgent.classList.contains('active')) {
@@ -270,8 +282,8 @@ function toggleUrgent() {
     low.classList.remove('active');
     medium.classList.remove('active');
   }
+  validateAddTaskForm();
 }
-
 
 function toggleMedium() {
   if (medium.classList.contains('active')) {
@@ -287,8 +299,8 @@ function toggleMedium() {
     urgent.classList.remove('active');
     low.classList.remove('active');
   }
+  validateAddTaskForm();
 }
-
 
 function toggleLow() {
   if (low.classList.contains('active')) {
@@ -304,17 +316,29 @@ function toggleLow() {
     urgent.classList.remove('active');
     medium.classList.remove('active');
   }
+  validateAddTaskForm();
 }
 
 
-//! Toggle Dropdown of Category
+// =====================================
+// Category Dropdown (first simple version)
+// =====================================
 function toggleDropdownCategory() {
   const categoryTasks = document.getElementById('categoryTasks');
   // Toggle the 'hidden' class on or off
   categoryTasks.classList.toggle('hiddenCategoryTasks');
 }
 
+function selectCategory(category) {
+  const selectedCategoryElement = document.getElementById('selectedCategory');
+  selectedCategoryElement.textContent = category;
+  closeCategoryDropdown();
+}
 
+
+// =====================================
+// Category Dropdown (enhanced version - overrides the first)
+// =====================================
 function toggleDropdownCategory(ev) {
   if (ev) ev.stopPropagation();
   const dd = document.getElementById('categoryTasks');
@@ -359,14 +383,6 @@ function closeCategoryDropdown() {
   document.removeEventListener('keydown', handleEscapeCategory);
 }
 
-// Kategorie setzen + Dropdown schließen
-function selectCategory(category) {
-  const selectedCategoryElement = document.getElementById('selectedCategory');
-  selectedCategoryElement.textContent = category;
-  closeCategoryDropdown();
-}
-
-
 // change category icon
 function changeDropdownCategoryIcon() {
   const arrowDown = document.getElementById('arrowDownCategory');
@@ -383,7 +399,7 @@ function changeDropdownCategoryIcon() {
   }
 }
 
-
+// (النسخة الأخيرة هي الفعّالة)
 function selectCategory(category) {
   const selectedCategoryElement = document.getElementById('selectedCategory');
   selectedCategoryElement.textContent = category; // Update text to the selected category
@@ -393,7 +409,9 @@ function selectCategory(category) {
 }
 
 
-// Function to display the selected subtasks in showAddedSubtasks
+// =====================================
+// Subtasks (Add/Render/Remove/Edit inline)
+// =====================================
 function addSubtask() {
   const input = document.getElementById('subtasks');
   const subtaskText = input.value.trim();
@@ -404,7 +422,6 @@ function addSubtask() {
     renderSubtasks();
   }
 }
-
 
 function renderSubtasks() {
   const container = document.getElementById('showAddedSubtasks');
@@ -435,12 +452,10 @@ function renderSubtasks() {
   });
 }
 
-
 function removeSubtask(index) {
   subtasks.splice(index, 1);
   renderSubtasks();
 }
-
 
 let editingSubtaskIndex = null;
 
@@ -474,10 +489,12 @@ function escHtml(s) {
   return s.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
 }
 
-
 document.querySelector('.add-subtask-btn').addEventListener('click', addSubtask);
 
 
+// =====================================
+// Create Task
+// =====================================
 async function createTask() {
   const title = document.getElementById('title').value.trim();
   const description = document.getElementById('description').value.trim();
@@ -498,12 +515,19 @@ async function createTask() {
     return;
   }
 
+  if (!validatePriorityField()) {
+    // This will show the error message automatically
+    validateAddTaskForm();
+    return;
+  }
+
   let priority = null;
   if (document.getElementById('urgent').classList.contains('active')) priority = "urgent";
   if (document.getElementById('medium').classList.contains('active')) priority = "medium";
   if (document.getElementById('low').classList.contains('active')) priority = "low";
   if (!priority) {
-    alert("Priority fehlt");
+    validatePriorityField();
+    // alert("Priority fehlt");
     return;
   }
 
@@ -519,7 +543,7 @@ async function createTask() {
     category,
     assigned_to: assigned,
     type: categoryText,
-    subtasks: subtasks
+    subtasks: (subtasks || []).map(s => ({ title: s, completed: false }))
   };
 
   const res = await fetch(`${DATABASE_URL}/tasks/to_do.json`, {
@@ -531,12 +555,18 @@ async function createTask() {
   if (res.ok) {
     showSuccessOverlay("Task added to board!");
     clearTask();
+    setTimeout(() => {
+      window.location.href = "../pages/board.html";
+    }, 1650);
   } else {
     alert("Fehler beim Erstellen!");
   }
 }
 
 
+// =====================================
+// UI Helpers (Success Overlay / Clear Form)
+// =====================================
 // Function to show the overlay message 
 function showSuccessOverlay(msg) {
   const overlay = document.getElementById('successOverlay');
@@ -547,7 +577,6 @@ function showSuccessOverlay(msg) {
     overlay.style.display = 'none';
   }, 1600); // 1.6 seconds
 }
-
 
 function clearTask() {
   /** Reset priority */
@@ -578,12 +607,19 @@ function clearTask() {
   /** Clear the display of selected contacts */
   const selectedContactsContainer = document.querySelector('.showSelectedContact');
   selectedContactsContainer.innerHTML = '';
+
+  setDefaultPriorityMedium();
+  if (typeof validateAddTaskForm === 'function') validateAddTaskForm();
 }
 
 
-
+// =====================================
+// Validation (Title/Due/Category/Priority/Form)
+// =====================================
 const titleInput = document.getElementById('title');
 const dueDateInput = document.getElementById('dueDate');
+const selectedPriorityElemnt = document.getElementById('priorityOptions');
+const priorityContainer = document.getElementById('priorityContianerId');
 const selectedCategoryElement = document.getElementById('selectedCategory');
 const categoryContainer = document.getElementById('category');
 const titleError = document.getElementById('titleErrorMessage');
@@ -628,15 +664,31 @@ function validateCategoryField() {
   return isValid;
 }
 
+// Update the priority validation function
+function validatePriorityField() {
+  const isUrgentActive = urgent.classList.contains('active');
+  const isMediumActive = medium.classList.contains('active');
+  const isLowActive = low.classList.contains('active');
+  const isValid = isUrgentActive || isMediumActive || isLowActive;
+
+  // Make sure you have this element in your HTML
+  const priorityError = document.getElementById('priorityErrorMessage');
+  if (priorityError) {
+    priorityError.style.display = isValid ? "none" : "flex";
+  }
+
+  return isValid;
+}
+
 // Haupt-Validierungsfunktion
 function validateAddTaskForm() {
   const isTitleValid = validateTitleField();
   const isDueDateValid = validateDueDateField();
   const isCategoryValid = validateCategoryField();
+  const isPriorityValid = validatePriorityField();
 
-  return isTitleValid && isDueDateValid && isCategoryValid;
+  return isTitleValid && isDueDateValid && isCategoryValid && isPriorityValid;
 }
-
 
 // Live-Check bei Eingabe / Änderung
 titleInput.addEventListener('input', validateAddTaskForm);
@@ -647,4 +699,3 @@ function submitAddTaskForm() {
   if (!validateAddTaskForm()) return; // blockt, wenn nicht alles ausgefüllt
   createTask(); // deine Funktion
 }
-

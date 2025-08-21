@@ -18,14 +18,26 @@ function taskTemplate(task, userData) {
     const progressBarWidth = total > 0 ? (completed / total) * 180 : 0;
 
     // Render the assigned contacts (assigned_to)
-    const assignedContacts = (task.assigned_to || [])
-        .map(id => {
-            const user = userData.find(u => u.id === id);
-            if (!user) return '';
-            return `<div class="taskSingleContact" style="background-color:${user.color}">
-                        <span>${user.initials}</span>
-                    </div>`;
-        }).join('');
+    // Render the assigned contacts (max 5 + "+X")
+    const maxVisible = 3;
+    const assigned = task.assigned_to || [];
+    const visibleUsers = assigned.slice(0, maxVisible);
+    const hiddenCount = assigned.length - maxVisible;
+
+    let assignedHTML = visibleUsers.map(id => {
+        const user = userData.find(u => u.id === id);
+        if (!user) return '';
+        return `<div class="taskSingleContact" style="background-color:${user.color}">
+              <span>${user.initials}</span>
+            </div>`;
+    }).join('');
+
+    if (hiddenCount > 0) {
+        assignedHTML += `<div class="taskSingleContact">
+                       <span>+${hiddenCount}</span>
+                     </div>`;
+    }
+
 
     function getPrioritySVG(priority) {
         if (priority === "urgent") {
@@ -70,8 +82,8 @@ function taskTemplate(task, userData) {
                 <span id="taskTypeText">${task.type}</span>
             </div>
             <div class="task-btns">
-                <span onclick="openEditTaskOverlay('${task.id}')" id="editTaskBtn" class="edit-task-btn">edit</span>
-                <span onclick="deleteTask('${task.id}')" id="deleteTaskBtn" class="delete-task-btn">delete</span>
+                <img src="../assets/icons/edit1.png" alt="" id="editTaskBtn" class="edit-task-btn" onclick="openEditTaskOverlay('${task.id}')">
+                <img src="../assets/icons/delete1.png" alt="" id="deleteTaskBtn" class="delete-task-btn" onclick="deleteTask('${task.id}')">
             </div>
         </div>
 
@@ -98,7 +110,7 @@ function taskTemplate(task, userData) {
 
         <div class="taskAssignedToAndPriorityContainer">
             <div id="taskAssignedToContainer" class="taskAssignedToContainer">
-                ${assignedContacts}
+                ${assignedHTML}
             </div>
 <div id="taskPriorityContainer" class="taskPriorityContainer">
     <div class="taskPrioritySVGContainer">

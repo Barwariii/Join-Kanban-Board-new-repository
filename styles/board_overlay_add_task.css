@@ -6,7 +6,12 @@
 .headcontent {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
   margin: 40px 0;
+  @media (max-width: 530px) {
+    width: 90%;
+  }
 }
 
 .head-title {
@@ -16,7 +21,6 @@
 .closeOverlayBtn {
   width: 35px;
   height: 35px;
-  background-color: #389d38;
   border: solid 2px #000000;
   border-radius: 8px;
   cursor: pointer;
@@ -103,7 +107,7 @@ textarea:focus {
 }
 
 .leftContent {
-  margin: 0 16px 0 16px;
+  margin: 0 16px 80px 16px;
 }
 
 .titleContainer input {
@@ -504,14 +508,61 @@ ul {
   border-radius: 8px;
 }
 
-.remove-subtask {
+.subtask-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-subtask {
   border: solid 1px #000000;
   border-radius: 8px;
   cursor: pointer;
 }
 
-.remove-subtask:hover {
+.edit-subtask:hover {
+  background: #02bc59;
+}
+
+.edit-subtask-input {
+  background: none;
+  border: solid 2px #9d4848 !important;
+  border-radius: 8px;
+}
+
+.added-subtask button:nth-of-type(1) {
+  background: none;
+  border: solid 2px #02bc59;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.added-subtask button:nth-of-type(2) {
+  background: none;
+  border: solid 2px #9d4848;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.added-subtask > button:nth-of-type(1):hover {
+  background: #02bc59;
+  color: #ffffff;
+}
+
+.added-subtask > button:nth-of-type(2):hover {
   background-color: #c72515;
+  color: #ffffff;
+}
+
+.remove-subtask {
+  color: #000000;
+  border: solid 1px #000000 !important;
+  border-radius: 8px;
+  cursor: pointer;
+  background: none;
+}
+
+.remove-subtask:hover {
+  background: #c72515 !important;
   color: #ffffff;
 }
 
@@ -573,6 +624,13 @@ ul {
   color: rgb(0, 93, 255);
   border: 2px solid rgb(0, 93, 255, 0.8);
   padding: 13px 15px;
+}
+
+.error-message {
+  color: #f44336; /* Rot für Fehlermeldung */
+  font-size: 14px;
+  display: none; /* Fehlermeldung ist standardmäßig versteckt */
+  margin-top: 5px;
 }
 
 /* show  create task is Success */

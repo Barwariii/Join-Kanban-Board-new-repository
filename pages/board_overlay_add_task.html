@@ -18,7 +18,7 @@
     <script src="../scripts/contacts.js" defer></script>
 </head>
 
-<body>
+<body onload="setDefaultPriorityMedium();">
     <!-- add-task-overlay.html -->
     <div class="addTaskOverlay">
         <div class="addTaskWrapper">
@@ -39,8 +39,9 @@
                     <div class="dueDateContainer">
                         <label for="dueDate">Due date</label>
                         <input type="date" id="dueDate" class="inputDate">
+                        <span id="dueDateErrorMessage" class="error-message">This field is required</span>
                     </div>
-                    <div class="priorityContianer">
+                    <div id="priorityContianerId" class="priorityContianer">
                         <label for="priority">Priority</label>
                         <div class="priorityOptions">
                             <!-- Urgent -->
@@ -101,6 +102,7 @@
                                 </svg>
                             </div>
                         </div>
+                        <span id="priorityErrorMessage" class="error-message">Please select a priority</span>
                     </div>
 
 
@@ -158,8 +160,8 @@
                     <!--! Category Section -->
                     <div class="category">
                         <label for="category">Category</label>
-                        <div class="chooseCategory" onclick="toggleDropdownCategory(), changeDropdownCategoryIcon()">
-                            <p id="selectedCategory">Select task category</p>
+                        <div id="category" class="chooseCategory" onclick="toggleDropdownCategory(), changeDropdownCategoryIcon()">
+                            <p id="selectedCategory">Select Category</p>
                             <!-- arrow Down default -->
                             <svg id="arrowDownCategory" class="arrowDownDefault" width="24" height="25"
                                 viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -191,6 +193,7 @@
                                 </g>
                             </svg>
                         </div>
+                        <span id="categoryErrorMessage" class="error-message">This field is required</span>
                     </div>
 
                     <!--*Chose a Category Tasks -->

@@ -1,8 +1,3 @@
-console.log("board_database.js geladen!");
-
-
-// const DATABASE_URL = "https://join-kanban-board-3a477-default-rtdb.europe-west1.firebasedatabase.app/";
-
 let toDoTasks = [];
 let inProgressTasks = [];
 let awaitFeedbackTasks = [];

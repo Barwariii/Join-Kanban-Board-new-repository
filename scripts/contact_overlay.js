@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
         addContactBtn.addEventListener('click', openAddContactPopup);
         addContactBtn.addEventListener('click', addBtnDisable);
     } else {
-        console.error("Der 'Add new Contact'-Button wurde nicht gefunden.");
+        console.error("The 'Add new Contact' button was not found.");
     }
 
     // Edit Contact
@@ -21,13 +21,19 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// Function to open the Add Contact pop-up
+/**
+ * Open the Add Contact pop-up overlay.
+ */
 function openAddContactPopup() {
     document.querySelector('.contactsOverlay').style.display = 'block'; // Make the pop-up visible
     document.querySelector('.contactsOverlay').innerHTML = renderAddContactOverlay();
 }
 
 
+/**
+ * Validate the Edit Contact form fields.
+ * @returns {boolean} True if all fields are filled correctly, false otherwise.
+ */
 function validateEditForm() {
     const nameRef = document.querySelector("#editName");
     const emailRef = document.querySelector("#editEmail");
@@ -38,20 +44,22 @@ function validateEditForm() {
     const emailOk = emailRef.value.trim() !== "";
     const phoneOk = phoneRef.value.trim() !== "";
 
-    // Rote Linie wenn leer, Standard wenn gefüllt
+    // Red underline if empty, default if filled
     nameRef.style.borderBottom = nameOk ? "1px solid var(--form-val-default)" : "1px solid var(--form-val-wrong)";
     emailRef.style.borderBottom = emailOk ? "1px solid var(--form-val-default)" : "1px solid var(--form-val-wrong)";
     phoneRef.style.borderBottom = phoneOk ? "1px solid var(--form-val-default)" : "1px solid var(--form-val-wrong)";
 
-    // Save nur aktiv, wenn alle Felder gefüllt
+    // Enable Save button only if all fields are filled
     if (saveBtn) saveBtn.disabled = !(nameOk && emailOk && phoneOk);
 
     return nameOk && emailOk && phoneOk;
 }
 
 
-
-// Function to open the Edit Contact pop-up
+/**
+ * Open the Edit Contact pop-up overlay.
+ * @param {number} index - The index of the contact to edit.
+ */
 let editUserDetails;
 function openEditContactPopup(index) {
     document.querySelector('.contactsOverlay').style.display = 'block';
@@ -59,28 +67,43 @@ function openEditContactPopup(index) {
 }
 
 
-// Function to close the pop-up
+/**
+ * Close the contacts pop-up overlay.
+ */
 function closePopup() {
     document.querySelector('.contactsOverlay').style.display = 'none'; // Hide the pop-up
 }
 
 
-// Function to disable the button
+/**
+ * Disable the add button (placeholder function).
+ */
 function addBtnDisable() {
-    document.querySelector(".add")
+    document.querySelector(".add");
 }
 
-//Function for dropdown contact info overlay for responsive
+
+/**
+ * Toggle dropdown for contact info overlay in responsive view.
+ */
 function dropDownEditAndDelete() {
     let editAndDeleteDropdown = document.getElementById('dropDownMenuForSpecialContact');
     editAndDeleteDropdown.style.display = editAndDeleteDropdown.style.display === "none" ? "block" : "none";
 }
 
-//Function for blue arrow pointing to Li ("back arrow")
+
+/**
+ * Navigate back using the browser history.
+ */
 function goBack() {
     window.history.back();
 }
 
+
+/**
+ * Close the responsive contact details overlay and reset background colors.
+ * @param {number} index - The index of the contact overlay to close.
+ */
 function closeResponsiveDetailsOverlay(index) {
     let contactOverlay = document.querySelector('.contactsOverlay');
     contactOverlay.style = "display: none";

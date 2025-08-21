@@ -1,12 +1,21 @@
-
-
+// ==============================
+// Global Exports & Data Stores
+// ==============================
 window.getUserDataForAddTask = getUserDataForAddTask;
+window.addTaskOverlayInit = addTaskOverlayInit;
 
 addTaskUserData = [];
 
 let addTaskSubtasks = [];
 let editTaskSubtasks = [];
 
+// === ADDED: inline subtask editing state ===
+let editingSubtaskIndex = null;
+
+
+// ==============================
+// Fetch Users (Assigned-To source)
+// ==============================
 async function getUserDataForAddTask(path = "/users") {
   try {
     let userResponse = await fetch(DATABASE_URL + path + ".json");
@@ -33,6 +42,25 @@ async function getUserDataForAddTask(path = "/users") {
 }
 
 
+// ==============================
+// Priority: Default (Medium)
+// ==============================
+function setDefaultPriorityMedium() {
+  // Medium aktiv
+  medium.classList.add('active');
+  medium.classList.remove('mediumHover');
+
+  // Andere auf Hover-Style setzen
+  urgent.classList.remove('active');
+  urgent.classList.add('urgentHover');
+  low.classList.remove('active');
+  low.classList.add('lowHover');
+}
+
+
+// ==============================
+// Assigned-To: Template & Render
+// ==============================
 //! Template function for assigned to
 function assignedToSingleUserTemplate(singleUser, i) {
   return /*html*/`
@@ -75,8 +103,9 @@ function renderAssignedToList() {
 window.renderAssignedToList = renderAssignedToList;
 
 
-
-
+// ==============================
+// Assigned-To: SVG Templates & Bootstrapping
+// ==============================
 // * Select assigned Contacts
 // Add the SVG only once as a template
 const uncheckedSVG = `
@@ -90,8 +119,22 @@ const checkedSVG = `
       <path d="M8 12.9658L12 16.9658L20 5.46582" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>`;
 
-  
+//* Get all contacts
+const contacts = document.querySelectorAll('.contact');
 
+// For loop through all contacts
+for (let i = 0; i < contacts.length; i++) {
+  const contact = contacts[i];
+
+  // Add checkbox (once)
+  const checkboxDiv = contact.querySelector('.checkbox');
+  checkboxDiv.innerHTML = checkedSVG;
+}
+
+
+// ==============================
+// Assigned-To: Toggle + Render Toggle
+// ==============================
 //! Funktion für Checkbox umschalten
 function toggleCheckbox(contactElement, i) {
   // Try to get the SVG by ID first
@@ -142,6 +185,9 @@ function renderToggleCheckbox(contactElement, i) {
 window.renderToggleCheckbox = renderToggleCheckbox;
 
 
+// ==============================
+// Assigned-To: Dropdown + Icons + Selected Preview
+// ==============================
 //! Toggle Dropdown of assigned Contacts
 function toggleDropdownAssignedContacts() {
   const assignedContacts = document.getElementById('assignedContacts');
@@ -150,7 +196,6 @@ function toggleDropdownAssignedContacts() {
   updateSelectedContacts();
 }
 window.toggleDropdownAssignedContacts = toggleDropdownAssignedContacts;
-
 
 
 // change assiend icon
@@ -188,10 +233,17 @@ function updateSelectedContacts() {
   });
 }
 
-//! Priority btns effects
-const urgent = document.getElementById('urgent');
-const medium = document.getElementById('medium');
-const low = document.getElementById('low');
+
+// ==============================
+// Priority Buttons (Urgent/Medium/Low)
+// ==============================
+function prioEls() {
+  return {
+    urgent: document.getElementById('urgent'),
+    medium: document.getElementById('medium'),
+    low: document.getElementById('low'),
+  };
+}
 
 
 function toggleUrgent() {
@@ -208,6 +260,7 @@ function toggleUrgent() {
     low.classList.remove('active');
     medium.classList.remove('active');
   }
+  validateAddTaskForm();
 }
 window.toggleUrgent = toggleUrgent;
 
@@ -226,6 +279,7 @@ function toggleMedium() {
     urgent.classList.remove('active');
     low.classList.remove('active');
   }
+  validateAddTaskForm();
 }
 window.toggleMedium = toggleMedium;
 
@@ -244,12 +298,14 @@ function toggleLow() {
     urgent.classList.remove('active');
     medium.classList.remove('active');
   }
+  
 }
 window.toggleLow = toggleLow;
 
 
-
-
+// ==============================
+// Category Dropdown & Selection
+// ==============================
 //! Toggle Dropdown of Category
 function toggleDropdownCategory() {
   const categoryTasks = document.getElementById('categoryTasks');
@@ -275,37 +331,60 @@ function changeDropdownCategoryIcon() {
 }
 
 
-
 function selectCategory(category) {
   const selectedCategoryElement = document.getElementById('selectedCategory');
-  selectedCategoryElement.textContent = category; // Update text to the selected category
-  toggleDropdownCategory(); // Hide dropdown
-  changeDropdownCategoryIcon(); // Change icon to show the arrow down
+  selectedCategoryElement.textContent = category;
+  validateAddTaskForm();
+  toggleDropdownCategory();
+  changeDropdownCategoryIcon();
 }
 window.selectCategory = selectCategory;
 
 
-
-// Function to display the selected subtasks in showAddedSubtasks
+// ==============================
+// Subtasks (Add/Render/Remove)
+// ==============================
+// ==============================
+// Subtasks (Add/Render/Remove/Edit inline)
+// ==============================
 function addSubtaskForAddTask() {
   const input = document.getElementById('subtasks');
-  if (!input || !input.value.trim()) return;
-  
-  addTaskSubtasks.push(input.value.trim());
-  input.value = '';
-  renderSubtasksForAddTask();
+  const subtaskText = input.value.trim();
+
+  if (subtaskText) {
+    addTaskSubtasks.push(subtaskText);
+    input.value = '';
+    renderSubtasksForAddTask();
+  }
 }
 
 function renderSubtasksForAddTask() {
   const container = document.getElementById('showAddedSubtasks');
-  if (!container) return;
-  
-  container.innerHTML = addTaskSubtasks.map((task, index) => `
-    <div class="added-subtask">
-      <span>${task}</span>
-      <button class="remove-subtask" onclick="removeAddTaskSubtask(${index})">x</button>
-    </div>
-  `).join('');
+  container.innerHTML = '';
+
+  addTaskSubtasks.forEach((task, index) => {
+    if (editingSubtaskIndex === index) {
+      container.innerHTML += `
+        <div class="added-subtask editing">
+          <input id="editSubtaskInput${index}" class="edit-subtask-input" type="text"
+                 value="${escHtml(task)}"
+                 onkeydown="handleEditKey(event, ${index})" />
+          <button onclick="saveSubtask(${index})">Save</button>
+          <button onclick="cancelEdit()">Cancel</button>
+        </div>
+      `;
+    } else {
+      container.innerHTML += `
+        <div class="added-subtask">
+          <span>${escHtml(task)}</span>
+          <div class="subtask-actions">
+            <img src="../assets/icons/edit-pen.png" alt="" class="edit-subtask" onclick="editSubtask(${index})">
+            <button class="remove-subtask" onclick="removeAddTaskSubtask(${index})">x</button>
+          </div>
+        </div>
+      `;
+    }
+  });
 }
 
 function removeAddTaskSubtask(index) {
@@ -313,46 +392,63 @@ function removeAddTaskSubtask(index) {
   renderSubtasksForAddTask();
 }
 
+function editSubtask(i) {
+  editingSubtaskIndex = i;
+  renderSubtasksForAddTask();
+  setTimeout(() => document.getElementById(`editSubtaskInput${i}`)?.focus(), 0);
+}
+
+function saveSubtask(i) {
+  const el = document.getElementById(`editSubtaskInput${i}`);
+  if (!el) return;
+  const val = el.value.trim();
+  if (val) addTaskSubtasks[i] = val;
+  editingSubtaskIndex = null;
+  renderSubtasksForAddTask();
+}
+
+function cancelEdit() {
+  editingSubtaskIndex = null;
+  renderSubtasksForAddTask();
+}
+
+function handleEditKey(e, i) {
+  if (e.key === 'Enter') saveSubtask(i);
+  if (e.key === 'Escape') cancelEdit();
+}
+
+// Kleine Hilfe für sichere Ausgabe
+function escHtml(s) {
+  return s.replace(/[&<>"']/g, m => ({ 
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', 
+    '"': '&quot;', "'": '&#39;' 
+  }[m]));
+}
+
 document.querySelector('.add-subtask-btn').addEventListener('click', addSubtaskForAddTask);
 
 
-// ! 
-function validateField() {
-  const titleInput = document.getElementById('title');
-  const errorMessage = document.getElementById('titleErrorMessage');
 
-  // Check if the input field is empty
-  if (titleInput.value.trim() === "") {
-    errorMessage.style.display = "flex"; // Show error message
-    titleInput.style.borderBottom = "1px solid #f44336"; // Red border
-  } else {
-    errorMessage.style.display = "none"; // Hide error message
-    titleInput.style.borderBottom = "1px solid #ccc"; // Normal border
-  }
-}
-
-
+// ==============================
+// Create Task (POST to DB)
+// ==============================
 async function createTask() {
   // 1. Werte einsammeln
+  if (!validateAddTaskForm()) return;
+
   const title = document.getElementById('title').value.trim();
-  if (!title) {
-    alert("Title fehlt!");
-    return;
-  }
   const description = document.getElementById('description').value.trim();
   const due_date = document.getElementById('dueDate').value;
-  // Priority
+
   let priority = null;
-  if (document.getElementById('urgent').classList.contains('active')) priority = "urgent";
-  if (document.getElementById('medium').classList.contains('active')) priority = "medium";
-  if (document.getElementById('low').classList.contains('active')) priority = "low";
-  // Assigned
+  if (urgent.classList.contains('active')) priority = "urgent";
+  if (medium.classList.contains('active')) priority = "medium";
+  if (low.classList.contains('active'))    priority = "low";
+
+  const categoryText = document.getElementById('selectedCategory').textContent.trim();
+  let category = (categoryText === "Technical Task") ? "toDo" : "inProgress";
+
   const assigned = addTaskUserData.filter(u => u.isToggled).map(u => u.id);
-  // Category (make sure you always get a value)
-  let categoryText = document.getElementById('selectedCategory').innerText;
-  let category = "toDo";
-  if (categoryText === "Technical Task") category = "toDo";
-  else if (categoryText === "User Story") category = "inProgress";
 
   // Generate ID (or just leave it empty, Firebase will give you one)
   // const id = ...;
@@ -385,6 +481,85 @@ async function createTask() {
 }
 window.createTask = createTask;
 
+
+// ==============================
+// Validation (Title/Due/Category/Priority/Form)
+// ==============================
+const titleInput = document.getElementById('title');
+const dueDateInput = document.getElementById('dueDate');
+const selectedCategoryElement = document.getElementById('selectedCategory');
+const categoryContainer = document.getElementById('category');
+const priorityContainer = document.getElementById('priorityContianerId');
+
+const titleError = document.getElementById('titleErrorMessage');
+const dueDateError = document.getElementById('dueDateErrorMessage');
+const categoryError = document.getElementById('categoryErrorMessage');
+
+function validateTitleField() {
+  const isValid = titleInput.value.trim() !== "";
+  titleInput.style.borderBottom = isValid
+    ? "1px solid var(--form-val-default)"
+    : "1px solid var(--form-val-wrong)";
+  if (titleError) titleError.style.display = isValid ? "none" : "flex";
+  return isValid;
+}
+
+function validateDueDateField() {
+  const isValid = dueDateInput.value.trim() !== "";
+  dueDateInput.style.borderBottom = isValid
+    ? "1px solid var(--form-val-default)"
+    : "1px solid var(--form-val-wrong)";
+  if (dueDateError) dueDateError.style.display = isValid ? "none" : "flex";
+  return isValid;
+}
+
+function validateCategoryField() {
+  const txt = selectedCategoryElement.textContent.trim();
+  const isValid = txt !== "" && txt !== "Select Category";
+  categoryContainer.style.borderBottom = isValid
+    ? "1px solid var(--form-val-default)"
+    : "1px solid var(--form-val-wrong)";
+  if (categoryError) categoryError.style.display = isValid ? "none" : "flex";
+  return isValid;
+}
+
+// Update the priority validation function
+function validatePriorityField() {
+  const isUrgentActive = urgent.classList.contains('active');
+  const isMediumActive = medium.classList.contains('active');
+  const isLowActive = low.classList.contains('active');
+  const isValid = isUrgentActive || isMediumActive || isLowActive;
+
+  // Make sure you have this element in your HTML
+  const priorityError = document.getElementById('priorityErrorMessage');
+  if (priorityError) {
+    priorityError.style.display = isValid ? "none" : "flex";
+  }
+
+  return isValid;
+}
+
+
+function validateAddTaskForm() {
+  const isTitleValid = validateTitleField();
+  const isDueDateValid = validateDueDateField();
+  const isCategoryValid = validateCategoryField();
+  const isPriorityValid = validatePriorityField();
+
+  return isTitleValid && isDueDateValid && isCategoryValid && isPriorityValid;
+}
+
+
+titleInput.addEventListener('input', validateAddTaskForm);
+dueDateInput.addEventListener('change', validateAddTaskForm);
+// falls der Category-Text sich ändert
+const obs = new MutationObserver(validateAddTaskForm);
+obs.observe(selectedCategoryElement, { childList: true, characterData: true, subtree: true });
+
+
+// ==============================
+// UI Helpers: Success Overlay & Clear Form
+// ==============================
 // Function to show the overlay message 
 function showSuccessOverlay(msg) {
   const overlay = document.getElementById('successOverlay');
@@ -433,10 +608,16 @@ const selectedContactsContainer = overlay.querySelector('.showSelectedContact');
 if (selectedContactsContainer) {
   selectedContactsContainer.innerHTML = '';
 }
+
+  setDefaultPriorityMedium();
+  if (typeof validateAddTaskForm === 'function') validateAddTaskForm();
 }
 window.clearTask = clearTask;
 
 
+// ==============================
+// Window Exports (dup kept as-is)
+// ==============================
 window.toggleDropdownAssignedContacts = toggleDropdownAssignedContacts;
 window.changeDropdownAssignedIcon = changeDropdownAssignedIcon;
 window.renderAssignedToList = renderAssignedToList;
@@ -445,6 +626,10 @@ window.selectCategory = selectCategory;
 window.createTask = createTask;
 window.clearTask = clearTask;
 
+
+// ==============================
+// DOM Ready: Hook UI & Defaults
+// ==============================
 // In board_overlay_add_task.js, at the very bottom:
 document.addEventListener('DOMContentLoaded', function () {
   const assignedTo = document.getElementById('assignedTo');
@@ -455,7 +640,7 @@ document.addEventListener('DOMContentLoaded', function () {
       renderAssignedToList();
     });
   }
+
+  // Medium als Default aktiv setzen
+  setDefaultPriorityMedium();
 });
-
-
-

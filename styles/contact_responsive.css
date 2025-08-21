@@ -49,38 +49,6 @@
   }
 }
 
-/* .contactListContainer {
-  @media (max-width: 950px) {
-    justify-content: end;
-    width: 672px;
-  }
-  @media (max-width: 912px) {
-    width: 580px;
-  }
-  @media (max-width: 700px) {
-    width: 415px;
-  }
-  @media (max-width: 570px) {
-    width: 360px;
-    margin-top: 92px;
-    flex-grow: 1;
-  }
-  @media (max-width: 510px) {
-    width: 325px;
-    margin-left: 4px;
-  }
-  @media (max-width: 445px) {
-    width: 290px;
-  }
-  @media (max-width: 400px) {
-    margin-left: 14px;
-    margin-top: 14px;
-  }
-  @media (max-width: 340px) {
-    margin-left: 5px;
-  }
-} */
-
 .headerLogo {
   @media (max-width: 540px) {
     padding-left: 30px;
@@ -98,7 +66,7 @@
 
 .headerTitle {
   @media (max-width: 510px) {
-    font-size: 12px;
+    font-size: 16px;
   }
   @media (max-width: 430px) {
     display: none;
@@ -111,11 +79,12 @@
     width: 280px;
   }
   @media (max-width: 468px) {
-    width: 213px;
-  }
-  @media (max-width: 400px) {
+    /* width: 213px; */
     display: none;
   }
+  /* @media (max-width: 400px) {
+    display: none;
+  } */
 }
 
 .headerHelpIconContainer {

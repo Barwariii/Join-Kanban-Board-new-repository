@@ -2,7 +2,12 @@
  * Contact Templates
  */
 
-// Contact List Template
+/**
+ * Render a single contact item in the contact list.
+ * @param {Object} singleContact - The contact object containing details.
+ * @param {number} index - The index of the contact in the list.
+ * @returns {string} HTML string for a single contact item.
+ */
 function contactListRenderTemplate(singleContact, index) {
     return /*html*/`
     <div class="contactListSingleContactItemContainer" id="${index}" onclick="renderContactDetails('${singleContact.id}', ${index}), checkBackgroundColor(${index})">
@@ -18,7 +23,12 @@ function contactListRenderTemplate(singleContact, index) {
     `;
 }
 
-// Contact Details Template
+/**
+ * Render the detailed view of a single contact.
+ * @param {Object} singleUser - The contact object containing details.
+ * @param {number} index - The index of the contact in the list.
+ * @returns {string} HTML string for the contact details view.
+ */
 function contactDetailsRenderTemplate(singleUser, index) {
     return /*html*/`
     <div class="upperContainer">
@@ -57,7 +67,12 @@ function contactDetailsRenderTemplate(singleUser, index) {
     `;
 }
 
-// contact details overlay ab einer max-width von 950px
+/**
+ * Render a responsive overlay for contact details (for screens max-width 950px).
+ * @param {Object} singleUser - The contact object containing details.
+ * @param {number} index - The index of the contact in the list.
+ * @returns {string} HTML string for the responsive contact details overlay.
+ */
 function contactDetailsOverlayTemplate(singleUser, index) {
     return /*html*/ `
     
@@ -101,8 +116,10 @@ function contactDetailsOverlayTemplate(singleUser, index) {
 `
 }
 
-/* Contact Overlay Templates */
-// Add Contact Overlay
+/**
+ * Render the overlay for adding a new contact.
+ * @returns {string} HTML string for the add contact overlay.
+ */
 function renderAddContactOverlay() {
     return /*html*/`
     <div class="popUpAddNewContact" onclick="event.stopPropagation()">
@@ -150,8 +167,12 @@ function renderAddContactOverlay() {
     `;
 }
 
-
-// Edit Contact Overlay
+/**
+ * Render the overlay for editing an existing contact.
+ * @param {Object} editUserDetails - The contact object to be edited.
+ * @param {number} index - The index of the contact in the list.
+ * @returns {string} HTML string for the edit contact overlay.
+ */
 function renderEditContactOverlay(editUserDetails, index) {
     return /*html*/`
     <div class="overlayEditContact" onclick="event.stopPropagation()">
