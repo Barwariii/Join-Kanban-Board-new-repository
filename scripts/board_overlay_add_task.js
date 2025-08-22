@@ -298,7 +298,7 @@ function toggleLow() {
     urgent.classList.remove('active');
     medium.classList.remove('active');
   }
-  
+
 }
 window.toggleLow = toggleLow;
 
@@ -419,9 +419,9 @@ function handleEditKey(e, i) {
 
 // Kleine Hilfe für sichere Ausgabe
 function escHtml(s) {
-  return s.replace(/[&<>"']/g, m => ({ 
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', 
-    '"': '&quot;', "'": '&#39;' 
+  return s.replace(/[&<>"']/g, m => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;',
+    '"': '&quot;', "'": '&#39;'
   }[m]));
 }
 
@@ -443,7 +443,7 @@ async function createTask() {
   let priority = null;
   if (urgent.classList.contains('active')) priority = "urgent";
   if (medium.classList.contains('active')) priority = "medium";
-  if (low.classList.contains('active'))    priority = "low";
+  if (low.classList.contains('active')) priority = "low";
 
   const categoryText = document.getElementById('selectedCategory').textContent.trim();
   let category = (categoryText === "Technical Task") ? "toDo" : "inProgress";
@@ -462,7 +462,7 @@ async function createTask() {
     category,
     assigned_to: assigned,
     type: categoryText,
-    subtasks: addTaskSubtasks.map(title => ({title, completed: false}))
+    subtasks: addTaskSubtasks.map(title => ({ title, completed: false }))
   };
 
   // 3. Save to DB (POST)
@@ -475,6 +475,9 @@ async function createTask() {
   if (res.ok) {
     showSuccessOverlay("Task erstellt!");
     clearTask(); // Clear input fields
+    setTimeout(() => {
+      window.location.href = "../pages/board.html";
+    }, 1650);
   } else {
     alert("Fehler beim Erstellen!");
   }
@@ -577,7 +580,7 @@ function clearTask() {
   document.getElementById('description').value = '';
   document.getElementById('dueDate').value = '';
   document.getElementById('showAddedSubtasks').innerHTML = '';
-addTaskSubtasks = [];
+  addTaskSubtasks = [];
 
   // Reset priority
   urgent.classList.remove('active');
@@ -585,29 +588,29 @@ addTaskSubtasks = [];
   low.classList.remove('active');
 
   // Reset assigned contacts
-addTaskUserData.forEach((user, i) => {
-  user.isToggled = false;
-  const contactElement = document.getElementById(user.id);
-  if (contactElement) {
-    renderToggleCheckbox(contactElement, i);
-  }
-});
+  addTaskUserData.forEach((user, i) => {
+    user.isToggled = false;
+    const contactElement = document.getElementById(user.id);
+    if (contactElement) {
+      renderToggleCheckbox(contactElement, i);
+    }
+  });
 
 
 
   const overlay = document.querySelector('.addTaskOverlay');
 
   // Clear the category selection
-const selectedCategoryElement = overlay.querySelector('#selectedCategory');
-if (selectedCategoryElement) {
-  selectedCategoryElement.textContent = 'Select Category';
-}
+  const selectedCategoryElement = overlay.querySelector('#selectedCategory');
+  if (selectedCategoryElement) {
+    selectedCategoryElement.textContent = 'Select Category';
+  }
 
   // Clear the display of selected contacts
-const selectedContactsContainer = overlay.querySelector('.showSelectedContact');
-if (selectedContactsContainer) {
-  selectedContactsContainer.innerHTML = '';
-}
+  const selectedContactsContainer = overlay.querySelector('.showSelectedContact');
+  if (selectedContactsContainer) {
+    selectedContactsContainer.innerHTML = '';
+  }
 
   setDefaultPriorityMedium();
   if (typeof validateAddTaskForm === 'function') validateAddTaskForm();

@@ -34,8 +34,9 @@
 }
 
 .headerTitleContainer {
-  @media (max-width: 510px) {
+  @media (max-width: 550px) {
     width: 280px;
+    font-size: var(--fontsize-16px);
   }
   @media (max-width: 468px) {
     /* width: 213px; */

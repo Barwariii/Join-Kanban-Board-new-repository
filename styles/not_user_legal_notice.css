@@ -1,0 +1,82 @@
+body {
+  margin: 0px;
+  font-family: "Open-Sans";
+}
+
+  .rightContent {
+    margin-left: unset !important;
+    margin-top: unset !important;
+  }
+
+.textAndArrow {
+  margin: 100px 32px 32px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.impressum {
+  margin-left: 64px;
+}
+
+.headerTitle {
+  cursor: pointer;
+}
+
+.headerProfileLetter {
+  cursor: pointer;
+}
+
+.dropDownBar {
+  top: 100px;
+  display: none;
+  position: absolute;
+  flex-direction: column;
+}
+
+.dropDownItem {
+  color: #42526e;
+  text-decoration: none;
+  display: block;
+  text-align: end;
+}
+
+.activ {
+  padding: 10px;
+  background-color: white;
+  width: 125px;
+  height: 90px;
+  display: block;
+  gap: 8px;
+  font-size: 19px;
+  font-weight: 400;
+  border-radius: 20px 0px 20px 20px;
+  box-shadow: 0 4px 10px rgb(0, 0, 0, 0.3);
+}
+
+.imprint {
+  color: #4589ff;
+  font-size: 33px;
+}
+.h3ForLegalNotice {
+  color: #005dff;
+}
+.h1ForLegalNotice {
+  font-size: 61px;
+  margin-left: 0px;
+}
+
+.arrowImg {
+  cursor: pointer;
+}
+
+
+.sidebarBecomesFooter {
+    display: none;
+}
+
+@media (max-width: 1150px) {
+  /* Legal Notice */
+  .impressum {
+    margin: 0px 8px;
+  }
+}

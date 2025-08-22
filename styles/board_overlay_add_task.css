@@ -87,6 +87,9 @@ textarea:focus {
   right: 16px;
   bottom: 16px;
   gap: 16px;
+  @media (max-width: 1150px) {
+    display: none;
+  }
 }
 
 /*! Left Content Add Task Window */
@@ -576,6 +579,17 @@ ul {
 }
 
 /* * right Container Btns */
+.leftBtnsContainer {
+  display: none;
+  @media (max-width: 1150px) {
+    display: flex;
+  }
+}
+
+.leftContainerBtn {
+  display: flex;
+}
+
 .clearTaskBtn button {
   display: flex;
   align-items: center;

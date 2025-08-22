@@ -25,7 +25,6 @@ async function getUserDataForAddTask(path = "/users") {
           isToggled: false // here initialize isToggled
         });
       });
-      console.log(addTaskUserData);
     }
 
   } catch (error) {
