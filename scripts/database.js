@@ -1,3 +1,7 @@
+/**
+ * Account color palette for user profiles.
+ * @type {Object.<string, string>}
+ */
 const accountColors = {
     orange: "#FF7A00",
     pink: "#FF5EB3",
@@ -14,14 +18,21 @@ const accountColors = {
     yellow: "#FFE62B",
     light_red: "#FF4646",
     light_orange: "#FFBB2B"
-}
+};
 
-// const DATABASE_URL = "https://join-kanban-board-3a477-default-rtdb.europe-west1.firebasedatabase.app/";
+
+/** Users path in Realtime Database. */
 const USERS_PATH = "/users";
 
+/** Local cache of user data. */
 let userData = [];
 
-// Load current userData from DB
+
+/**
+ * Load current user data from the database.
+ * @param {string} [path="/users"] - Database path to load user data from.
+ * @returns {Promise<void>}
+ */
 async function loadUserData(path = "/users") {
     try {
         let userResponse = await fetch(DATABASE_URL + path + ".json");
@@ -38,7 +49,6 @@ async function loadUserData(path = "/users") {
                     color: userResponseJson[key].color
                 });
             });
-            // renderContactList(userData); // Render the contact list with the loaded user data
             if (typeof callback === 'function') callback(userData);
         }
     } catch (error) {
@@ -47,7 +57,11 @@ async function loadUserData(path = "/users") {
 }
 
 
-// Send new created Contact to DB
+/**
+ * Send a newly created contact to the database.
+ * @param {Object} newProfile - The new profile object to be stored.
+ * @returns {Promise<void>}
+ */
 async function sendNewContactToDB(newProfile) {
     try {
         const response = await fetch(DATABASE_URL + USERS_PATH + ".json", {
@@ -70,7 +84,12 @@ async function sendNewContactToDB(newProfile) {
 }
 
 
-// Update Current User
+/**
+ * Update an existing contact in the database.
+ * @param {string} id - User ID.
+ * @param {Object} updatedData - Updated profile data.
+ * @returns {Promise<void>}
+ */
 async function updateContactToDB(id, updatedData) {
     try {
         const response = await fetch(DATABASE_URL + `/users/${id}` + ".json", {
@@ -94,7 +113,11 @@ async function updateContactToDB(id, updatedData) {
 }
 
 
-// Delete Current User
+/**
+ * Delete a contact from the database.
+ * @param {string} id - User ID.
+ * @returns {Promise<void>}
+ */
 async function deleteContactFromDB(id) {
     try {
         const response = await fetch(DATABASE_URL + `/users/${id}` + ".json", {
@@ -117,8 +140,11 @@ async function deleteContactFromDB(id) {
 }
 
 
-// Board Database functions
-
+/**
+ * Retrieve tasks from the database.
+ * @param {string} [path="/tasks"] - Database path to tasks.
+ * @returns {Promise<void>}
+ */
 async function getTasksFromDB(path = "/tasks") {
 
 }

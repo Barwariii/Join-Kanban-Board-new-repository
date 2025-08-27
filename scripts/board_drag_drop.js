@@ -102,44 +102,6 @@ async function moveCardToNewCategory(category) {
     if (_ghost) { _ghost.remove(); _ghost = null; }
   }
 
-  // Attach pointer handlers to each task card (called after render)
-  // window.bindPointerDnDToCard = function(cardEl, taskId) {
-  //   if (!cardEl) return;
-
-  //   cardEl.addEventListener('pointerdown', (e) => {
-  //     if (!isTouchLikePointer(e)) return; // اترك الماوس لـ HTML5 DnD
-  //     _touchDragging = true;
-  //     _touchDragTaskId = taskId;
-  //     cardEl.setPointerCapture?.(e.pointerId);
-
-  //     // ghost
-  //     _ghost = makeGhostFrom(cardEl);
-  //     _ghost.style.left = e.clientX + 'px';
-  //     _ghost.style.top  = e.clientY + 'px';
-  //   });
-
-  //   cardEl.addEventListener('pointermove', (e) => {
-  //     if (!_touchDragging) return;
-  //     _ghost && (_ghost.style.left = e.clientX + 'px', _ghost.style.top = e.clientY + 'px');
-  //     getCategoryFromPoint(e.clientX, e.clientY);
-  //   });
-
-  //   cardEl.addEventListener('pointerup', async (e) => {
-  //     if (!_touchDragging) return;
-  //     const cat = getCategoryFromPoint(e.clientX, e.clientY);
-  //     clearTouchDnD();
-  //     if (cat && typeof window.moveCardToNewCategory === 'function') {
-  //       // استخدم الـ API الموجودة لديك لنقل الكرت
-  //       currentDraggedElement = _touchDragTaskId;
-  //       await moveCardToNewCategory(cat);
-  //     }
-  //   });
-
-  //   // احتياط عند الإلغاء
-  //   cardEl.addEventListener('pointercancel', clearTouchDnD);
-  //   cardEl.addEventListener('lostpointercapture', () => { if (_touchDragging) clearTouchDnD(); });
-  // };
-
 
 // =====================================
 // Pointer Drag (Mouse + Touch) for Cards

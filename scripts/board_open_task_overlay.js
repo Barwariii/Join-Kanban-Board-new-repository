@@ -48,18 +48,17 @@ function closeTaskOverlay() {
 function taskOverlayTemplate(task) {
   const subtasksHtml = renderOverlaySubtasks(task);
 
-  // استخدم نفس مصدر userData (محلي أو window)
   const ud = Array.isArray(typeof userData !== 'undefined' ? userData : null)
     ? userData
     : (Array.isArray(window.userData) ? window.userData : []);
 
-  // دعم Array أو كائن Firebase
+
   const assignedRaw = task.assigned_to || [];
   const assigned = Array.isArray(assignedRaw)
     ? assignedRaw
     : (assignedRaw && typeof assignedRaw === 'object' ? Object.values(assignedRaw) : []);
 
-  // جهّز عناصر (Badge + Name) لكل مكلّف
+
   const users = assigned
     .map(id => ud.find(u => String(u.id) === String(id)))
     .filter(Boolean);
@@ -111,21 +110,6 @@ function taskOverlayTemplate(task) {
     </div>
   `;
 }
-
-
-
-/** 
- * vor dem substask section 
- * <div class="ot-section">
-*/
-        // <div class="ot-section">
-        //   <div class="ot-subtitle">Progress</div>
-        //   <div class="ot-progress">
-        //     <div class="ot-progress-track"><div id="progressFill"></div></div>
-        //     <div id="progressText" class="ot-progress-text"></div>
-        //   </div>
-        // </div>
-
 
 
 /**
@@ -364,7 +348,7 @@ function closeTaskOverlay() {
   overlay.style.display = 'none';
   overlay.innerHTML = '';
 
-  // ⟵ نفس الشي اللي يصير بعد save
+
   if (typeof loadAndRenderBoardTasks === 'function') {
     loadAndRenderBoardTasks();
   }

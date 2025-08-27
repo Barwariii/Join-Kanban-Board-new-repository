@@ -37,7 +37,8 @@
 
 .taskSingleCardContentWrapper {
   width: 240px;
-  height: 220px;
+  /* height: 220px; */
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -14,12 +14,12 @@
     <link rel="stylesheet" href="../styles/privacy_policy.css">
 
     <!-- Scripts -->
-    <script src="../script.js"></script>
+    <!-- <script src="../script.js"></script> -->
     <script src="../scripts/globale_functions.js"></script>
 </head>
 
 <body>
-    <header>
+    <!-- <header>
         <div class="header">
             <div class="headerLeft">
                 <img class="headerLogo" src="../assets/icons/logo_full_white.png" alt="join logo">
@@ -35,6 +35,45 @@
                     <a href="../pages/log_in.html" class="dropDownItem">Log Out</a>
                 </div>
 
+            </div>
+        </div>
+    </header> -->
+
+        <header>
+        <div class="background-header">
+            <div class="header">
+                <div class="headerLeft">
+                    <img class="headerLogo" src="../assets/icons/logo_full_white.png" alt="join logo">
+                </div>
+
+                <div class="headerRight">
+                    <div class="headerTitleContainer" onclick="toggledropDownBar()">
+                        <span class="headerTitle">Kanban Project Management Tool</span>
+                    </div>
+                    <div class="headerHelpIconContainer">
+                        <a href="./help_button.html" class="headerHelpIconLink">
+                            <img class="headerHelpIcon" src="../assets/icons/help_icon.png" alt="help icon">
+                        </a>
+                    </div>
+
+                    <div class="headerProfileContainer" onclick="toggledropDownBar()">
+                        <div class="headerProfile">
+                            <span class="headerProfileLetter">SM</span>
+                        </div>
+                    </div>
+
+                    <div class="dropDownBar" id="dropDownBar">
+                        <a href="./help_button.html" class="helpForDropDownButOnlyVisibleInResponsiv"><span
+                                class="textForDropDownOverlay">Help</span></a>
+                        <a href="./legal_notice.html" class="dropDownItem"><span class="textForDropDownOverlay">Legal
+                                Notice</span></a>
+                        <a href="./privacy_policy.html" class="dropDownItem"><span
+                                class="textForDropDownOverlay">Privacy Policy</span></a>
+                        <a href="../pages/log_in.html" class="dropDownItem"><span class="textForDropDownOverlay">Log
+                                Out</span></a>
+                    </div>
+
+                </div>
             </div>
         </div>
     </header>

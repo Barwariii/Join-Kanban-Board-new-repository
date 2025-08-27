@@ -692,7 +692,7 @@ function validateAddTaskForm() {
 // Live-Check bei Eingabe / Änderung
 titleInput.addEventListener('input', validateAddTaskForm);
 dueDateInput.addEventListener('change', validateAddTaskForm);
-categoryContainer.addEventListener('DOMSubtreeModified', validateAddTaskForm); // Für Dropdown Textänderung
+// categoryContainer.addEventListener('DOMSubtreeModified', validateAddTaskForm); // Für Dropdown Textänderung
 
 function submitAddTaskForm() {
   if (!validateAddTaskForm()) return; // blockt, wenn nicht alles ausgefüllt

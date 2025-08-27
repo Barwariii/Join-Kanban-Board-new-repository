@@ -3,13 +3,14 @@ body {
   font-family: "Open-Sans";
 }
 .textAndArrow {
-  margin: 32px;
+  margin: 32px 32px 32px 0px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .impressum {
   margin-left: 64px;
+  margin-right: 64px;
 }
 
 .headerTitle {

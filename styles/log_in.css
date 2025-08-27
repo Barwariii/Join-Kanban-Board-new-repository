@@ -85,7 +85,7 @@ h2 {
 .checkboxGroup {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin: 12px 0px 20px 0px;
 }
 
 .checkboxGroup input {
@@ -116,11 +116,9 @@ button.login-btn {
 }
 
 button.login-btn:hover {
-  background-color: #005DFF;
+  background-color: #005dff;
   color: white;
 }
-
-
 
 button.guest-btn {
   background-color: rgb(255, 255, 255);
@@ -129,7 +127,6 @@ button.guest-btn {
   width: 197px;
   height: 48px;
   border-radius: 8px;
-
 }
 
 .footerLinks {
@@ -152,6 +149,11 @@ button.guest-btn {
   color: #005dff;
 }
 
+.field-error {
+  color: #f55;
+  font-size: 16px;
+  display: none;
+}
 
 @media (max-width: 600px) {
   .JoinLogoHeader {
@@ -170,7 +172,7 @@ button.guest-btn {
   }
 
   .loginBox {
-    width: 90%; 
+    width: 90%;
     padding: 20px;
   }
 
@@ -191,7 +193,7 @@ button.guest-btn {
 
   button.login-btn,
   button.guest-btn {
-    width: 100%; 
+    width: 100%;
     font-size: 14px;
   }
 
@@ -201,12 +203,12 @@ button.guest-btn {
   }
 
   .footerLinks {
-    position: absolute; 
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
     font-size: 12px;
     gap: 10px;
-    width: 100%; 
+    width: 100%;
     display: flex;
     justify-content: center;
   }
@@ -217,14 +219,14 @@ button.guest-btn {
 
   .headerLogIn {
     position: absolute;
-    bottom: 40px; 
+    bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-    width: 90%; 
-    max-width: 400px; 
-    overflow: hidden; 
-    box-sizing: border-box; 
+    width: 90%;
+    max-width: 400px;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 
   .headerLogInFull {
@@ -232,11 +234,73 @@ button.guest-btn {
     justify-content: center;
   }
 
-  
   .headerJoinLogoSignUp {
-    max-width: 100%; 
-    height: auto; 
-    overflow: hidden; 
-    box-sizing: border-box; 
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 }
+
+
+
+/* ====== Final target per breakpoint (CSS-only) ====== */
+:root{
+  /* Desktop / large */
+  --fly-x: -40vw;   /* horizontal shift from center to header logo */
+  --fly-y: -38vh;   /* vertical shift from center to header logo */
+  --fly-scale: .6;  /* end size relative to intro logo */
+}
+
+@media (max-width: 1150px){
+  :root{
+    /* Tablet range — tune as needed */
+    --fly-x: -42vw;
+    --fly-y: -44vh;
+    --fly-scale: .65;
+  }
+}
+
+@media (max-width: 600px){
+  :root{
+    /* Small phones — tune as needed */
+    --fly-x: -34vw;
+    --fly-y: -44vh;
+    --fly-scale: .70;
+  }
+}
+
+/* Keep your intro/visibility rules as you have */
+.intro{
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+  pointer-events: none;
+  animation: introVanish 0s linear 2.4s forwards; /* 1s hold + 1.15s fly + 0.25s fade */
+}
+@keyframes introVanish { to { visibility: hidden; } }
+
+.headerJoinLogo { opacity: 0; }
+body.intro-done .headerJoinLogo { opacity: 1; transition: opacity .05s linear; }
+
+.intro__logo{
+  width: clamp(120px, 12vw, 180px);
+  transform: translateZ(0);
+  animation:
+    /* hold 1s then fly 1.15s to the variable-based target */
+    logoFly 1150ms cubic-bezier(.33,0,.17,1) 1s forwards,
+    /* fade after arriving */
+    logoFade 250ms linear 2.15s forwards;
+  will-change: transform, opacity;
+}
+
+/* Use variables for the final position/scale */
+@keyframes logoFly{
+  0%   { transform: translate(0,0) scale(1.4); }
+  100% { transform: translate(var(--fly-x), var(--fly-y)) scale(var(--fly-scale)); }
+}
+@keyframes logoFade{ to { opacity: 0; } }
+

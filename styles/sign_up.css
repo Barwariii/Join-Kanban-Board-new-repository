@@ -10,7 +10,7 @@ body {
 
 /* Header */
 .signUpHeader {
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   justify-content: start;
   padding: 20px;
@@ -185,6 +185,33 @@ h2 {
       opacity: 1;
   }
 }
+
+
+:root{
+  --form-val-wrong:#FF3D00;
+  --form-val-default:#D1D1D1;
+}
+
+.error-message{
+  display:none;
+  color:var(--form-val-wrong);
+  font-size:12px;
+  margin:6px 0 10px;
+}
+
+.inputSignUp input{
+  width:100%;
+  border:none;
+  border-bottom:1px solid var(--form-val-default);
+  outline:none;
+  background:transparent;
+  padding:12px 36px 12px 12px; /* يراعي الأيقونة */
+}
+
+.inputSignUp input.invalid{
+  border-bottom:1px solid var(--form-val-wrong);
+}
+
 
 
 @media (max-width: 600px) {

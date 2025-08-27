@@ -28,27 +28,36 @@
             </a>
 
             <h2>Sign Up</h2>
-            <form id="signupForm" action="#" method="post" class="login-form">
+            <form id="signupForm" action="#" method="post" class="login-form" novalidate>
                 <div class="inputSignUp">
                     <input type="text" id="name" name="name" placeholder="Name" required>
                     <img src="../assets/icons/signUpNameIcon.png" alt="Name Icon" class="input-icon">
+                    <span id="nameError" class="error-message">This field is required</span>
                 </div>
+
                 <div class="inputSignUp">
                     <input type="email" id="email" name="email" placeholder="Email" required>
                     <img src="../assets/icons/logInMailIcon.png" alt="Email Icon" class="input-icon">
+                    <span id="emailError" class="error-message">Please enter a valid email</span>
                 </div>
+
                 <div class="inputSignUp">
                     <input type="text" id="passwordField" name="password" placeholder="Password" required oninput="maskPassword('passwordField')">
                     <img src="../assets/icons/logInLock.png" alt="Password Icon" class="input-icon">
+                    <span id="passwordError" class="error-message">At least 6 characters</span>
                 </div>
+
                 <div class="inputSignUp">
                     <input type="text" id="confirmPasswordField" name="confirmpassword" placeholder="Confirm Password" required oninput="maskPassword('confirmPasswordField')">
                     <img src="../assets/icons/logInLock.png" alt="Confirm Password Icon" class="input-icon">
+                    <span id="confirmError" class="error-message">Passwords do not match</span>
                 </div>
-                <div class="checkboxAccept">
+
+                <div id="acceptErrorMessage" class="checkboxAccept">
                     <input type="checkbox" id="accept" name="accept">
                     <label for="accept">I accept the</label>
                     <a class="linkPrivacy" href="../pages/not_user_pricacy_policy.html">Privacy Policy</a>
+                    <span id="acceptError" class="error-message">You must accept the Privacy Policy</span>
                 </div>
                 <button type="submit" class="login-btn" id="signUpButton" disabled>Sign up</button>
             </form>
@@ -82,7 +91,7 @@
     </script>
 
     <!-- Include signup.js -->
-    <script src="../scripts/signup.js"></script>
+    <script type="module" src="../scripts/signup.js"></script>
 
 </body>
 
