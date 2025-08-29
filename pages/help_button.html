@@ -13,10 +13,10 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../styles/contact.css">
     <link rel="stylesheet" href="../styles/help_icon.css">
+    <link rel="stylesheet" href="../style_responsive.css">
 
     <!-- Scripts -->
-    <script src="../script.js"></script>
-    <script src="../scripts/overlay_functionality.js"></script>
+    <script src="../scripts/globale_functions.js"></script>
 </head>
 
 <body>
@@ -218,11 +218,39 @@
                 </div>
             </span>
         </div>
-        <script>
-            function goBack() {
-                window.history.back();
-            }
-        </script>
+
+        <footer class="sidebarBecomesFooter">
+            <div class="linkContainerForResonsivFooter">
+                <a class="footerMenuAtResponsiv" href="../index.html">
+                    <img class="iconForResponsivFooter" src="../assets/icons/summary_icon.svg">
+                    <span class="textForResponsivFooter">Summary</span>
+                </a>
+            </div>
+
+
+            <div class="linkContainerForResonsivFooter">
+                <a class="footerMenuAtResponsiv" href="../pages/board.html">
+                    <img class="iconForResponsivFooter" src="../assets/icons/board_icon.svg">
+                    <span class="textForResponsivFooter boardTextResponsiv">Board</span>
+                </a>
+            </div>
+
+            <div class="linkContainerForResonsivFooter">
+                <a class="footerMenuAtResponsiv" href="../pages/add_task.html">
+                    <img class="iconForResponsivFooter" src="../assets/icons/add_task_icon.svg">
+                    <span class="textForResponsivFooter">Add Task</span>
+                </a>
+            </div>
+
+            <div class="contactInBlueForOverlay">
+                <div class="linkContainerForResonsivFooter">
+                    <a class="footerMenuAtResponsiv" href="../pages/contact.html">
+                        <img class="iconForResponsivFooter" src="../assets/icons/contact_icon_blue.svg">
+                        <span class="textForResponsivFooter">Contacts</span>
+                    </a>
+                </div>
+            </div>
+        </footer>
 </body>
 
 </html>

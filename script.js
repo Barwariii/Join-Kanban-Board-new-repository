@@ -35,8 +35,32 @@ function updateGreeting() {
     greeting = "Good night,";
   }
 
-  document.querySelector('.dashboardHeader h1').innerHTML = `${greeting}<span class="dashboardUsername"> Sofia Müller</span>`;
+  document.querySelector('.dashboardHeader h1').innerHTML = `${greeting}<span class="dashboardUsername"></span>`;
 }
+
+
+function toInitials(nameOrEmail) {
+  const s = String(nameOrEmail || '').trim();
+  if (!s) return '??';
+  // نولّد أحرفًا أولى من الاسم الكامل أو الإيميل (نستبدل . _ - بمسافات)
+  const parts = s.replace(/[_.-]+/g, ' ').split(/\s+/).filter(Boolean);
+  if (parts.length === 1) return (parts[0][0] || '?').toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
+function setDashboardName(raw) {
+  const name = String(raw || '').trim();
+
+  // الترحيب: املأ كل العناصر .dashboardUsername
+  document.querySelectorAll('.dashboardUsername')
+    .forEach(el => el.textContent = name ? ' ' + name : ' Guest');
+
+  // الحروف المختصرة في الهيدر
+  const initials = toInitials(name || 'Guest');
+  document.querySelectorAll('.headerProfileLetter')
+    .forEach(el => el.textContent = initials);
+}
+
 
 // Calls the function as soon as the DOM is loaded
 // Reads /tasks/to_do and shows task count in dashboard
