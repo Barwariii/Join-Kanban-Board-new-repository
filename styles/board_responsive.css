@@ -39,12 +39,8 @@
     font-size: var(--fontsize-16px);
   }
   @media (max-width: 468px) {
-    /* width: 213px; */
     display: none;
   }
-  /* @media (max-width: 400px) {
-    display: none;
-  } */
 }
 
 .headerHelpIconContainer {
@@ -130,10 +126,6 @@
     flex-direction: column;
   }
 
-  /* .searchBarContainer {
-    width: 100% !important;
-  } */
-
   .searchInput {
     padding: unset !important;
     max-width: 320px !important;
@@ -170,9 +162,6 @@
   .tasksContainer {
     overflow-x: auto !important;
     width: 90svw !important;
-    /* max-width: 400px !important; */
-    /* width: 100% !important; */
-    /* margin-left: 40px; */
     align-items: unset;
   }
 

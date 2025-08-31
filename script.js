@@ -1,11 +1,27 @@
+/**
+ * Base URL of the Firebase Realtime Database used by the app.
+ * @type {string}
+ */
 const DATABASE_URL = "https://join-kanban-board-3a477-default-rtdb.europe-west1.firebasedatabase.app/";
 
-// Toggle dropdown for logout, legal notice, and privacy policy
+
+
+/**
+ * Toggle the dropdown visibility for logout, legal notice, and privacy policy.
+ * Adds/removes the "activ" class on the element with id "dropDownBar".
+ * @returns {void}
+ */
 function toggledropDownBar() {
   document.getElementById("dropDownBar").classList.toggle("activ");
 }
 
-// Function for the current date
+
+
+/**
+ * Display the current date inside the element with id "currentDate".
+ * Uses locale "en-US" and options { year: "numeric", month: "long", day: "numeric" }.
+ * @returns {void}
+ */
 function displayCurrentDate() {
   const dateElement = document.getElementById("currentDate");
 
@@ -20,7 +36,13 @@ function displayCurrentDate() {
   dateElement.textContent = formattedDate;
 }
 
-// Greeting based on the time of day
+
+
+/**
+ * Update the greeting message based on the current hour and inject it
+ * into '.dashboardHeader h1' with a span '.dashboardUsername' placeholder.
+ * @returns {void}
+ */
 function updateGreeting() {
   const hour = new Date().getHours();
   let greeting;
@@ -39,31 +61,51 @@ function updateGreeting() {
 }
 
 
+
+/**
+ * Create initials from a full name or email string.
+ * Replaces separators (., _, -) with spaces and uses the first and last tokens.
+ * @param {string} nameOrEmail - Raw name or email address to derive initials from.
+ * @returns {string} Two-letter initials (or '??' if input is empty).
+ */
 function toInitials(nameOrEmail) {
   const s = String(nameOrEmail || '').trim();
   if (!s) return '??';
-  // نولّد أحرفًا أولى من الاسم الكامل أو الإيميل (نستبدل . _ - بمسافات)
+  // Generate initials from full name or email (replace . _ - with spaces)
   const parts = s.replace(/[_.-]+/g, ' ').split(/\s+/).filter(Boolean);
   if (parts.length === 1) return (parts[0][0] || '?').toUpperCase();
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
 
+
+
+/**
+ * Fill all ".dashboardUsername" elements with the provided display name
+ * and set the header profile initials in ".headerProfileLetter" elements.
+ * @param {string} raw - The raw display name string.
+ * @returns {void}
+ */
 function setDashboardName(raw) {
   const name = String(raw || '').trim();
 
-  // الترحيب: املأ كل العناصر .dashboardUsername
+  // Greeting: fill all .dashboardUsername elements
   document.querySelectorAll('.dashboardUsername')
     .forEach(el => el.textContent = name ? ' ' + name : ' Guest');
 
-  // الحروف المختصرة في الهيدر
+  // Initials in the header
   const initials = toInitials(name || 'Guest');
   document.querySelectorAll('.headerProfileLetter')
     .forEach(el => el.textContent = initials);
 }
 
 
-// Calls the function as soon as the DOM is loaded
-// Reads /tasks/to_do and shows task count in dashboard
+
+/**
+ * Fetch the count of tasks in '/tasks/to_do' and display it in the dashboard element
+ * with id "toDoTaskDashboard".
+ * @async
+ * @returns {Promise<void>}
+ */
 async function updateToDoTaskDashboard() {
   try {
     const response = await fetch(`${DATABASE_URL}/tasks/to_do.json`);
@@ -84,8 +126,13 @@ async function updateToDoTaskDashboard() {
 }
 
 
-// Reads /tasks/in_progress and shows task count in dashboard
-// Reads /tasks/in_progress and shows task count in dashboard
+
+/**
+ * Fetch the count of tasks in '/tasks/in_progress' and display it in the dashboard element
+ * with id "inProgressTaskDashboard".
+ * @async
+ * @returns {Promise<void>}
+ */
 async function updateInProgresskDashboard() {
   try {
     const response = await fetch(`${DATABASE_URL}/tasks/in_progress.json`);
@@ -106,7 +153,13 @@ async function updateInProgresskDashboard() {
 }
 
 
-// Reads /tasks/to_do and shows task count in dashboard
+
+/**
+ * Fetch the count of tasks in '/tasks/await_feedback' and display it in the dashboard element
+ * with id "awaitingTaskDashboard".
+ * @async
+ * @returns {Promise<void>}
+ */
 async function updateAwaitFeedbackTaskDashboard() {
   try {
     const response = await fetch(`${DATABASE_URL}/tasks/await_feedback.json`);
@@ -127,7 +180,13 @@ async function updateAwaitFeedbackTaskDashboard() {
 }
 
 
-// Reads /tasks/done and shows task count in dashboard
+
+/**
+ * Fetch the count of tasks in '/tasks/done' and display it in the dashboard element
+ * with id "doneTaskDashboard".
+ * @async
+ * @returns {Promise<void>}
+ */
 async function updateDoneTaskDashboard() {
   try {
     const response = await fetch(`${DATABASE_URL}/tasks/done.json`);
@@ -148,7 +207,14 @@ async function updateDoneTaskDashboard() {
 }
 
 
-// Reads /tasks and shows total tasks in board
+
+/**
+ * Fetch counts from all task categories and compute the total number of tasks.
+ * Displays the total in the element with id "totalTasksinBoard".
+ * Note: Logic preserved as-is.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function updateTotalTaskInBoardDashboard() {
   try {
     const paths = ['to_do', 'in_progress', 'await_feedback', 'done'];
@@ -161,7 +227,6 @@ async function updateTotalTaskInBoardDashboard() {
         total += Object.keys(data).length;
       }
     }
-
 
     const dashboardNumbers = document.getElementById("totalTasksinBoard").textContent = total;;
     if (dashboardNumbers.length >= 2) {
@@ -178,7 +243,13 @@ async function updateTotalTaskInBoardDashboard() {
 }
 
 
-// update uregent tasks dashboard
+
+/**
+ * Count tasks with priority "urgent" across all categories
+ * and display the total in the element with id "urgenttasksInBoard".
+ * @async
+ * @returns {Promise<void>}
+ */
 async function updateUrgentTaskDashboard() {
   try {
     const paths = ['to_do', 'in_progress', 'await_feedback', 'done'];
@@ -204,7 +275,14 @@ async function updateUrgentTaskDashboard() {
 }
 
 
-// update  dashboard of deadline for next urgent task in board
+
+/**
+ * Find the upcoming (nearest) deadline date among all tasks that have a valid due_date
+ * that is today or later, and display it inside the element with id "currentDate".
+ * If none exist, display "No upcoming deadline".
+ * @async
+ * @returns {Promise<void>}
+ */
 async function updateUpcomingDeadline() {
   try {
     const paths = ['to_do', 'in_progress', 'await_feedback', 'done'];
@@ -231,11 +309,11 @@ async function updateUpcomingDeadline() {
     if (deadlines.length > 0) {
       // Get the nearest date.
       const minDate = new Date(Math.min(...deadlines));
-      // Date format as you prefer (here: dd.mm.yyyy)
+      // Date format (here: "en-GB" long format)
       const formatted = minDate.toLocaleDateString("en-GB", {
-            year: "numeric",
-    month: "long",
-    day: "numeric"
+        year: "numeric",
+        month: "long",
+        day: "numeric"
       });
       document.getElementById("currentDate").textContent = formatted;
     } else {
@@ -249,7 +327,11 @@ async function updateUpcomingDeadline() {
 
 
 
-// Execute it when the page loads.
+/**
+ * Page load handler that initializes date, greeting, and all dashboard counters.
+ * This function is assigned to window.onload and runs once the page loads.
+ * @returns {void}
+ */
 window.onload = function() {
   displayCurrentDate();
   updateGreeting();

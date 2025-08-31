@@ -5,20 +5,20 @@
   justify-content: center;
   align-items: center;
 }
-  
+
 .headerHelpIcon {
   width: 32px;
   height: 32px;
   cursor: pointer;
 }
-  
+
 .headerHelpIcon:hover {
   width: 40px;
   height: 40px;
 }
 
-.join{
-  color: #4589FF;
+.join {
+  color: #4589ff;
 }
 
 .helpHeins {
@@ -26,18 +26,18 @@
   font-size: 61px;
 }
 
-h2{
-  color: #4589FF;
+h2 {
+  color: #4589ff;
 }
 
 h3 {
   margin-top: 16px;
-  color: #005DFF;
+  color: #005dff;
 }
 
 h4 {
-  color: #005DFF;
-  margin-bottom: 0;    
+  color: #005dff;
+  margin-bottom: 0;
 }
 
 .numberAndText {
@@ -61,23 +61,23 @@ h4 {
   margin-top: 0;
 }
 
-.textAndArrow{
+.textAndArrow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-right: 70px;  
-} 
+  margin-right: 70px;
+}
 
-.mainBodyForHelp{
+.mainBodyForHelp {
   margin: 32px 64px 0 64px;
-  @media (max-width:1150px) {
+  @media (max-width: 1150px) {
     margin-top: 80px;
   }
 }
 
-.arrowImg{
+.arrowImg {
   cursor: pointer;
 }
-.dropDownBar{
+.dropDownBar {
   background-color: white;
 }

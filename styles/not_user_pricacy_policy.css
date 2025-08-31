@@ -61,7 +61,6 @@ body{
     cursor: pointer;
 }
 
-
 .sidebarBecomesFooter {
     display: none;
 }
@@ -95,11 +94,6 @@ body{
     width: 24px;
     height: 24px;
   }
-
-  /* .rightContent {
-    margin-left: unset !important;
-  } */
-
 
   /* privacy Container */
   .privacyPolicyContainer {

@@ -17,10 +17,37 @@
 
 
     <!-- Scripts -->
-    <script src="../scripts/add_task_template.js"></script>
+    <script src="../scripts/add_task/add_task_template.js"></script>
     <script src="../script.js"></script>
     <script type="module" src="../scripts/user_display_auto.js"></script>
-    <script src="../scripts/add_task.js" defer></script>
+
+    <!-- 1) Globals and initial setup -->
+    <script src="../scripts/add_task/add_task_globals.js" defer></script>
+
+    <!-- 2) Fetch users and render Assigned-To list -->
+    <script src="../scripts/add_task/add_task_users.js" defer></script>
+
+    <!-- 3) Assigned-To logic (toggle, dropdown, selected contacts) -->
+    <script src="../scripts/add_task/add_task_assigned.js" defer></script>
+
+    <!-- 4) Priority buttons -->
+    <script src="../scripts/add_task/add_task_priority.js" defer></script>
+
+    <!-- 5) Category dropdown (simple + enhanced override) -->
+    <script src="../scripts/add_task/add_task_category.js" defer></script>
+
+    <!-- 6) Subtasks (add, render, remove, edit) -->
+    <script src="../scripts/add_task/add_task_subtasks.js" defer></script>
+
+    <!-- 7) UI helpers (success overlay, clear form) -->
+    <script src="../scripts/add_task/add_task_ui.js" defer></script>
+
+    <!-- 8) Create task -->
+    <script src="../scripts/add_task/add_task_create.js" defer></script>
+
+    <!-- 9) Validation (fields, form submit) -->
+    <script src="../scripts/add_task/add_task_validation.js" defer></script>
+
 
     <script src="../scripts/database.js" defer></script>
     <script src="../scripts/contacts.js" defer></script>
@@ -244,7 +271,6 @@
                         <label for="category">Category</label>
                         <div id="category" class="chooseCategory"
                             onclick="toggleDropdownCategory(event), changeDropdownCategoryIcon()">
-                            <!-- <p id="selectedCategory">Select task category</p> -->
                             <div id="selectedCategoryContainer">
                                 <p id="selectedCategory">Select Category</p>
                             </div>

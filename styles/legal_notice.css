@@ -64,9 +64,8 @@ body {
   cursor: pointer;
 }
 
-
 .sidebarBecomesFooter {
-    display: none;
+  display: none;
 }
 
 @media (max-width: 1150px) {
@@ -102,7 +101,6 @@ body {
   .rightContent {
     margin-left: unset;
   }
-
 
   /* Legal Notice */
   .impressum {

@@ -37,7 +37,6 @@
 
 .taskSingleCardContentWrapper {
   width: 240px;
-  /* height: 220px; */
   height: auto;
   display: flex;
   flex-direction: column;
@@ -81,7 +80,6 @@
 }
 
 .delete-task-btn {
-  /* background-color: #ff3d00; */
   color: white;
   border: solid 2px #4589ff;
   margin: 0;
@@ -154,7 +152,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin-left: 10px; */
 }
 
 .taskAssignedToContainer {

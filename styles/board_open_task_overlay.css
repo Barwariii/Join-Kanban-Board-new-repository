@@ -9,24 +9,26 @@
   z-index: 5000;
   padding: 16px;
 }
+
 .open-task-card {
   background: #fff;
   max-width: min(84vw, 400px);
   max-height: min(80dvh, 800px);
   overflow-y: auto;
   width: 100%;
-  /* height: 100%; */
   border-radius: 16px;
   padding: 24px 20px 16px;
   margin-bottom: 60px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
 }
+
 .ot-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 8px;
 }
+
 .ot-chip {
   background: #ff7a00;
   color: #fff;
@@ -35,6 +37,7 @@
   font-weight: 400;
   font-family: "open-sans", sans-serif;
 }
+
 .ot-close {
   background: transparent;
   border: 0;
@@ -53,10 +56,8 @@
   font-weight: 700;
   overflow-wrap: anywhere;
   word-break: break-word;
-  /* white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; */
 }
+
 .ot-desc {
   color: #000000;
   margin: 0 0 16px;
@@ -64,11 +65,13 @@
   font-weight: 400;
   font-size: var(--fontsize-19px);
 }
+
 .ot-row {
   display: flex;
   gap: 12px;
   margin: 25px 0;
 }
+
 .ot-label {
   font-weight: 700;
   color: #42526e;
@@ -80,6 +83,7 @@
 .ot-section {
   margin-top: 25px;
 }
+
 .ot-subtitle {
   font-weight: 700;
   color: #42526e;
@@ -97,11 +101,13 @@
   height: 100%;
   overflow-y: auto;
 }
+
 .ot-chip-user {
   display: flex;
   align-items: center;
   gap: 10px;
 }
+
 .ot-badge {
   display: inline-flex;
   align-items: center;
@@ -112,6 +118,7 @@
   color: #fff;
   font-weight: 700;
 }
+
 .ot-name {
   color: #000000;
   font-size: var(--fontsize-19px);
@@ -125,18 +132,21 @@
   flex-direction: column;
   gap: 6px;
 }
+
 .ot-progress-track {
   background: #f4f4f4;
   border-radius: 8px;
   height: 16px;
   overflow: hidden;
 }
+
 #progressFill {
   height: 16px;
   border-radius: 8px;
   background: #4589ff;
   width: 0;
 }
+
 .ot-progress-text {
   color: #6b778c;
   font-size: 14px;
@@ -194,10 +204,10 @@
 /* Actions */
 .ot-actions {
   display: flex;
-  /* gap: 16px; */
   justify-content: flex-end;
   margin-top: 18px;
 }
+
 .ot-delete-btn,
 .ot-edit-btn {
   display: inline-flex;
@@ -208,14 +218,17 @@
   padding: 10px 14px;
   cursor: pointer;
 }
+
 .ot-delete-btn {
   background: none;
   color: #2a3647;
 }
+
 .ot-edit-btn {
   background: none;
   color: #2a3647;
 }
+
 .ot-ico {
   font-size: 16px;
 }
@@ -231,14 +244,17 @@
   padding: 3px 10px;
   font-weight: 600;
 }
+
 .pill-urgent {
   background: #ffe4e0;
   color: #ff3d00;
 }
+
 .pill-medium {
   background: #fff2da;
   color: #ffa800;
 }
+
 .pill-low {
   background: #e9f8e1;
   color: #4c9a2a;

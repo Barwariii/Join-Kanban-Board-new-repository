@@ -35,38 +35,6 @@
 </head>
 
 <body>
-    <!-- <header>
-        <div class="header">
-            <div class="headerLeft">
-                <img class="headerLogo" src="./assets/icons/logo_full_white.png" alt="join logo">
-            </div>
-
-            <div class="headerRight">
-                <div class="headerTitleContainer" onclick="toggledropDownBar()">
-                    <span class="headerTitle">Kanban Project Management Tool</span>
-                </div>
-                <div class="headerHelpIconContainer">
-                    <a href="./pages/help_button.html" class="headerHelpIconLink">
-                        <img class="headerHelpIcon" src="./assets/icons/help_icon.png" alt="help icon">
-                    </a>
-                </div>
-
-                <div class="headerProfileContainer" onclick="toggledropDownBar()">
-                    <div class="headerProfile">
-                        <span class="headerProfileLetter">SM</span>
-                    </div>
-                </div>
-
-                <div class="dropDownBar" id="dropDownBar">
-                    <a href="./legal_notice.html" class="dropDownItem">Legal Notice</a>
-                    <a href="./privacy_policy.html" class="dropDownItem">Privacy Policy</a>
-                    <a href="./pages/log_in.html" class="dropDownItem">Log Out</a>
-                </div>
-
-            </div>
-        </div>
-    </header> -->
-
     <header>
         <div class="background-header">
             <div class="header">
@@ -91,11 +59,15 @@
                     </div>
 
                     <div class="dropDownBar" id="dropDownBar">
-                        <a href="../pages/help_button.html" class="helpForDropDownButOnlyVisibleInResponsiv"><span class="textForDropDownOverlay">Help</span></a>
-                        <a href="../pages/legal_notice.html" class="dropDownItem"><span class="textForDropDownOverlay">Legal
+                        <a href="../pages/help_button.html" class="helpForDropDownButOnlyVisibleInResponsiv"><span
+                                class="textForDropDownOverlay">Help</span></a>
+                        <a href="../pages/legal_notice.html" class="dropDownItem"><span
+                                class="textForDropDownOverlay">Legal
                                 Notice</span></a>
-                        <a href="../pages/privacy_policy.html" class="dropDownItem"><span class="textForDropDownOverlay">Privacy Policy</span></a>
-                        <a href="../pages/log_in.html" class="dropDownItem"><span class="textForDropDownOverlay">Log Out</span></a>
+                        <a href="../pages/privacy_policy.html" class="dropDownItem"><span
+                                class="textForDropDownOverlay">Privacy Policy</span></a>
+                        <a href="../pages/log_in.html" class="dropDownItem"><span class="textForDropDownOverlay">Log
+                                Out</span></a>
                     </div>
 
                 </div>
@@ -143,7 +115,6 @@
         </footer>
 
         <div class="rightContent">
-
             <!-- Dashboard Section -->
             <div class="dashboardWrapper">
                 <div class="dashboardHeader">
@@ -246,21 +217,26 @@
 </body>
 
 <script type="module">
-  import { auth } from './scripts/firebase.js';
-  import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+    import { auth } from './scripts/firebase.js';
+    import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
-  // ننتظر تغيّر حالة تسجيل الدخول
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // اختَر أفضل اسم متاح: displayName -> اسم محفوظ محليًا -> قبل @ من الإيميل
-      const localName = localStorage.getItem('join:name');
-      const fromEmail = (user.email || '').split('@')[0]?.replace(/[_.-]+/g, ' ');
-      const name = user.displayName || localName || fromEmail || 'Guest';
-      window.setDashboardName?.(name);  // الدالة موجودة في script.js (global)
-    } else {
-      window.setDashboardName?.('Guest');
-    }
-  });
+
+/**
+ * Subscribe to authentication state changes and update the dashboard name.
+ * - If a user is logged in, choose the best available name:
+ *   displayName → locally saved name → local-part of email → 'Guest'.
+ * - If no user is logged in, set name as 'Guest'.
+ */
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const localName = localStorage.getItem('join:name');
+            const fromEmail = (user.email || '').split('@')[0]?.replace(/[_.-]+/g, ' ');
+            const name = user.displayName || localName || fromEmail || 'Guest';
+            window.setDashboardName?.(name);  // الدالة موجودة في script.js (global)
+        } else {
+            window.setDashboardName?.('Guest');
+        }
+    });
 </script>
 
 

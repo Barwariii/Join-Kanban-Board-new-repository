@@ -128,9 +128,9 @@ textarea:focus {
 
 /* Styling for the error message */
 .error-message {
-  color: #f44336; /* Rot für Fehlermeldung */
+  color: #f44336;
   font-size: 14px;
-  display: none; /* Fehlermeldung ist standardmäßig versteckt */
+  display: none;
   margin-top: 5px;
 }
 
@@ -287,12 +287,10 @@ textarea:focus {
   display: none;
 }
 
-/* Anfangszustand des rect - es ist ausgeblendet */
 #arrowDownHover {
   display: none;
 }
 
-/* Wenn der Mauszeiger über dem #arrowDown ist, wird das rect angezeigt */
 #arrowDown:hover #arrowDownHover {
   display: flex;
 }
@@ -301,12 +299,10 @@ textarea:focus {
   display: flex;
 }
 
-/* Anfangszustand des rect - es ist ausgeblendet */
 #arrowUpHover {
   display: none;
 }
 
-/* Wenn der Mauszeiger über dem #arrowDown ist, wird das rect angezeigt */
 #arrowUp:hover #arrowUpHover {
   display: flex;
 }
@@ -372,9 +368,9 @@ textarea:focus {
 }
 
 ul {
-  list-style-type: none; /* Remove bullets*/
-  padding: 0px; /* Remove padding */
-  margin: 0px; /* Remove margins */
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
 }
 
 .contactAvatar {
@@ -398,6 +394,7 @@ ul {
 .checkbox {
   margin-right: 8px;
 }
+
 .showSelectedContact {
   display: flex;
   margin: 8px 0px 8px 0px;
@@ -416,7 +413,6 @@ ul {
   border: 2px solid white;
   border-radius: 21px;
   font-size: 12px;
-  /* margin-left: 8px; */
 }
 
 /*! category Section */
@@ -641,9 +637,9 @@ ul {
 }
 
 .error-message {
-  color: #f44336; /* Rot für Fehlermeldung */
+  color: #f44336;
   font-size: 14px;
-  display: none; /* Fehlermeldung ist standardmäßig versteckt */
+  display: none;
   margin-top: 5px;
 }
 

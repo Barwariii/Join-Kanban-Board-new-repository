@@ -1,8 +1,4 @@
 /**
- * Contact Templates
- */
-
-/**
  * Render a single contact item in the contact list.
  * @param {Object} singleContact - The contact object containing details.
  * @param {number} index - The index of the contact in the list.

@@ -1,6 +1,3 @@
-// === board_open_task_overlay.js ===
-// Overlay for opening a task card, showing all details and subtasks, plus Edit/Delete buttons
-
 /**
  * Opens the task overlay and renders the full task information.
  * Initializes editTaskSubtasks and binds checkbox handlers.
@@ -39,6 +36,7 @@ function closeTaskOverlay() {
   overlay.style.display = 'none';
   overlay.innerHTML = '';
 }
+
 
 /**
  * Creates the HTML of the overlay for the given task.
@@ -128,6 +126,7 @@ function bindSubtaskCheckboxHandlers(task) {
   });
 }
 
+
 /**
  * Toggles a single subtask (check/uncheck), updates it in the database
  * and re-renders the updated overlay.
@@ -193,8 +192,6 @@ async function toggleOverlaySubtask(task, index, isChecked) {
 }
 
 
-
-
 /**
  * Handles the click on the "Edit" button inside the task overlay.
  * Closes the current overlay and opens the edit overlay for the given task.
@@ -204,6 +201,7 @@ function handleOverlayEdit(taskId) {
   closeTaskOverlay();
   openEditTaskOverlay(taskId);
 }
+
 
 /**
  * Handles the click on the "Delete" button inside the task overlay.
@@ -234,8 +232,14 @@ function normalizeIds(v) {
   return [];
 }
 
-// حالة عامة للـOverlay
+/**
+ * General state holder for the current overlay's assigned users.
+ * Stored globally on the window object.
+ * 
+ * @type {string[]} Array of user IDs assigned to the currently opened overlay.
+ */
 window.currentOverlayAssigned = [];
+
 
 /**
  * Updates the overlay assignee state and re-renders the assigned contact chips.
@@ -246,6 +250,7 @@ function setOverlayAssignees(value, rootEl) {
   window.currentOverlayAssigned = normalizeIds(value).map(String);
   renderTaskAssignedTo('openTaskAssignedToContainer', window.currentOverlayAssigned, rootEl);
 }
+
 
 /**
  * Renders the assignee chips used in both the board and the overlay.
@@ -263,17 +268,12 @@ function renderTaskAssignedTo(containerId, ids, root = document) {
     return;
   }
 
-
   box.innerHTML = users.map(u => `
     <div class="taskSingleContact" style="background-color:${u.color || '#999'}">
       <span>${escapeHtml(u.initials || '??')}</span>
     </div>
   `).join('');
 }
-
-
-
-
 
 
 /**
@@ -307,6 +307,7 @@ function priorityBadge(priority) {
   return `<span class="pill pill-medium">Medium</span>`;
 }
 
+
 /**
  * Formats a date string as DD/MM/YYYY.
  * @param {string|Date} d - Raw date value or ISO string.
@@ -325,6 +326,7 @@ function formatDate(d) {
   }
 }
 
+
 /**
  * Escapes special HTML characters in a string in order to prevent XSS.
  * @param {string} str - The raw string to escape.
@@ -337,9 +339,6 @@ function escapeHtml(str) {
 }
 
 
-
-
-
 /**
  * Closes the task overlay and reloads the board tasks (same as after a save).
  */
@@ -347,7 +346,6 @@ function closeTaskOverlay() {
   const overlay = document.getElementById('boardOverlay');
   overlay.style.display = 'none';
   overlay.innerHTML = '';
-
 
   if (typeof loadAndRenderBoardTasks === 'function') {
     loadAndRenderBoardTasks();

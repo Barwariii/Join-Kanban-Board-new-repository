@@ -68,11 +68,7 @@ textarea:focus {
 
 /*! Left Content Add Task Window */
 .mainLeftContent {
-  /* background-color: wheat; */
   width: 400px;
-  /* height: 100%;
-  overflow-y: scroll;
-  scrollbar-width: thin; */
 }
 
 ::placeholder {
@@ -102,9 +98,9 @@ textarea:focus {
 
 /* Styling for the error message */
 .error-message {
-  color: #f44336; /* Rot für Fehlermeldung */
+  color: #f44336;
   font-size: 14px;
-  display: none; /* Fehlermeldung ist standardmäßig versteckt */
+  display: none;
   margin-top: 5px;
 }
 
@@ -158,7 +154,6 @@ textarea:focus {
 .priorityOptions {
   display: flex;
   justify-content: space-between;
-  /* margin: 8px 0 24px 0; */
 }
 
 .priority {
@@ -264,12 +259,10 @@ textarea:focus {
   display: none;
 }
 
-/* Anfangszustand des rect - es ist ausgeblendet */
 #arrowDownHover {
   display: none;
 }
 
-/* Wenn der Mauszeiger über dem #arrowDown ist, wird das rect angezeigt */
 #arrowDown:hover #arrowDownHover {
   display: flex;
 }
@@ -278,12 +271,10 @@ textarea:focus {
   display: flex;
 }
 
-/* Anfangszustand des rect - es ist ausgeblendet */
 #arrowUpHover {
   display: none;
 }
 
-/* Wenn der Mauszeiger über dem #arrowDown ist, wird das rect angezeigt */
 #arrowUp:hover #arrowUpHover {
   display: flex;
 }
@@ -349,9 +340,9 @@ textarea:focus {
 }
 
 ul {
-  list-style-type: none; /* Remove bullets*/
-  padding: 0px; /* Remove padding */
-  margin: 0px; /* Remove margins */
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
 }
 
 .contactAvatar {
@@ -384,7 +375,6 @@ ul {
 }
 
 .showncontactAvatar {
-  /* background-color: #00ffa2; */
   width: 28px;
   height: 28px;
   display: flex;
@@ -477,10 +467,6 @@ ul {
 .add-subtask-btn {
   cursor: pointer;
 }
-
-/* .subtaskInput:hover {
-  border-bottom: 1px solid #005dff;
-} */
 
 .added-subtask {
   display: flex;

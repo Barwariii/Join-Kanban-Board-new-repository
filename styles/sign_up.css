@@ -10,7 +10,6 @@ body {
 
 /* Header */
 .signUpHeader {
-  /* width: 100%; */
   display: flex;
   justify-content: start;
   padding: 20px;
@@ -174,7 +173,7 @@ h2 {
   display: none;
 }
 
-/* animation vom popup */
+/* animation of popup */
 @keyframes slideUp {
   0% {
       top: 80%;
@@ -205,7 +204,7 @@ h2 {
   border-bottom:1px solid var(--form-val-default);
   outline:none;
   background:transparent;
-  padding:12px 36px 12px 12px; /* يراعي الأيقونة */
+  padding:12px 36px 12px 12px;
 }
 
 .inputSignUp input.invalid{
