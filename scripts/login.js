@@ -10,6 +10,7 @@ import {
   browserSessionPersistence,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
+
 /**
  * Handle intro logo animation completion.
  * Adds the `intro-done` class on the <body> when the animation ends,
@@ -32,32 +33,37 @@ document.addEventListener('DOMContentLoaded', () => {
  * and performs the authentication flow. Mirrors the UX of signup.js.
  */
 document.addEventListener('DOMContentLoaded', () => {
-  // ==============================
-  // DOM references
-  // ==============================
-  const form        = document.querySelector('.login-form');
-  const emailInput  = document.getElementById('email');
-  const passInput   = document.getElementById('passwordField');
-  const rememberCb  = document.getElementById('remember');
 
-  // Error spans (like signup)
-  const emailError     = document.getElementById('loginEmailError');
-  const passwordError  = document.getElementById('loginPasswordError');
-  const generalError   = document.getElementById('loginGeneralError');
+  /**
+   * DOM references
+   */
+  const form = document.querySelector('.login-form');
+  const emailInput = document.getElementById('email');
+  const passInput = document.getElementById('passwordField');
+  const rememberCb = document.getElementById('remember');
+
+  /**
+   * Error spans (like signup)
+   */
+  const emailError = document.getElementById('loginEmailError');
+  const passwordError = document.getElementById('loginPasswordError');
+  const generalError = document.getElementById('loginGeneralError');
 
 
   /**
    * Always start with a signed-out state to avoid auto sign-in.
    * Errors are ignored intentionally.
    */
-  signOut(auth).catch(() => {});
+  signOut(auth).catch(() => { });
 
 
-  // ===== (1) Remember-me helpers (AES-GCM via Web Crypto) =====
-  /** LocalStorage key used for the remember-me bundle. */
+  /** 
+   * LocalStorage key used for the remember-me bundle. 
+   * Remember-me helpers
+   */
   const REMEMBER_KEY = 'join.remember.v1';
   /** App-scoped secret used to derive a non-exportable AES key (not a true secret). */
-  const APP_SECRET   = 'join-remember-secret-v1';
+  const APP_SECRET = 'join-remember-secret-v1';
 
   const enc = new TextEncoder();
   const dec = new TextDecoder();
@@ -69,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   async function getAesKey() {
     const hash = await crypto.subtle.digest('SHA-256', enc.encode(APP_SECRET));
-    return crypto.subtle.importKey('raw', hash, 'AES-GCM', false, ['encrypt','decrypt']);
+    return crypto.subtle.importKey('raw', hash, 'AES-GCM', false, ['encrypt', 'decrypt']);
   }
 
 
@@ -105,8 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   async function encryptText(plain) {
     const key = await getAesKey();
-    const iv  = crypto.getRandomValues(new Uint8Array(12));
-    const ct  = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(plain));
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(plain));
     return { iv: b64FromBytes(iv), ct: b64FromBytes(ct) };
   }
 
@@ -119,9 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   async function decryptText(ivB64, ctB64) {
     const key = await getAesKey();
-    const iv  = bytesFromB64(ivB64);
-    const ct  = bytesFromB64(ctB64);
-    const pt  = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ct);
+    const iv = bytesFromB64(ivB64);
+    const ct = bytesFromB64(ctB64);
+    const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ct);
     return dec.decode(pt);
   }
 
@@ -136,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const { iv, ct } = await encryptText(password);
       localStorage.setItem(REMEMBER_KEY, JSON.stringify({ email, iv, ct }));
-    } catch {}
+    } catch { }
   }
 
 
@@ -180,12 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
   loadRemember();
 
 
-  // ==============================
-  // Validation & UI helpers (signup parity)
-  // ==============================
-
-
   /**
+   * Validation & UI helpers (signup parity)
    * Toggle field validity UI and error text.
    * @param {HTMLInputElement|null} inputEl
    * @param {boolean} isValid
@@ -233,10 +235,10 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   window.maskPassword = function () {
     const prev = passInput.getAttribute('data-real-password') || '';
-    const vis  = passInput.value;
+    const vis = passInput.value;
     let next = prev;
-    if (vis.length > prev.length)       next = prev + vis.slice(prev.length);
-    else if (vis.length < prev.length)  next = prev.slice(0, -1);
+    if (vis.length > prev.length) next = prev + vis.slice(prev.length);
+    else if (vis.length < prev.length) next = prev.slice(0, -1);
     passInput.setAttribute('data-real-password', next);
     passInput.value = '*'.repeat(next.length); // or '•'
   };
@@ -257,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * @returns {boolean}
    */
   function validateEmailField() {
-    const v  = (emailInput.value || '').trim();
+    const v = (emailInput.value || '').trim();
     const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
     setFieldValidity(emailInput, ok, emailError, 'Please enter a valid email address.');
     return ok;
@@ -276,12 +278,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // Disable native bubbles (same as signup)
+  /**
+   * Disable native bubbles
+   */
   emailInput.addEventListener('invalid', e => e.preventDefault());
-  passInput .addEventListener('invalid', e => e.preventDefault());
+  passInput.addEventListener('invalid', e => e.preventDefault());
 
   emailInput.addEventListener('input', () => { validateEmailField(); hideGeneral(); });
-  passInput .addEventListener('input', () => { validatePasswordField(); hideGeneral(); });
+  passInput.addEventListener('input', () => { validatePasswordField(); hideGeneral(); });
 
 
   /**
@@ -302,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return false;
   };
 
-  
+
   /**
    * Execute the Firebase login flow with persistence based on remember-me.
    * Shows field-level or general errors depending on error type.
@@ -310,56 +314,73 @@ document.addEventListener('DOMContentLoaded', () => {
    * @returns {Promise<void>}
    */
   async function runLogin() {
-    const email    = (emailInput.value || '').trim();
-    const password = getRealPassword(passInput);
-
-    // Clear all inline errors before calling Firebase
-    setFieldValidity(emailInput, true, emailError);
-    setFieldValidity(passInput,  true, passwordError);
-    hideGeneral();
-
+    const { email, password } = prepareLoginInputs();
     try {
-      const persistence = rememberCb?.checked ? browserLocalPersistence : browserSessionPersistence;
-      await setPersistence(auth, persistence);
-      await signInWithEmailAndPassword(auth, email, password);
-
-      // Save/Clear remember depending on checkbox state
-      if (rememberCb?.checked) {
-        await saveRemember(email, password);
-      } else {
-        clearRemember();
-      }
-
+      await doFirebaseSignIn(email, password, !!rememberCb?.checked);
       window.location.href = '../index.html';
     } catch (err) {
-      console.error('Login failed:', err);
-      const code = err?.code || '';
-
-      // 1) Invalid email format → highlight email
-      if (code === 'auth/invalid-email') {
-        setFieldValidity(emailInput, false, emailError, 'Please enter a valid email address.');
-        return;
-      }
-
-      // 2) Wrong credentials (do not reveal which field)
-      if (code === 'auth/user-not-found' || code === 'auth/wrong-password' || code === 'auth/invalid-credential') {
-        setFieldValidity(emailInput, true, emailError);
-        setFieldValidity(passInput,  true, passwordError);
-        showGeneral('Email or password is incorrect.');
-        return;
-      }
-
-      // 3) Rate limit / Other errors → general area
-      if (code === 'auth/too-many-requests') {
-        showGeneral('Too many attempts. Please try again later.');
-      } else {
-        showGeneral(err.message || 'Failed to sign in.');
-      }
+      handleLoginError(err);
     }
   }
 
+
   /**
-   * Guest login – simply navigates to the app root without authentication.
+ * Prepare inputs and clear inline errors before calling Firebase.
+ * @returns {{email:string, password:string}}
+ */
+  function prepareLoginInputs() {
+    const email = (emailInput.value || '').trim();
+    const password = getRealPassword(passInput);
+    setFieldValidity(emailInput, true, emailError);
+    setFieldValidity(passInput, true, passwordError);
+    hideGeneral();
+    return { email, password };
+  }
+
+  /**
+   * Set persistence, sign in, and handle remember-me storage.
+   * @param {string} email
+   * @param {string} password
+   * @param {boolean} remember
+   * @returns {Promise<void>}
+   */
+  async function doFirebaseSignIn(email, password, remember) {
+    const persistence = remember ? browserLocalPersistence : browserSessionPersistence;
+    await setPersistence(auth, persistence);
+    await signInWithEmailAndPassword(auth, email, password);
+    if (remember) { await saveRemember(email, password); } else { clearRemember(); }
+  }
+
+  /**
+   * Map Firebase error codes to UI feedback (same messages as before).
+   * @param {any} err
+   * @returns {void}
+   */
+  function handleLoginError(err) {
+    console.error('Login failed:', err);
+    const code = err?.code || '';
+    if (code === 'auth/invalid-email') {
+      setFieldValidity(emailInput, false, emailError, 'Please enter a valid email address.');
+      return;
+    }
+    if (code === 'auth/user-not-found' || code === 'auth/wrong-password' || code === 'auth/invalid-credential') {
+      setFieldValidity(emailInput, true, emailError);
+      setFieldValidity(passInput, true, passwordError);
+      showGeneral('Email or password is incorrect.');
+      return;
+    }
+    if (code === 'auth/too-many-requests') {
+      showGeneral('Too many attempts. Please try again later.');
+    } else {
+      showGeneral(err.message || 'Failed to sign in.');
+    }
+  }
+  
+  
+  /**
+   * Guest login handler that redirects to ../index.html without authentication.
+   * Bound from inline HTML onclick for robustness.
+   * @returns {void}
    */
   window.guestLogin = function () { window.location.href = '../index.html'; };
 });
