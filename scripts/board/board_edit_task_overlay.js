@@ -1,16 +1,13 @@
-/** =====================================
+/**
  * Edit Overlay State
- * ===================================== */
+ */
 let currentEditedTaskId = null;
 let currentPriority = '';
 let editTaskSubtasks = [];
 
 
-/** =====================================
- * Open/Get/Save/Close
- * ===================================== */
-
 /**
+ * Open/Get/Save/Close
  * Open edit overlay for a task and prefill its data.
  * @param {string} taskId
  * @returns {Promise<void>}
@@ -88,11 +85,8 @@ async function saveEditedTask() {
 }
 
 
-/** =====================================
- * Priority Selection
- * ===================================== */
-
 /**
+ * Priority Selection
  * Set current priority and update active button classes.
  * @param {"urgent"|"medium"|"low"} priority
  * @returns {void}
@@ -111,11 +105,8 @@ function setPriority(priority) {
 }
 
 
-/** =====================================
- * Contacts (Assignable / Selected)
- * ===================================== */
-
 /**
+ * Contacts (Assignable / Selected)
  * Render list of assignable contacts with checkbox SVGs.
  * @param {string[]} [assignedIds=[]]
  * @returns {string}
@@ -196,7 +187,7 @@ function removeContact(contactId) {
     const unchecked = document.getElementById(`edit-unCheckedBox${userIndex}`);
     const checked = document.getElementById(`edit-checkedBox${userIndex}`);
     const contactElement = document.getElementById(`contact-option-${userIndex}`);
-    
+
     unchecked.classList.remove('hideCheckBox');
     checked.classList.add('hideCheckBox');
     contactElement.classList.remove('active');
@@ -259,11 +250,8 @@ function initializeContactSelection(assignedIds = []) {
 }
 
 
-/** =====================================
- * Subtasks (Edit Overlay)
- * ===================================== */
-
 /**
+ * Subtasks (Edit Overlay)
  * Render subtasks list as HTML.
  * @param {Array<{title:string, completed:boolean}>} [subtasks=[]]
  * @returns {string}
@@ -344,45 +332,19 @@ function updateProgressBar() {
 }
 
 
-/** =====================================
- * Save (PUT version)
- * ===================================== */
-
 /**
  * Save edited task (PUT version with merge).
  * @returns {Promise<void>}
  */
 async function saveEditedTask() {
   if (!currentEditedTaskId) return;
-
   try {
-    const updatedTask = {
-      title: document.getElementById('editTaskTitle').value,
-      description: document.getElementById('editTaskDescription').value,
-      due_date: document.getElementById('editTaskDueDate').value,
-      priority: currentPriority,
-      assigned_to: getSelectedContactIds(),
-      subtasks: editTaskSubtasks
-    };
-
+    const updatedTask = buildUpdatedTaskFromForm();
     const task = await getTaskById(currentEditedTaskId);
     const categoryKey = categoryToDbKey(task.category);
-
     const mergedTask = { ...task, ...updatedTask };
-
-    const res = await fetch(`${DATABASE_URL}/tasks/${categoryKey}/${currentEditedTaskId}.json`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(mergedTask)
-    });
-
-    if (!res.ok) {
-      const err = await res.text();
-      console.error("API error:", err);
-      alert("Failed to save changes!\n" + err);
-      return;
-    }
-
+    const ok = await putMergedTask(categoryKey, currentEditedTaskId, mergedTask);
+    if (!ok) return;
     loadAndRenderBoardTasks();
     closeEditOverlay();
   } catch (error) {
@@ -391,12 +353,47 @@ async function saveEditedTask() {
   }
 }
 
+/**
+ * PUT the merged task to Realtime DB and handle API errors.
+ * @param {string} categoryKey
+ * @param {string} taskId
+ * @param {Object} mergedTask
+ * @returns {Promise<boolean>} true if saved, false if API error.
+ */
+async function putMergedTask(categoryKey, taskId, mergedTask) {
+  const res = await fetch(`${DATABASE_URL}/tasks/${categoryKey}/${taskId}.json`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(mergedTask)
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    console.error("API error:", err);
+    alert("Failed to save changes!\n" + err);
+    return false;
+  }
+  return true;
+}
 
-/** =====================================
- * Close Overlay / Delete
- * ===================================== */
 
 /**
+ * Read edited fields and build the updated task object.
+ * @returns {{title:string,description:string,due_date:string,priority:any,assigned_to:string[],subtasks:any[]}}
+ */
+function buildUpdatedTaskFromForm() {
+  return {
+    title: document.getElementById('editTaskTitle').value,
+    description: document.getElementById('editTaskDescription').value,
+    due_date: document.getElementById('editTaskDueDate').value,
+    priority: currentPriority,
+    assigned_to: getSelectedContactIds(),
+    subtasks: editTaskSubtasks
+  };
+}
+
+
+/**
+ * Close Overlay / Delete
  * Close the edit overlay and reset edit state.
  * @returns {void}
  */

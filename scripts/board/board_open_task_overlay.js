@@ -1,10 +1,11 @@
 /**
- * Opens the task overlay and renders the full task information.
- * Initializes editTaskSubtasks and binds checkbox handlers.
+ * Open the task overlay by task id:
+ * - Ensures user data is loaded, Fetches task, Delegates rendering/binding to renderTaskOverlay()
  * @param {string} taskId - The ID of the task to open.
+ * @returns {Promise<void>}
  */
 async function openTaskOverlay(taskId) {
-  const hasUD  = Array.isArray(typeof userData !== 'undefined' ? userData : null) && userData.length;
+  const hasUD = Array.isArray(typeof userData !== 'undefined' ? userData : null) && userData.length;
   const hasWUD = Array.isArray(window.userData) && window.userData.length;
   if (!hasUD && !hasWUD && typeof loadUserData === 'function') {
     await loadUserData();
@@ -13,16 +14,27 @@ async function openTaskOverlay(taskId) {
   const task = await getTaskById(taskId);
   if (!task) return;
 
+  renderTaskOverlay(task);
+}
+
+
+/**
+ * Render and wire up the overlay for a given task:
+ * - Shows overlay and injects template, Copies subtasks into editTaskSubtasks, Binds checkbox handlers and updates progress, Closes on backdrop click
+ * @param {object} task 
+ * @returns {void}
+ */
+function renderTaskOverlay(task) {
   const overlay = document.getElementById('boardOverlay');
   overlay.style.display = 'block';
   overlay.innerHTML = taskOverlayTemplate(task);
 
   // keep progress/subtasks
-  window.editTaskSubtasks = Array.isArray(task.subtasks) ? task.subtasks.map(s => ({...s})) : [];
+  window.editTaskSubtasks = Array.isArray(task.subtasks) ? task.subtasks.map(s => ({ ...s })) : [];
   bindSubtaskCheckboxHandlers(task);
   if (typeof updateProgressBar === 'function') updateProgressBar();
 
-  overlay.addEventListener('click', function closeOnBackdrop(e){
+  overlay.addEventListener('click', function closeOnBackdrop(e) {
     if (e.target.id === 'boardOverlay') { overlay.removeEventListener('click', closeOnBackdrop); closeTaskOverlay(); }
   });
 }
@@ -45,30 +57,8 @@ function closeTaskOverlay() {
  */
 function taskOverlayTemplate(task) {
   const subtasksHtml = renderOverlaySubtasks(task);
-
-  const ud = Array.isArray(typeof userData !== 'undefined' ? userData : null)
-    ? userData
-    : (Array.isArray(window.userData) ? window.userData : []);
-
-
-  const assignedRaw = task.assigned_to || [];
-  const assigned = Array.isArray(assignedRaw)
-    ? assignedRaw
-    : (assignedRaw && typeof assignedRaw === 'object' ? Object.values(assignedRaw) : []);
-
-
-  const users = assigned
-    .map(id => ud.find(u => String(u.id) === String(id)))
-    .filter(Boolean);
-
-  const assignedHTML = users.length
-    ? users.map(u => `
-        <div class="ot-chip-user">
-          <span class="ot-badge" style="background:${u.color || '#999'}">${escapeHtml(u.initials || '')}</span>
-          <span class="ot-name">${escapeHtml(u.name || '')}</span>
-        </div>
-      `).join('')
-    : '<span class="ot-muted">No assignees</span>';
+  const users = resolveOverlayUsers(task);
+  const assignedHTML = renderAssignedChips(users);
 
   return `
     <div class="open-task-overlay">
@@ -99,7 +89,7 @@ function taskOverlayTemplate(task) {
         <div class="ot-actions">
           <button class="ot-delete-btn" onclick="handleOverlayDelete('${task.id}')">
             <img src="../assets/icons/delete1.png" alt="" class="ot-ico"> Delete
-         </button>
+          </button>
           <button class="ot-edit-btn" onclick="handleOverlayEdit('${task.id}')">
             <img src="../assets/icons/edit1.png" alt="" class="ot-ico"> Edit
           </button>
@@ -107,6 +97,46 @@ function taskOverlayTemplate(task) {
       </div>
     </div>
   `;
+}
+
+
+/**
+ * Resolve the users assigned to this task using global user data.
+ * Mirrors original logic (array/object support and string id compare).
+ * @param {Object} task
+ * @returns {Array<Object>} matched user objects
+ */
+function resolveOverlayUsers(task) {
+  const ud = Array.isArray(typeof userData !== 'undefined' ? userData : null)
+    ? userData
+    : (Array.isArray(window.userData) ? window.userData : []);
+
+  const assignedRaw = task.assigned_to || [];
+  const assigned = Array.isArray(assignedRaw)
+    ? assignedRaw
+    : (assignedRaw && typeof assignedRaw === 'object' ? Object.values(assignedRaw) : []);
+
+  return assigned
+    .map(id => ud.find(u => String(u.id) === String(id)))
+    .filter(Boolean);
+}
+
+
+/**
+ * Render "Assigned To" chips HTML.
+ * Keeps exact structure/strings as original code.
+ * @param {Array<Object>} users
+ * @returns {string} HTML
+ */
+function renderAssignedChips(users) {
+  return users.length
+    ? users.map(u => `
+        <div class="ot-chip-user">
+          <span class="ot-badge" style="background:${u.color || '#999'}">${escapeHtml(u.initials || '')}</span>
+          <span class="ot-name">${escapeHtml(u.name || '')}</span>
+        </div>
+      `).join('')
+    : '<span class="ot-muted">No assignees</span>';
 }
 
 
@@ -128,66 +158,106 @@ function bindSubtaskCheckboxHandlers(task) {
 
 
 /**
- * Toggles a single subtask (check/uncheck), updates it in the database
- * and re-renders the updated overlay.
- *
- * @param {Object} task - The task object.
- * @param {number} index - Index of the subtask to toggle.
- * @param {boolean} isChecked - True if the checkbox is checked.
+ * Toggle one subtask, persist to DB, refresh overlay/progress.
+ * @param {Object} task
+ * @param {number} index
+ * @param {boolean} isChecked
+ * @returns {Promise<void>}
  */
 async function toggleOverlaySubtask(task, index, isChecked) {
   try {
     const fresh = await getTaskById(task.id) || task;
     const subtasks = Array.isArray(fresh.subtasks) ? [...fresh.subtasks] : [];
     if (index < 0 || index >= subtasks.length) return;
-
-    // 1) update locally
     subtasks[index] = { ...subtasks[index], completed: !!isChecked };
-
-    // 2) update DB
-    let categoryKey = fresh.category ? categoryToDbKey(fresh.category) : null;
-    if (!categoryKey && typeof findTaskAndCategoryIndex === 'function') {
-      const pos = findTaskAndCategoryIndex(fresh.id);
-      if (pos) {
-        const map = ['to_do','in_progress','await_feedback','done'];
-        categoryKey = map[pos.categoryIndex];
-      }
-    }
-    if (!categoryKey) throw new Error('Category not resolvable for this task');
-
-    const url = `${DATABASE_URL}/tasks/${categoryKey}/${fresh.id}/subtasks.json`;
-    const res = await fetch(url, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(subtasks)
-    });
-    if (!res.ok) throw new Error(await res.text() || 'Failed to PUT subtasks');
-
-    // 3) update in-memory copy
-    if (typeof findTaskAndCategoryIndex === 'function') {
-      const pos = findTaskAndCategoryIndex(fresh.id);
-      if (pos) globalAllTasks[pos.categoryIndex][pos.taskIndex].subtasks = subtasks;
-    }
-
-    // 4) re-render overlay subtasks
-    const latestTask = { ...fresh, subtasks, assigned_to: window.currentOverlayAssigned };
-    const box = document.getElementById('ot-subtasks');
-    if (box) {
-      box.innerHTML = renderOverlaySubtasks(latestTask);
-      bindSubtaskCheckboxHandlers(latestTask);
-    }
-
-    // 5) update global overlay subtasks memory
-    window.editTaskSubtasks = subtasks;
-
-    // requestAnimationFrame to ensure DOM is updated before computing progress
-    if (typeof updateProgressBar === 'function') {
-      requestAnimationFrame(() => updateProgressBar());
-    }
-
+    await updateDbAndMemory(fresh, subtasks);
+    updateOverlayAfterSubtasksChange(fresh, subtasks);
   } catch (err) {
     console.error('Failed to toggle subtask:', err);
     alert('Failed to update subtask. Please try again.');
+  }
+}
+
+
+/**
+ * Resolve category key, PUT subtasks, and sync in-memory list.
+ * Mirrors original error and update flow 1:1.
+ * @param {Object} fresh
+ * @param {Array} subtasks
+ * @returns {Promise<void>}
+ */
+async function updateDbAndMemory(fresh, subtasks) {
+  const categoryKey = await resolveCategoryKey(fresh);
+  if (!categoryKey) throw new Error('Category not resolvable for this task');
+
+  const url = `${DATABASE_URL}/tasks/${categoryKey}/${fresh.id}/subtasks.json`;
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(subtasks)
+  });
+  if (!res.ok) throw new Error((await res.text()) || 'Failed to PUT subtasks');
+
+  if (typeof findTaskAndCategoryIndex === 'function') {
+    const pos = findTaskAndCategoryIndex(fresh.id);
+    if (pos) globalAllTasks[pos.categoryIndex][pos.taskIndex].subtasks = subtasks;
+  }
+}
+
+
+/**
+ * Resolve the DB category key for a task (same logic as before).
+ * @param {Object} fresh
+ * @returns {Promise<string|null>}
+ */
+async function resolveCategoryKey(fresh) {
+  let key = fresh.category ? categoryToDbKey(fresh.category) : null;
+  if (!key && typeof findTaskAndCategoryIndex === 'function') {
+    const pos = findTaskAndCategoryIndex(fresh.id);
+    if (pos) {
+      const map = ['to_do', 'in_progress', 'await_feedback', 'done'];
+      key = map[pos.categoryIndex];
+    }
+  }
+  return key;
+}
+
+
+/**
+ * Resolve the DB category key for a task, mirroring original logic.
+ * @param {Object} fresh - Fresh task object.
+ * @returns {Promise<string|null>}
+ */
+async function resolveCategoryKey(fresh) {
+  let categoryKey = fresh.category ? categoryToDbKey(fresh.category) : null;
+  if (!categoryKey && typeof findTaskAndCategoryIndex === 'function') {
+    const pos = findTaskAndCategoryIndex(fresh.id);
+    if (pos) {
+      const map = ['to_do', 'in_progress', 'await_feedback', 'done'];
+      categoryKey = map[pos.categoryIndex];
+    }
+  }
+  return categoryKey;
+}
+
+
+/**
+ * Re-render overlay subtasks, update global overlay memory, and progress bar.
+ * @param {Object} fresh - Fresh task object used for overlay.
+ * @param {Array} subtasks - Updated subtasks array.
+ * @returns {void}
+ */
+function updateOverlayAfterSubtasksChange(fresh, subtasks) {
+  const latestTask = { ...fresh, subtasks, assigned_to: window.currentOverlayAssigned };
+  const box = document.getElementById('ot-subtasks');
+  if (box) {
+    box.innerHTML = renderOverlaySubtasks(latestTask);
+    bindSubtaskCheckboxHandlers(latestTask);
+  }
+  window.editTaskSubtasks = subtasks;
+
+  if (typeof updateProgressBar === 'function') {
+    requestAnimationFrame(() => updateProgressBar());
   }
 }
 
@@ -303,7 +373,7 @@ function renderOverlaySubtasks(task) {
 function priorityBadge(priority) {
   const p = (priority || '').toLowerCase();
   if (p === 'urgent') return `<span class="pill pill-urgent">Urgent</span>`;
-  if (p === 'low')    return `<span class="pill pill-low">Low</span>`;
+  if (p === 'low') return `<span class="pill pill-low">Low</span>`;
   return `<span class="pill pill-medium">Medium</span>`;
 }
 
@@ -334,7 +404,7 @@ function formatDate(d) {
  */
 function escapeHtml(str) {
   return String(str ?? '').replace(/[&<>"']/g, s => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   }[s]));
 }
 
