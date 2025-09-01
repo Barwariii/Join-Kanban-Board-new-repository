@@ -1,8 +1,5 @@
-/** =====================================
- * Fetch Users (Assigned-To source)
- * ===================================== */
-
 /**
+ * Fetch Users (Assigned-To source)
  * Load users from database and prepare Assigned-To source.
  * @param {string} [path="/users"] - Realtime DB path for users.
  * @returns {Promise<void>}

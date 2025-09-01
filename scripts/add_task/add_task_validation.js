@@ -1,7 +1,3 @@
-/** =====================================
- * Validation (Title/Due/Category/Priority/Form)
- * ===================================== */
-
 /** @type {HTMLInputElement} */
 const titleInput = document.getElementById('title');
 

@@ -1,7 +1,11 @@
-// =====================================
-// Assigned-To: Template & Render
-// =====================================
-//! Template function for assigned to
+/**
+ * Assigned-To: Template & Render
+ * Template function for a single "Assigned To" user list item
+ * @param {{ id: string, color: string, initials: string, name: string }} singleUser - The user to render. 
+ * @param {number} i - Zero-based index used to build unique checkbox SVG ids.
+ * @returns {string} HTML string for the user list item with avatar, name, and checkboxes.
+ */
+
 function assignedToSingleUserTemplate(singleUser, i) {
   return /*html*/`
                                   <li>
@@ -26,11 +30,12 @@ function assignedToSingleUserTemplate(singleUser, i) {
 }
 
 
-// =====================================
-// Assigned-To: SVG Templates & Bootstrapping
-// =====================================
-// * Select assigned Contacts
-// Add the SVG only once as a template
+/**
+ * Assigned-To: SVG Templates & Bootstrapping
+ * Select assigned Contacts
+ * Added once as a shared template.
+ * @type {string}
+ */
 const uncheckedSVG = `
   <svg class="unchecked" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect x="4" y="4.96582" width="16" height="16" rx="3" stroke="#4589FF" stroke-width="2"/>
@@ -43,6 +48,14 @@ const checkedSVG = `
   </svg>`;
 
 
+  /**
+   * Render the current list of subtasks into the container with id "showAddedSubtasks".
+   * Uses globals:
+   *  - subtasks: string[] of subtask labels
+   *  - editingSubtaskIndex: number|null indicating which subtask is being edited
+   *  - - escHtml, handleEditKey, saveSubtask, cancelEdit, editSubtask, removeSubtask: helper functions referenced in event handlers
+   * @returns {void}
+   */
   function renderSubtasks() {
   const container = document.getElementById('showAddedSubtasks');
   container.innerHTML = '';

@@ -1,7 +1,3 @@
-/** =====================================
- * Subtasks (Add/Render/Remove/Edit inline)
- * ===================================== */
-
 /**
  * Add a subtask from the input and re-render.
  * @returns {void}

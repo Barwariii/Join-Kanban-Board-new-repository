@@ -1,33 +1,3 @@
-/** =====================================
- * Category Dropdown (first simple version)
- * ===================================== */
-
-/**
- * Toggle visibility for the category dropdown (simple version).
- * @returns {void}
- */
-function toggleDropdownCategory() {
-  const categoryTasks = document.getElementById('categoryTasks');
-  categoryTasks.classList.toggle('hiddenCategoryTasks');
-}
-
-
-/**
- * Set selected category label and close simple dropdown.
- * @param {string} category
- * @returns {void}
- */
-function selectCategory(category) {
-  const selectedCategoryElement = document.getElementById('selectedCategory');
-  selectedCategoryElement.textContent = category;
-  closeCategoryDropdown();
-}
-
-
-/** =====================================
- * Category Dropdown (enhanced version - overrides the first)
- * ===================================== */
-
 /**
  * Toggle the enhanced category dropdown and attach outside/Escape handlers.
  * @param {Event} [ev]

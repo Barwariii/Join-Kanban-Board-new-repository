@@ -1,7 +1,3 @@
-/** =====================================
- * Globals
- * ===================================== */
-
 /** @type {Array<{id:string, initials:string, name:string, color:string, isToggled:boolean}>} */
 addTaskUserData = [];
 
@@ -9,11 +5,10 @@ addTaskUserData = [];
 let subtasks = [];
 
 
-/** =====================================
- * Contacts (checkbox mount once)
- * ===================================== */
-
-/** All contact elements on the page. */
+/** 
+ * Contacts checkbox
+ * All contact elements on the page. 
+*/
 const contacts = document.querySelectorAll('.contact');
 
 /** Mount a checkbox SVG once for every contact item. */

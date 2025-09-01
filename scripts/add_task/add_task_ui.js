@@ -1,8 +1,5 @@
-/** =====================================
- * UI Helpers (Success Overlay / Clear Form)
- * ===================================== */
-
 /**
+ * UI Helpers (Success Overlay / Clear Form)
  * Show a success overlay with a message for ~1.6s.
  * @param {string} [msg="Erfolg!"]
  * @returns {void}
@@ -23,19 +20,36 @@ function showSuccessOverlay(msg) {
  * @returns {void}
  */
 function clearTask() {
-  /** Reset basic fields */
+  resetTaskFields();
+  resetPriorityAndAssignments();
+  resetCategoryAndContacts();
+  setDefaultPriorityMedium();
+  if (typeof validateAddTaskForm === 'function') validateAddTaskForm();
+}
+
+
+/**
+ * Reset the main input fields and subtasks.
+ * @returns {void}
+ */
+function resetTaskFields() {
   document.getElementById('title').value = '';
   document.getElementById('description').value = '';
   document.getElementById('dueDate').value = '';
   document.getElementById('showAddedSubtasks').innerHTML = '';
   subtasks = [];
+}
 
-  /** Reset priority visuals */
+
+/**
+ * Reset priority buttons, assigned contacts, and category/contacts UI.
+ * @returns {void}
+ */
+function resetPriorityAndAssignments() {
   urgent.classList.remove('active');
   medium.classList.remove('active');
   low.classList.remove('active');
 
-  /** Reset assigned contacts UI + state */
   addTaskUserData.forEach((user) => {
     user.isToggled = false;
     const contactElement = document.getElementById(user.id);
@@ -43,15 +57,17 @@ function clearTask() {
       renderToggleCheckbox(contactElement, addTaskUserData.indexOf(user));
     }
   });
+}
 
-  /** Clear the category selection */
+
+/**
+ * Reset category selection and selected contacts display.
+ * @returns {void}
+ */
+function resetCategoryAndContacts() {
   const selectedCategoryElement = document.getElementById('selectedCategory');
   selectedCategoryElement.textContent = 'Select Category';
 
-  /** Clear the display of selected contacts */
   const selectedContactsContainer = document.querySelector('.showSelectedContact');
   selectedContactsContainer.innerHTML = '';
-
-  setDefaultPriorityMedium();
-  if (typeof validateAddTaskForm === 'function') validateAddTaskForm();
 }

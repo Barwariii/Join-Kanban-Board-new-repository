@@ -1,7 +1,3 @@
-/** =====================================
- * Assigned-To Dropdown (open/close + outside/esc)
- * ===================================== */
-
 /** Prevent event bubbling inside the Assigned-To dropdown. */
 (function initAssignedDropdownShield() {
   const dd = document.getElementById('assignedContacts');
@@ -120,11 +116,8 @@ function updateSelectedContacts() {
 }
 
 
-/** =====================================
- * Assigned-To: Toggle + Render Toggle
- * ===================================== */
-
 /**
+ * Assigned-To: Toggle + Render Toggle
  * Toggle Checkbox on a contact item and flip its active state.
  * @param {HTMLElement} contactElement
  * @param {number} i - Index in addTaskUserData.

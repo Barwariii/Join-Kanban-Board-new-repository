@@ -1,8 +1,7 @@
-/** =====================================
+/** 
  * Priority Buttons (Urgent/Medium/Low)
- * ===================================== */
-
-/** Urgent priority button element. */
+ * Urgent priority button element. 
+ */
 const urgent = document.getElementById('urgent');
 
 /** Medium priority button element. */
