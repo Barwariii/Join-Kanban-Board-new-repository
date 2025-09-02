@@ -1,6 +1,3 @@
-// scripts/signup.js
-// All comments converted to English JSDoc. Logic unchanged.
-
 import { auth } from './firebase.js';
 import {
   createUserWithEmailAndPassword,
@@ -14,9 +11,11 @@ import {
  */
 const DATABASE_URL = "https://join-kanban-board-3a477-default-rtdb.europe-west1.firebasedatabase.app/";
 
-// ==============================
-// DOM references
-// ==============================
+
+/**
+ * DOM references
+ * -Error spans
+ */
 const acceptCheckbox = document.getElementById('accept');
 const signUpButton   = document.getElementById('signUpButton');
 const signupForm     = document.getElementById('signupForm');
@@ -28,7 +27,6 @@ const emailInput     = document.getElementById('email');
 const passInput      = document.getElementById('passwordField');
 const confirmInput   = document.getElementById('confirmPasswordField');
 
-// Error spans
 const nameError      = document.getElementById('nameError');
 const emailError     = document.getElementById('emailError');
 const passwordError  = document.getElementById('passwordError');
@@ -149,28 +147,32 @@ function validateSignUpForm() {
 }
 
 
-// ==============================
-// Live validation bindings
-// ==============================
+/**
+ * Live validation bindings
+ * - Initial state: disabled until valid
+ * - Disable native bubbles
+ */
 nameInput?.addEventListener('input', validateSignUpForm);
 emailInput?.addEventListener('input', validateSignUpForm);
 passInput?.addEventListener('input', validateSignUpForm);
 confirmInput?.addEventListener('input', validateSignUpForm);
 acceptCheckbox?.addEventListener('change', validateSignUpForm);
 
-// Initial state: disabled until valid
 if (signUpButton) signUpButton.disabled = true;
 
-// Disable native bubbles
 emailInput?.addEventListener('invalid', e => e.preventDefault());
 nameInput?.addEventListener('invalid', e => e.preventDefault());
 passInput?.addEventListener('invalid', e => e.preventDefault());
 confirmInput?.addEventListener('invalid', e => e.preventDefault());
 
 
-// ==============================
-// Submit handler (Firebase Auth)
-// ==============================
+/**
+ * Submit handler (Firebase Auth)
+ * - Create account in Firebase Auth
+ * - Set displayName
+ * - Save public profile in Realtime DB
+ * - Success popup + redirect to log_in.html
+ */
 signupForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
   if (!validateSignUpForm()) return;
@@ -180,13 +182,10 @@ signupForm?.addEventListener('submit', async (event) => {
   const password = getRealPassword(passInput);
 
   try {
-    // Create account in Firebase Auth
     const cred = await createUserWithEmailAndPassword(auth, email, password);
 
-    // Set displayName
     await updateProfile(cred.user, { displayName: name });
 
-    // Save public profile in Realtime DB
     const uid = cred.user.uid;
     const profile = {
       id: uid,
@@ -204,7 +203,6 @@ signupForm?.addEventListener('submit', async (event) => {
       body: JSON.stringify(profile)
     });
 
-    // Success popup + redirect
     showPopup();
     setTimeout(() => {
       window.location.href = '../pages/log_in.html';

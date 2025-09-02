@@ -1,13 +1,13 @@
-/** =====================================
+/**
  * Global State
- * ===================================== */
+ */
 let currentDraggedElement = null;
 let globalAllTasks = [];
 
 
-/** =====================================
+/**
  * Mappers & Helpers
- * ===================================== */
+ */
 
 /**
  * Map UI category to DB key.
@@ -100,9 +100,9 @@ function fixTaskCategories() {
 }
 
 
-/** =====================================
+/**
  * Load & Render Board
- * ===================================== */
+ */
 
 /**
  * Load users, fetch tasks, normalize categories, and render lanes.
@@ -202,11 +202,9 @@ function renderDoneTasks(data) {
 }
 
 
-/** =====================================
- * Add Task Overlay (Load/Init/Close)
- * ===================================== */
-
 /**
+ * Add Task Overlay (Load/Init/Close)
+ * =====================================
  * Open the "Add Task" overlay for the board.
  * - Hides the host overlay
  * - Loads and injects the .addTaskOverlay HTML
@@ -301,11 +299,9 @@ if (document.getElementById('assignedContactsUlItem')) {
 }
 
 
-/** =====================================
- * Search Filter
- * ===================================== */
-
 /**
+ * Search Filter
+ * =====================================
  * Filter tasks across lanes by search input value, then re-render each lane.
  * @returns {void}
  */

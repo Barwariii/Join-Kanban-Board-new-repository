@@ -1,12 +1,13 @@
 /**
  * Added eventListener to handle addContact Overlay
+ * - Event listener for the "Add new Contact" button
+ * - Check if the button exists and an event listener was added
+ * - Edit Contact
  */
 document.addEventListener('DOMContentLoaded', function () {
-    // Event listener for the "Add new Contact" button
     const addContactBtn = document.querySelector('.addNewContactBtn');
     const editContactBtn = document.querySelector('.contactListSingleContactItemContainer');
 
-    // Check if the button exists and an event listener was added
     if (addContactBtn) {
         addContactBtn.addEventListener('click', openAddContactPopup);
         addContactBtn.addEventListener('click', addBtnDisable);
@@ -14,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error("The 'Add new Contact' button was not found.");
     }
 
-    // Edit Contact
     if (editContactBtn) {
         editContactBtn.addEventListener('click', openEditContactPopup);
     }
@@ -25,13 +25,15 @@ document.addEventListener('DOMContentLoaded', function () {
  * Open the Add Contact pop-up overlay.
  */
 function openAddContactPopup() {
-    document.querySelector('.contactsOverlay').style.display = 'block'; // Make the pop-up visible
+    document.querySelector('.contactsOverlay').style.display = 'block';
     document.querySelector('.contactsOverlay').innerHTML = renderAddContactOverlay();
 }
 
 
 /**
  * Validate the Edit Contact form fields.
+ * - Red underline if empty, default if filled
+ * - Enable Save button only if all fields are filled
  * @returns {boolean} True if all fields are filled correctly, false otherwise.
  */
 function validateEditForm() {
@@ -44,12 +46,10 @@ function validateEditForm() {
     const emailOk = emailRef.value.trim() !== "";
     const phoneOk = phoneRef.value.trim() !== "";
 
-    // Red underline if empty, default if filled
     nameRef.style.borderBottom = nameOk ? "1px solid var(--form-val-default)" : "1px solid var(--form-val-wrong)";
     emailRef.style.borderBottom = emailOk ? "1px solid var(--form-val-default)" : "1px solid var(--form-val-wrong)";
     phoneRef.style.borderBottom = phoneOk ? "1px solid var(--form-val-default)" : "1px solid var(--form-val-wrong)";
 
-    // Enable Save button only if all fields are filled
     if (saveBtn) saveBtn.disabled = !(nameOk && emailOk && phoneOk);
 
     return nameOk && emailOk && phoneOk;
@@ -71,7 +71,7 @@ function openEditContactPopup(index) {
  * Close the contacts pop-up overlay.
  */
 function closePopup() {
-    document.querySelector('.contactsOverlay').style.display = 'none'; // Hide the pop-up
+    document.querySelector('.contactsOverlay').style.display = 'none';
 }
 
 

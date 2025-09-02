@@ -1,6 +1,3 @@
-// scripts/login.js
-// All comments converted to English JSDoc. Logic unchanged.
-
 import { auth } from './firebase.js';
 import {
   signInWithEmailAndPassword,
@@ -376,7 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   
-  
+
   /**
    * Guest login handler that redirects to ../index.html without authentication.
    * Bound from inline HTML onclick for robustness.

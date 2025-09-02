@@ -107,7 +107,6 @@ function renderContactDetailsClear() {
  * Validates the new contact form before submission.
  */
 function checkContactFormValidation() {
-    // Albert fragen in wie weit die Form Validation nochmal gehen soll
     let nameRef = document.querySelector("#name");
     let emailRef = document.querySelector("#email");
     let phoneRef = document.querySelector("#phone");
@@ -138,17 +137,14 @@ function checkFormValidation() {
     let emailRef = document.querySelector("#email");
     let phoneRef = document.querySelector("#phone");
 
-    // Name prüfen
     if (nameRef.value.trim() !== "") {
         nameRef.style.borderBottom = "1px solid var(--form-val-default)";
     }
 
-    // Email prüfen
     if (emailRef.value.trim() !== "") {
         emailRef.style.borderBottom = "1px solid var(--form-val-default)";
     }
 
-    // Phone prüfen
     if (phoneRef.value.trim() !== "") {
         phoneRef.style.borderBottom = "1px solid var(--form-val-default)";
     }
@@ -159,7 +155,6 @@ function checkFormValidation() {
  * Adds a new contact to the database.
  */
 function addNewContact() {
-    // checkContactFormValidation();
     let nameRef = document.querySelector("#name");
     let emailRef = document.querySelector("#email");
     let phoneRef = document.querySelector("#phone");
@@ -186,7 +181,6 @@ function addNewContact() {
     phoneValue = "";
 
     closePopup();
-    // Successfull created Animation
 }
 
 
@@ -196,7 +190,7 @@ function addNewContact() {
  * @param {number} index - The contact's index in the list.
  */
 function updateCurrentContact(id, index) {
-    if (!validateEditForm()) return; // Abbrechen, wenn eines leer ist
+    if (!validateEditForm()) return;
 
     const nameRef  = document.querySelector("#editName");
     const emailRef = document.querySelector("#editEmail");

@@ -29,7 +29,6 @@ function renderTaskOverlay(task) {
   overlay.style.display = 'block';
   overlay.innerHTML = taskOverlayTemplate(task);
 
-  // keep progress/subtasks
   window.editTaskSubtasks = Array.isArray(task.subtasks) ? task.subtasks.map(s => ({ ...s })) : [];
   bindSubtaskCheckboxHandlers(task);
   if (typeof updateProgressBar === 'function') updateProgressBar();

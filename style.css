@@ -376,8 +376,10 @@ body {
 .dropDownItem {
   color: #42526e;
   text-decoration: none;
-  display: block;
-  text-align: end;
+  /* display: block;
+  text-align: end; */
+  display: flex;
+  justify-content: center;
 }
 
 .activ {
@@ -522,4 +524,6 @@ body {
 }
 a {
   text-decoration: none;
+  display: flex;
+  justify-content: center;
 }

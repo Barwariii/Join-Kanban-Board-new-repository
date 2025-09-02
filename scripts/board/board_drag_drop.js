@@ -282,7 +282,7 @@ function makeCardPointerDraggable(cardEl, taskId) {
     const dx = ev.clientX - _drag.startX;
     const dy = ev.clientY - _drag.startY;
 
-    // only start drag when movement is mostly vertical
+    /** only start drag when movement is mostly vertical */
     if (!pointerMoved) {
       const absDx = Math.abs(dx);
       const absDy = Math.abs(dy);
@@ -290,7 +290,7 @@ function makeCardPointerDraggable(cardEl, taskId) {
         pointerMoved = true;
         startRealDrag();
       } else {
-        // horizontal scroll
+        /** horizontal scroll */
         return;
       }
     }
@@ -311,7 +311,7 @@ function makeCardPointerDraggable(cardEl, taskId) {
  * @returns {void}
  */
   function updateDragFrame(ev, dx, dy) {
-    // ✳️ keep pointer capture so the ghost is not released during auto-scroll
+    /** keep pointer capture so the ghost is not released during auto-scroll */
     if (cardEl.hasPointerCapture(ev.pointerId)) {
       cardEl.setPointerCapture(ev.pointerId);
     }
@@ -319,7 +319,7 @@ function makeCardPointerDraggable(cardEl, taskId) {
     highlightDropColumnAt(ev.clientX, ev.clientY);
     autoScrollAndAdjustStartY(ev.clientY);
 
-    // update the ghost position
+    /** update the ghost position */
     _drag.ghost.style.transform = `translate(${dx}px, ${dy}px)`;
   }
 

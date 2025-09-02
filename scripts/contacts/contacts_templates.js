@@ -19,6 +19,7 @@ function contactListRenderTemplate(singleContact, index) {
     `;
 }
 
+
 /**
  * Render the detailed view of a single contact.
  * @param {Object} singleUser - The contact object containing details.
@@ -62,6 +63,7 @@ function contactDetailsRenderTemplate(singleUser, index) {
     </div>
     `;
 }
+
 
 /**
  * Render a responsive overlay for contact details (for screens max-width 950px).
@@ -111,6 +113,7 @@ function contactDetailsOverlayTemplate(singleUser, index) {
     </div>
 `
 }
+
 
 /**
  * Render the overlay for adding a new contact.
@@ -162,6 +165,7 @@ function renderAddContactOverlay() {
     </div>
     `;
 }
+
 
 /**
  * Render the overlay for editing an existing contact.

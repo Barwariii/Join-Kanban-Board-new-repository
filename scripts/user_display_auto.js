@@ -1,6 +1,3 @@
-// scripts/user-display.auto.js
-// All comments converted to English JSDoc. Logic unchanged.
-
 import { auth } from './firebase.js';
 import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
